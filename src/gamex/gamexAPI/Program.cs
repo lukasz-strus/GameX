@@ -113,8 +113,7 @@ app.UseEndpoints(endpoints =>
 app.Run();
 
 /*Next stages:
- *TODO zmiana nazwy biblioteki ModelsDto
- *TODO ca³ego Models do biblioteki
+ *TODO Validators in gamexAPI
  *
  *
  */
