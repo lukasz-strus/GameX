@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="gamexDesktopApp.Views.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:components="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM"
+             xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <Image Source="/Images/logo.png"
+               Height="150"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Margin="5" />
+        <Label Content="Rejestracja"
+               FontSize="32"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Margin="5" />
+        <Grid HorizontalAlignment="Center" Width="350" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Login"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Width="50"
+                   Height="30"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            <TextBox x:Name="txbLoginRegistration"
+                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="0"
+                     Height="30"
+                     MinWidth="230"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Margin="5"
+                     Padding="5" />
+            <Label Content="E-mail"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Width="50"
+                   Height="30"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            <TextBox x:Name="txbMailRegistration"
+                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="1"
+                     Height="30"
+                     MinWidth="230"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Margin="5"
+                     Padding="5" />
+            <Label Content="Powtórz e-mail"
+                   Grid.Column="0"
+                   Grid.Row="2"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Width="105"
+                   Height="30"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            <TextBox x:Name="txbMailRepeatRegistration"
+                     Text="{Binding ConfirmEmail, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="2"
+                     Height="30"
+                     MinWidth="230"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Margin="5"
+                     Padding="5" />
+            <Label Content="Hasło"
+                   Grid.Column="0"
+                   Grid.Row="3"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Width="50"
+                   Height="30"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            <components:BindablePasswordBox x:Name="txbPasswordRegistration"
+                     Password="{Binding Password}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="3"
+                     Height="30"
+                     MinWidth="230"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Margin="5" />
+            <Label Content="Powtórz hasło"
+                   Grid.Column="0"
+                   Grid.Row="4"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Width="110"
+                   Height="30"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            <components:BindablePasswordBox x:Name="txbPasswordRepeatRegistration"
+                     Password="{Binding ConfirmPassword}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="4"
+                     Height="30"
+                     MinWidth="230"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Margin="5" />
+            <Button x:Name="btnRegister"
+                    Content="Załóż konto"
+                    Command="{Binding RegisterCommand}"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="5"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Width="100"
+                    Height="30"
+                    Margin="5"
+                    Background="Black"
+                    Foreground="White" />
+            <Label  Content="Masz już konto?"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="6"
+                    FontSize="12"
+                    FontStyle="Italic" />
+            <Button x:Name="btnLogInRegistration"
+                    Command="{Binding ViewLoginCommand}"
+                    Content="Zaloguj się"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="6"
+                    FontSize="12"
+                    FontStyle="Italic"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right"
+                    Margin="5"
+                    Background="White"
+                    BorderBrush="White" />
+            <TextBlock Grid.Row="7" Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    DataContext="{Binding ErrorMessageViewModel}"
+                    Foreground="DarkRed"
+                    Text="{Binding Message}"
+                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
+    </StackPanel>
+</UserControl>
