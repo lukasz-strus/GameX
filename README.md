@@ -8,7 +8,6 @@
 ## **Technologie**
 - serwer REST (ASP.NET)
 - aplikacja desktopowa (WPF)
-- aplikacja mobilna (React Native)
 
 ## Azure 
 https://gamex-api-app.azurewebsites.net
@@ -19,9 +18,6 @@ https://gamex-api-app.azurewebsites.net/swagger/index.html
 ## **Design:**
 ##### Desktop:
 ![shop_home](https://user-images.githubusercontent.com/61932823/169684370-27bfd821-a474-48b6-b67f-79aebc1dfa64.png)
-
-##### Mobile:
-![Home page](https://user-images.githubusercontent.com/61932823/169684445-421e0e39-65e0-40de-a93b-c910c550fa1b.png)
 
 ## **Baza danych**
 ##### Games:
@@ -51,7 +47,7 @@ https://gamex-api-app.azurewebsites.net/swagger/index.html
 
 ###### Funkcjonalności klienta
 - zakupy
-- koszyk
+- koszyk (w rozszerzeniu)
 - biblioteka gier (w rozszerzeniu)
 - portfel
 - historia zakupów (w rozszerzeniu)
