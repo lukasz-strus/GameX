@@ -9,7 +9,7 @@ using gamexAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using gamexModelsDto;
+using gamexModels;
 using NLog.Web;
 using System.Reflection;
 using System.Text;

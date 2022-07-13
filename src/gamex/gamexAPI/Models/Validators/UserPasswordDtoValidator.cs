@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using gamexAPI.Entities;
-using gamexModelsDto;
+using gamexModels;
 
 namespace gamexAPI.Models.Validators;
 

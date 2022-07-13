@@ -2,7 +2,7 @@
 using gamexAPI.Entities;
 using gamexAPI.Excepitons;
 using gamexAPI.Models;
-using gamexModelsDto;
+using gamexModels;
 using System.Linq.Expressions;
 
 namespace gamexAPI.Services;

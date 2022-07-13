@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using gamexAPI.Entities;
-using gamexModelsDto;
+using gamexModels;
 
 namespace gamexAPI;
 

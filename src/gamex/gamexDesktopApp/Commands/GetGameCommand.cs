@@ -1,7 +1,7 @@
 ﻿using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.SelectedGame;
 using gamexDesktopApp.ViewModels;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,7 @@ public class GetGameCommand<T> : AsyncCommandBase
             }
         }
         catch (Exception)
-        { 
+        {
         }
     }
 

@@ -44,7 +44,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\gamexServices\gamexServices.csproj" />
-    <ProjectReference Include="..\ModelsDto\gamexModelsDto.csproj" />
+    <ProjectReference Include="..\ModelsDto\gamexModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

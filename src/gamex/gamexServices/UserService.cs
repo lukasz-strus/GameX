@@ -1,5 +1,5 @@
 ﻿using Flurl.Http;
-using gamexModelsDto;
+using gamexModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 

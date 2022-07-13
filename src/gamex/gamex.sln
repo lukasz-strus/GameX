@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexAPI", "gamexAPI\gamexA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexDesktopApp", "gamexDesktopApp\gamexDesktopApp.csproj", "{9246F909-BC81-43F0-B3C3-431C7B23CC4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexModelsDto", "ModelsDto\gamexModelsDto.csproj", "{DB209FA0-4F47-4AE6-9728-BEF996513861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexModels", "ModelsDto\gamexModels.csproj", "{DB209FA0-4F47-4AE6-9728-BEF996513861}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gamexServices", "gamexServices\gamexServices.csproj", "{CDBE564C-19B4-4A65-B668-51633AF710CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexServices", "gamexServices\gamexServices.csproj", "{CDBE564C-19B4-4A65-B668-51633AF710CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
