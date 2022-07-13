@@ -111,3 +111,12 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+/*Next stages:
+ *TODO cleaning code
+ *
+ *
+ *
+ *
+ *
+ */
