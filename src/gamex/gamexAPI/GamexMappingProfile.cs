@@ -4,9 +4,6 @@ using gamexModelsDto;
 
 namespace gamexAPI;
 
-/// <summary>
-/// Gamex Mapping Profile
-/// </summary>
 public class GamexMappingProfile : Profile
 {
     public GamexMappingProfile()

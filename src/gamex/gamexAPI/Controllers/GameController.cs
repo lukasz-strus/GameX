@@ -7,9 +7,6 @@ using gamexAPI.Models;
 
 namespace gamexAPI.Controllers;
 
-/// <summary>
-/// Game Controller
-/// </summary>
 [Route("api/game")]
 [ApiController]
 [Authorize]

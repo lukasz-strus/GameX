@@ -113,10 +113,8 @@ app.UseEndpoints(endpoints =>
 app.Run();
 
 /*Next stages:
- *TODO cleaning code
- *
- *
- *
+ *TODO zmiana nazwy biblioteki ModelsDto
+ *TODO ca³ego Models do biblioteki
  *
  *
  */

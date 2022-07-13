@@ -1,18 +1,5 @@
 ﻿namespace gamexAPI.Entities;
 
-/// <summary>
-/// User Type
-/// </summary>
-public enum UserTypeEnum
-{
-    Customer,
-    Seller,
-    Admin,
-}
-
-/// <summary>
-/// User Entity
-/// </summary>
 public class User
 {
     public int Id { get; set; }
