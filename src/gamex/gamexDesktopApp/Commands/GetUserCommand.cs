@@ -2,7 +2,7 @@
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.SelectedUser;
 using gamexDesktopApp.ViewModels;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
 
 namespace gamexDesktopApp.Commands;

@@ -1,8 +1,5 @@
 ﻿namespace gamexAPI.Entities;
 
-/// <summary>
-/// Game Entity
-/// </summary>
 public class Game
 {
     public int Id { get; set; }

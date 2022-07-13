@@ -3,9 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace gamexAPI;
 
-/// <summary>
-/// Gamex Seeder class
-/// </summary>
 public class GamexSeeder
 {
     private readonly GamexDbContext _dbContext;

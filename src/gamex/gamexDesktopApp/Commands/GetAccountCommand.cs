@@ -1,7 +1,7 @@
 ﻿using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.ViewModels;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

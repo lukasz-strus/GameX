@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using gamexModelsDto;
+using gamexModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -15,62 +15,23 @@ using System.Linq.Expressions;
 
 namespace gamexAPI.Services;
 
-/// <summary>
-/// Interface User Service
-/// </summary>
 public interface IUserService
 {
-    /// <summary>
-    /// Register User
-    /// </summary>
-    /// <param name="dto">Data Transfer Object</param>
     void RegisterUser(RegisterUserDto dto);
 
-    /// <summary>
-    /// Get list of users
-    /// </summary>
-    /// <param name="query">Get All Query</param>
-    /// <returns>Collection of Data Transfer Objects</returns>
     GetAllResult<UserDto> GetAll(GetAllQuery query);
 
-    /// <summary>
-    /// Get one user by id number
-    /// </summary>
-    /// <param name="id">User ID</param>
-    /// <returns>Data Transfer Object</returns>
     UserDto Get(int id);
 
-    /// <summary>
-    /// Delete one user by id number
-    /// </summary>
-    /// <param name="id">User ID</param>
     void Delete(int id);
 
-    /// <summary>
-    /// Change user password
-    /// </summary>
-    /// <param name="id">User ID for password change</param>
-    /// <param name="dto">Data Transfer Object with changed password</param>
     void ChangePassword(int id, UserPasswordDto dto);
 
-    /// <summary>
-    /// Update one user by id number
-    /// </summary>
-    /// <param name="id">User ID</param>
-    /// <param name="dto">Data Transfer Object with changed parameters</param>
     void Update(int id, UpdateUserDto dto);
 
-    /// <summary>
-    /// Generate JSON Web Token
-    /// </summary>
-    /// <param name="dto">Data Transfer Object to authentication</param>
-    /// <returns>JSON Web Token</returns>
     string GenerateJwt(LoginDto dto);
 }
 
-/// <summary>
-/// User Service
-/// </summary>
 public class UserService : IUserService
 {
     private readonly GamexDbContext _dbContext;

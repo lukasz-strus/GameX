@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using gamexAPI.Entities;
-using gamexModelsDto;
+using gamexModels;
 
 namespace gamexAPI;
 
-/// <summary>
-/// Gamex Mapping Profile
-/// </summary>
 public class GamexMappingProfile : Profile
 {
     public GamexMappingProfile()

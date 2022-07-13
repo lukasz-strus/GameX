@@ -2,9 +2,6 @@
 
 namespace gamexAPI.Entities;
 
-/// <summary>
-/// GameX Data Base Context
-/// </summary>
 public class GamexDbContext : DbContext
 {
     public DbSet<Game> Games { get; set; }

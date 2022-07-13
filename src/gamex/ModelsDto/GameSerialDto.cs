@@ -1,9 +1,6 @@
-﻿namespace gamexModelsDto;
+﻿namespace gamexModels;
 
 public class GameSerialDto
 {
-    /// <summary>
-    /// Serial key value
-    /// </summary>
     public string Value { get; set; }
 }
