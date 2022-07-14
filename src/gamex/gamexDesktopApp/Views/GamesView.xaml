@@ -8,8 +8,12 @@
              xmlns:service="clr-namespace:gamexServices;assembly=gamexServices"
              d:DataContext="{d:DesignInstance Type=viewmodels:GamesViewModel}"
              xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <converter:NullImageConverter x:Key="nullImageConverter" />
+    </UserControl.Resources>
     <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -171,6 +175,10 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
+                        <Image Source="{Binding Source,
+                                Converter={StaticResource nullImageConverter},
+                                TargetNullValue={x:Null}}"
+                               Height="100" />
                         <TextBlock HorizontalAlignment="Left"
                                    Margin="5"
                                    Text="{Binding Name}"

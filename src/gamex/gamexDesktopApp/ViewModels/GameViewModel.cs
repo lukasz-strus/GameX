@@ -1,9 +1,12 @@
 ﻿using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
 using gamexServices;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace gamexDesktopApp.ViewModels;
@@ -21,6 +24,7 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
+            Source = ImageSourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -81,6 +85,18 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         set
         {
             _total = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _source;
+
+    public string Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
             OnPropertyChanged();
         }
     }

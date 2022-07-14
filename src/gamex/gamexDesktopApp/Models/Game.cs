@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using gamexDesktopApp.Helpers;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace gamexDesktopApp.Models;
@@ -18,6 +19,7 @@ public class Game : INotifyPropertyChanged
         set
         {
             _id = value;
+            Source = ImageSourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -54,6 +56,18 @@ public class Game : INotifyPropertyChanged
         set
         {
             _price = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _source;
+
+    public string Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
             OnPropertyChanged();
         }
     }
