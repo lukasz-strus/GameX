@@ -1,4 +1,5 @@
 ﻿using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
@@ -23,6 +24,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
+            Source = ImageSourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -83,6 +85,18 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _total = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private string _source;
+
+    public string Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
             OnPropertyChanged();
         }
     }

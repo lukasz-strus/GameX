@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:gamexDesktopApp.Views" xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GamesAdminViewModel}"
+             xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
+             xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GamesAdminViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.Resources>
+        <converter:NullImageConverter x:Key="nullImageConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <StackPanel>
@@ -157,6 +161,10 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
+                        <Image Source="{Binding Source,
+                                Converter={StaticResource nullImageConverter},
+                                TargetNullValue={x:Null}}"
+                               Height="100" />
                         <TextBlock HorizontalAlignment="Left"
                                    Margin="5"
                                    Text="{Binding Name}"
