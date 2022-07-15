@@ -62,7 +62,7 @@ public class LoadImageCommand : ICommand
                 var fileSourceName = openFileDialog.FileName;
                 var extension = Path.GetExtension(fileSourceName);
 
-                //TODO dodać exception do innych typu plików, np pdf, txt itd.
+                //TODO dodać exception do innych typów, np pdf, txt itd.
 
                 File.Copy(fileSourceName, string.Concat(fullCopyPath, extension), true);
             }
