@@ -24,7 +24,7 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = ImageSourceHelper.SetSource(_id);
+            Source = SourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }

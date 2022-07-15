@@ -24,7 +24,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = ImageSourceHelper.SetSource(_id);
+            Source = SourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -113,6 +113,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
     public ICommand BackToGamesCommand { get; }
     public ICommand GoToAccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
+    public ICommand LoadImageCommand { get; }
 
     public GameAdminViewModel(IGameService gameService,
                              IAccountStore accountStore,
@@ -131,6 +132,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
+        LoadImageCommand = new LoadImageCommand(this);
     }
 
     public override void Dispose()
