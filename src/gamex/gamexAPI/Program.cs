@@ -81,6 +81,9 @@ var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<GamexSeeder>();
+
+app.UseStaticFiles();
+
 seeder.Seed();
 
 if (app.Environment.IsDevelopment())
