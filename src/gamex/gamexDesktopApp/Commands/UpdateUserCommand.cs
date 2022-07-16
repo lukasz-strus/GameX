@@ -1,7 +1,7 @@
 ﻿using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.SelectedUser;
 using gamexDesktopApp.ViewModels;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
 using System;
 using System.Collections.Generic;

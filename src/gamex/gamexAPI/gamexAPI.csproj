@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModelsDto\gamexModelsDto.csproj" />
+    <ProjectReference Include="..\ModelsDto\gamexModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,14 +2,11 @@
 using gamexAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using gamexModelsDto;
+using gamexModels;
 using gamexAPI.Models;
 
 namespace gamexAPI.Controllers;
 
-/// <summary>
-/// Game Controller
-/// </summary>
 [Route("api/game")]
 [ApiController]
 [Authorize]

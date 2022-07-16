@@ -5,7 +5,7 @@ using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
 using System.ComponentModel;
 using System.Windows.Data;
