@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:gamexDesktopApp.Views" xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GameAdminViewModel}"
+             xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
+             xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GameAdminViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1000">
     <UserControl.Resources>
+        <converter:NullImageConverter x:Key="nullImageConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
@@ -73,6 +77,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -81,14 +86,14 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label x:Name="lblName"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="0"
                        Content="Nazwa:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbName"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="0"
                          Grid.ColumnSpan="2"
                          Margin="5"
@@ -97,46 +102,77 @@
                          TextWrapping="Wrap"
                          Text="{Binding Name}" />
                 <Label x:Name="lblDescription"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="1"
                        Content="Opis:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbDescription"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="1"
                          Grid.ColumnSpan="2"
                          Margin="5"
                          FontSize="18"
+                         Height="300"
+                         MaxHeight="350"
                          TextWrapping="Wrap"
                          Text="{Binding Description}" />
                 <Label x:Name="lblPrice"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="2"
                        Content="Cena:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbPrice"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="2"
                          Grid.ColumnSpan="2"
                          Margin="5"
                          Foreground="Red"
                          FontSize="25"
                          TextWrapping="Wrap"
+                         Width="150"
+                         MaxWidth="150"
+                         HorizontalAlignment="Left"
                          Text="{Binding Price}" />
+                <Image Source="{Binding Source,
+                            Converter={StaticResource nullImageConverter},
+                            TargetNullValue={x:Null}}"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.RowSpan="3"
+                       Width="350"
+                       Height="350" />
             </Grid>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnCancel"
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button x:Name="btnLoadImage"
                         Grid.Column="0"
+                        Grid.Row="1"
+                        Content="Wczytaj obrazek"
+                        FontSize="30"
+                        Foreground="White"
+                        BorderBrush="{x:Null}"
+                        Background="Black"
+                        Margin="5"
+                        Width="250"
+                        Height="50"
+                        Command="{Binding LoadImageCommand}" />
+                <Button x:Name="btnCancel"
+                        Grid.Column="2"
+                        Grid.Row="1"
                         Content="Anuluj"
                         FontSize="30"
                         Foreground="White"
@@ -144,9 +180,11 @@
                         Background="Black"
                         Margin="5"
                         Width="200"
+                        Height="50"
                         Command="{Binding BackToGamesCommand}" />
                 <Button x:Name="btnSave"
                         Grid.Column="1"
+                        Grid.Row="1"
                         Content="Zapisz"
                         FontSize="30"
                         Foreground="White"
@@ -154,11 +192,13 @@
                         Background="Black"
                         Margin="5"
                         Width="200"
+                        Height="50"
                         Command="{Binding UpdateGameCommand}" />
                 <TextBlock Width="250"
                            Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Margin="5"
+                           Grid.ColumnSpan="3"
+                           Grid.Row="0"
+                           Margin="10"
                            HorizontalAlignment="Center"
                            DataContext="{Binding ErrorMessageViewModel}"
                            Foreground="DarkRed"
