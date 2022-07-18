@@ -11,6 +11,17 @@
 		</VisualStudio>
 	</ProjectExtensions>
 
+	<ItemGroup>
+	  <Compile Remove="PrivateFiles\Users\**" />
+	  <Compile Remove="wwwroot\**" />
+	  <Content Remove="PrivateFiles\Users\**" />
+	  <Content Remove="wwwroot\**" />
+	  <EmbeddedResource Remove="PrivateFiles\Users\**" />
+	  <EmbeddedResource Remove="wwwroot\**" />
+	  <None Remove="PrivateFiles\Users\**" />
+	  <None Remove="wwwroot\**" />
+	</ItemGroup>
+
   <ItemGroup>
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />
@@ -28,11 +39,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ModelsDto\gamexModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PrivateFiles\Users\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
