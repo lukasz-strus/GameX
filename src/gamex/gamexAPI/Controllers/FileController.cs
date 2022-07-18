@@ -16,24 +16,29 @@ public class FileController : ControllerBase
     [HttpGet]
     public ActionResult GetGameImage([FromQuery] int gameId)
     {
-        var rootPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+        //  var rootPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+        var rootPath = Directory.GetCurrentDirectory();
         var pathToSearch = $"{rootPath}/PrivateFiles/Games/";
 
         string partialName = gameId.ToString();
-        string fullName;
 
-        DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
-        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles(partialName + "*.*");
+        var hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
+        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
 
-        fullName = filesInDir.FirstOrDefault().FullName;
+        var filePath = filesInDir.FirstOrDefault().FullName;
 
-        if (fullName is null)
+        if (filePath is null)
         {
             return NotFound();
         }
 
-        var extension = Path.GetExtension(fullName);
+        var fileName = filesInDir.FirstOrDefault().Name;
 
-        return File(fullName, extension);
+        var contentProvider = new FileExtensionContentTypeProvider();
+        contentProvider.TryGetContentType(fileName, out var contentType);
+
+        var fileContents = System.IO.File.ReadAllBytes(filePath);
+
+        return File(fileContents, contentType, fileName);
     }
 }

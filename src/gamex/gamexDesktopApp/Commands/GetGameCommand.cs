@@ -3,6 +3,7 @@ using gamexDesktopApp.State.SelectedGame;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;
+using gamexDesktopApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,19 @@ public class GetGameCommand<T> : AsyncCommandBase
     private readonly IGameService _gameService;
     private readonly IAccountStore _accountStore;
     private readonly ISingleGame _singleGame;
+    private readonly IFileService _fileService;
 
     public GetGameCommand(T gameViewModel,
                           IGameService gameService,
                           IAccountStore accountStore,
-                          ISingleGame singleGame)
+                          ISingleGame singleGame,
+                          IFileService fileService)
     {
         _gameViewModel = gameViewModel;
         _gameService = gameService;
         _accountStore = accountStore;
         _singleGame = singleGame;
+        _fileService = fileService;
     }
 
     public override async Task ExecuteAsync(object parameter)
@@ -36,8 +40,13 @@ public class GetGameCommand<T> : AsyncCommandBase
         {
             if (_singleGame != null)
             {
-                var game = await _gameService.Get(_accountStore.CurrentAccount.Token, (int)_singleGame.Id);
+                var token = _accountStore.CurrentAccount.Token;
+                var gameId = (int)_singleGame.Id;
+                var game = await _gameService.Get(token, gameId);
                 AssignValues(game);
+
+                var fullPath = string.Concat(SourceHelper.GetProjectDirectory(), $"/Images/Games/");
+                await _fileService.GetGameImage(token, gameId, fullPath); //TODO Wyjątek 404
             }
         }
         catch (Exception)

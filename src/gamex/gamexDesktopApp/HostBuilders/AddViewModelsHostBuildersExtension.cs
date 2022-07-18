@@ -90,7 +90,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesAdminViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesSalesViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesAdminViewModel CreateGamesAdminViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),
@@ -141,7 +142,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesViewModel CreateGamesViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),

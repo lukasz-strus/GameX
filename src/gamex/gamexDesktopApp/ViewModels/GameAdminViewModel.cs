@@ -122,11 +122,12 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
                              IRenavigator gamesAdminRenavigator,
                              IRenavigator gamesSalesRenavigator,
                              IRenavigator loginRenavigator,
-                             IRenavigator accountRenavigator)
+                             IRenavigator accountRenavigator,
+                             IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame);
+        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame, fileService);
         GetGameCommand.Execute(null);
         UpdateGameCommand = new UpdateGameCommand(this, gameService, accountStore, singleGame);
         BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);

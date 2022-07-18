@@ -76,6 +76,15 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontEndClient", policyBuilder =>
+    policyBuilder.AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithOrigins(builder.Configuration["AllowedOrigins"])
+        );
+});
+
 // configure
 var app = builder.Build();
 
@@ -83,6 +92,8 @@ var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<GamexSeeder>();
 
 app.UseStaticFiles();
+
+app.UseCors("FrontEndClient");
 
 seeder.Seed();
 

@@ -123,11 +123,12 @@ public class GameViewModel : BaseViewModel, IGameViewModel
                          IRenavigator gamesRenavigator,
                          IRenavigator loginRenavigator,
                          IRenavigator accountRenavigator,
-                         IRenavigator walletRenavigator)
+                         IRenavigator walletRenavigator,
+                         IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameViewModel>(this, gameService, accountStore, singleGame);
+        GetGameCommand = new GetGameCommand<GameViewModel>(this, gameService, accountStore, singleGame, fileService);
         GetGameCommand.Execute(null);
         BuyGameCommand = new BuyGameCommand(this, gameService, accountStore, userService);
         BackToGamesCommand = new RenavigateCommand(gamesRenavigator);
