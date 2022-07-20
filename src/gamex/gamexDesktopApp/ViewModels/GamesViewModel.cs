@@ -166,7 +166,8 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
                           IRenavigator loginRenavigator,
                           IRenavigator accountRenavigator,
                           IRenavigator walletRenavigator,
-                          IRenavigator libraryRenavigator)
+                          IRenavigator libraryRenavigator,
+                          IFileService fileService)
     {
         ErrorMessageViewModel = new();
         _singleGame = singleGame;
@@ -177,7 +178,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         };
         GamesListView = collectionViewSource.View;
 
-        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore);
+        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
         UpdatePageCommand = new UpdatePageCommand<GamesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesViewModel>(this);
         GoToWalletCommand = new RenavigateCommand(walletRenavigator);

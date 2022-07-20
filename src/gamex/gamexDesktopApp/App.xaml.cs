@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using gamexServices;
 using gamexDesktopApp.Views;
 using Microsoft.Extensions.Hosting;
 using gamexDesktopApp.HostBuilders;

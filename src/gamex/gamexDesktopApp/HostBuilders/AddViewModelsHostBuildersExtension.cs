@@ -102,7 +102,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<UsersViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<UsersViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesSalesViewModel CreateGamesSalesViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),
@@ -112,7 +113,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GameAdminViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static WalletViewModel CreateWalletViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IUserService>(),
@@ -154,7 +156,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<LibraryViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<LibraryViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IAuthenticator>(),

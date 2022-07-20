@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace gamexDesktopApp.Commands;
 
@@ -43,10 +44,9 @@ public class GetGameCommand<T> : AsyncCommandBase
                 var token = _accountStore.CurrentAccount.Token;
                 var gameId = (int)_singleGame.Id;
                 var game = await _gameService.Get(token, gameId);
-                AssignValues(game);
-
                 var fullPath = string.Concat(SourceHelper.GetProjectDirectory(), $"/Images/Games/");
-                await _fileService.GetGameImage(token, gameId, fullPath); //TODO Wyjątek 404
+
+                AssignValues(game);
             }
         }
         catch (Exception)
@@ -61,5 +61,6 @@ public class GetGameCommand<T> : AsyncCommandBase
         _gameViewModel.Description = gameDto.Description;
         _gameViewModel.Price = gameDto.Price;
         _gameViewModel.Total = _accountStore.CurrentAccount.Total;
+        _gameViewModel.Source = SourceHelper.SetSource(_gameViewModel.Id);
     }
 }

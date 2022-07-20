@@ -15,17 +15,15 @@ public class FileService : IFileService
 
     public async Task GetGameImage(string token, int gameId, string localFolderPath)
     {
-        var response = await (_baseUrl)
+        FlurlHttp.ConfigureClient("https://localhost:5001", client =>
+            client.Settings.HttpClientFactory = new UntrustedCertClientFactory());
+
+        var response = await (_localUrl)
             .WithOAuthBearerToken(token)
             .SetQueryParams(new
             {
                 gameId
             })
-            .GetStreamAsync();
-
-        using (var stream = new FileStream(localFolderPath, FileMode.Create))
-        {
-            response.CopyTo(stream);
-        }
+            .DownloadFileAsync(Path.Combine(localFolderPath));
     }
 }

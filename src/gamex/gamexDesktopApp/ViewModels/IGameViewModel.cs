@@ -16,6 +16,7 @@ namespace gamexDesktopApp.ViewModels
         decimal Price { get; set; }
         string SerialKey { get; set; }
         decimal Total { get; set; }
+        string Source { get; set; }
 
         void Dispose();
     }
