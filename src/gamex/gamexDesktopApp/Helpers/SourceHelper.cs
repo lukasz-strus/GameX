@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.Helpers;
 
-public static class SourceHelper
+public static class FileHelper
 {
-    public static string SetSource(int id)
+    public static BitmapImage SetSource(int id)
     {
         var currentPath = GetProjectDirectory();
 
         var fullpath = string.Concat(currentPath, $"/Images/Games/{id}.jpg");
-        var defaultPath = string.Concat(currentPath, $"/Images/Games/0.jpg");
 
-        return IsImageSourceExists(fullpath) ? fullpath : defaultPath;
+        if (!File.Exists(fullpath))
+        {
+            return null;
+        }
+        var bitmapImage = new BitmapImage();
+        var stream = File.OpenRead(fullpath);
+
+        bitmapImage.BeginInit();
+        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+        bitmapImage.StreamSource = stream;
+        bitmapImage.EndInit();
+        stream.Close();
+        stream.Dispose();
+
+        return bitmapImage;
     }
 
-    public static string GetFilePath(string pathToSearch, string partialName)
+    public static string SearchFilePath(string pathToSearch, string partialName)
     {
         var hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
         FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");

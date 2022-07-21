@@ -18,7 +18,6 @@ public class GetGamesListCommand<T> : AsyncCommandBase
     private GetAllResult<GameDto> _getAllResult;
     private readonly IAccountStore _accountStore;
     private readonly IFileService _fileService;
-    private static bool isImagesLoaded = false;
 
     public GetGamesListCommand(T gamesViewModel,
                                IGameService gameService,
@@ -39,7 +38,9 @@ public class GetGamesListCommand<T> : AsyncCommandBase
 
             var token = _accountStore.CurrentAccount.Token;
             _getAllResult = await GetAllResult(token);
-            Mapping(token, _getAllResult);
+            AssignValues(token, _getAllResult);
+
+            AssignImages();
         }
         catch (Exception)
         {
@@ -48,9 +49,9 @@ public class GetGamesListCommand<T> : AsyncCommandBase
     }
 
     private async Task<GetAllResult<GameDto>> GetAllResult(string token) =>
-        await _gameService.GetAll(token, GetAllQuery());
+        await _gameService.GetAll(token, Query());
 
-    private GetAllQuery GetAllQuery() =>
+    private GetAllQuery Query() =>
         new()
         {
             SearchPhrase = _gamesViewModel.SearchPhrase,
@@ -60,7 +61,7 @@ public class GetGamesListCommand<T> : AsyncCommandBase
             SortDirection = _gamesViewModel.SortDirection
         };
 
-    private void Mapping(string token, GetAllResult<GameDto> getAllResult)
+    private void AssignValues(string token, GetAllResult<GameDto> getAllResult)
     {
         AddToGamesCollection(token, getAllResult.Items);
         _gamesViewModel.TotalPages = getAllResult.TotalPages;
@@ -74,13 +75,10 @@ public class GetGamesListCommand<T> : AsyncCommandBase
     {
         foreach (var item in dto)
         {
+            GetGamesImages(token, item.Id);
+
             _gamesViewModel.Games.GamesCollection.Add(MapFromGameDto(item));
-
-            if (!isImagesLoaded)
-                GetGamesImages(token, item.Id);
         }
-
-        isImagesLoaded = true;
     }
 
     private Game MapFromGameDto(GameDto dto) =>
@@ -90,18 +88,20 @@ public class GetGamesListCommand<T> : AsyncCommandBase
             Name = dto.Name,
             Description = dto.Description,
             Price = dto.Price,
-            Source = SourceHelper.SetSource(dto.Id)
         };
 
-    private async void GetGamesImages(string token, int gameId)
+    private void GetGamesImages(string token, int gameId)
     {
-        var fullPath = string.Concat(SourceHelper.GetProjectDirectory(), $"/Images/Games/");
+        var fullPath = string.Concat(FileHelper.GetProjectDirectory(), $"/Images/Games/");
 
-        var myFile = File.Create(SourceHelper.GetFilePath(fullPath, gameId.ToString()));
-        myFile.Close();
+        _fileService.GetGameImage(token, gameId, fullPath);
+    }
 
-        Thread.Sleep(100);
-
-        await _fileService.GetGameImage(token, gameId, fullPath);
+    private void AssignImages()
+    {
+        foreach (var game in _gamesViewModel.Games.GamesCollection)
+        {
+            game.Source = FileHelper.SetSource(game.Id);
+        }
     }
 }

@@ -5,9 +5,11 @@ using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
 using gamexServices;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
@@ -24,7 +26,7 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = SourceHelper.SetSource(_id);
+            Source = FileHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -89,9 +91,9 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         }
     }
 
-    private string _source;
+    private BitmapImage _source;
 
-    public string Source
+    public BitmapImage Source
     {
         get => _source;
         set

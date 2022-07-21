@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
@@ -7,7 +8,9 @@ using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
 using gamexModels;
 using gamexServices;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -189,6 +192,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
 
         ViewListCommand.Execute(null);
+        ViewListCommand.Execute(null);
     }
 
     public override void Dispose()
@@ -196,5 +200,13 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         ErrorMessageViewModel.Dispose();
 
         base.Dispose();
+    }
+
+    private void DisposeImages(ObservableCollection<Game> games)
+    {
+        foreach (var game in games)
+        {
+            game.Source = null;
+        }
     }
 }

@@ -32,7 +32,7 @@ public class LoadImageCommand : ICommand
     {
         try
         {
-            var projectDirectory = SourceHelper.GetProjectDirectory();
+            var projectDirectory = FileHelper.GetProjectDirectory();
             var copyName = _gameAdminViewModel.Id;
             var fullCopyPath = $"{projectDirectory}/Images/Games/{copyName}";
 

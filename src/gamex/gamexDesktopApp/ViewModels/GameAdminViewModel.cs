@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
@@ -24,7 +25,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = SourceHelper.SetSource(_id);
+            Source = FileHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -89,9 +90,9 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         }
     }
 
-    private string _source;
+    private BitmapImage _source;
 
-    public string Source
+    public BitmapImage Source
     {
         get => _source;
         set

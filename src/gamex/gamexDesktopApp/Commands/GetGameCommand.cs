@@ -44,7 +44,7 @@ public class GetGameCommand<T> : AsyncCommandBase
                 var token = _accountStore.CurrentAccount.Token;
                 var gameId = (int)_singleGame.Id;
                 var game = await _gameService.Get(token, gameId);
-                var fullPath = string.Concat(SourceHelper.GetProjectDirectory(), $"/Images/Games/");
+                var fullPath = string.Concat(FileHelper.GetProjectDirectory(), $"/Images/Games/");
 
                 AssignValues(game);
             }
@@ -61,6 +61,6 @@ public class GetGameCommand<T> : AsyncCommandBase
         _gameViewModel.Description = gameDto.Description;
         _gameViewModel.Price = gameDto.Price;
         _gameViewModel.Total = _accountStore.CurrentAccount.Total;
-        _gameViewModel.Source = SourceHelper.SetSource(_gameViewModel.Id);
+        _gameViewModel.Source = FileHelper.SetSource(_gameViewModel.Id);
     }
 }
