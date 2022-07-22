@@ -48,8 +48,8 @@ public class GetGamesListCommand<T> : AsyncCommandBase
         }
     }
 
-    private async Task<GetAllResult<GameDto>> GetAllResult(string token) =>
-        await _gameService.GetAll(token, Query());
+    private Task<GetAllResult<GameDto>> GetAllResult(string token) =>
+         _gameService.GetAll(token, Query());
 
     private GetAllQuery Query() =>
         new()

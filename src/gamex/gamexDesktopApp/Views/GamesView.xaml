@@ -23,15 +23,15 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="30" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
                Grid.Column="0"
@@ -44,19 +44,20 @@
                      Grid.Column="2"
                      Grid.Row="0"
                      Grid.ColumnSpan="4"
-                     Height="50"
+                     Height="30"
                      BorderBrush="Black"
                      BorderThickness="2"
-                     FontSize="20"
+                     FontSize="12"
                      VerticalContentAlignment="Center" />
             <Button x:Name="btnSearch"
                     Command="{Binding ViewListCommand}"
-                Grid.Column="6"
-                Grid.Row="0"
-                BorderBrush="Red"
-                BorderThickness="2"
-                Background="White">
-                <Image Source="/Images/search.png" Stretch="Uniform" />
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    BorderBrush="Red"
+                    BorderThickness="2"
+                    Background="White">
+                <Image Source="/Images/search.png"
+                       Stretch="Uniform" />
             </Button>
 
             <Button x:Name="btnUser"
@@ -68,11 +69,12 @@
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-               Content="Profil"
-               Grid.Column="7"
-               Grid.Row="1"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center" />
+                   Content="Profil"
+                   Grid.Column="7"
+                   Grid.Row="1"
+                   FontSize="12"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
             <Button x:Name="btnWallet"
                 Grid.Column="8"
                 Grid.Row="0"
@@ -82,52 +84,50 @@
                 <Image Source="/Images/wallet.png" Stretch="Uniform" />
             </Button>
             <TextBlock x:Name="lblWallet"
-               Text="{Binding Total, StringFormat={}{0} PLN}"
-               Grid.Column="8"
-               Grid.Row="1"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center" />
+                       Text="{Binding Total, StringFormat={}{0} PLN}"
+                       Grid.Column="8"
+                       Grid.Row="1"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
             <Button x:Name="btnLogout"
                     Command="{Binding LogoutCommand}"
-                Grid.Column="9"
-                Grid.Row="0"
-                BorderBrush="{x:Null}"
+                    Grid.Column="9"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
                     Background="White">
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-               Content="Wyloguj"
-               Grid.Column="9"
-               Grid.Row="1"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center" />
+                   Content="Wyloguj"
+                   Grid.Column="9"
+                   Grid.Row="1"
+                   FontSize="12"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
             <Button x:Name="btnShop"
                     Grid.Column="0"
                     Grid.Row="2"
-                    Grid.ColumnSpan="5"
-                    BorderBrush="Black"
-                    BorderThickness="2"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="{x:Null}"
                     Content="SKLEP"
-                    FontSize="40"
-                    FontWeight="Bold">
-                <Button.Effect>
-                    <DropShadowEffect />
-                </Button.Effect>
-            </Button>
+                    FontSize="26"
+                    FontWeight="Bold"
+                    Background="{x:Null}" />
             <Button x:Name="btnLibrary"
-                    Grid.Column="5"
+                    Grid.Column="2"
                     Grid.Row="2"
-                    Grid.ColumnSpan="5"
-                    BorderBrush="Black"
-                    BorderThickness="2"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="{x:Null}"
                     Content="BIBLIOTEKA"
-                    FontSize="40"
-                    FontWeight="Bold" Background="{x:Null}"
+                    Foreground="#FF232323"
+                    FontSize="26"
+                    Background="{x:Null}"
                     Command="{Binding GoToLibraryViewCommand}" />
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock FontSize="20" Margin="5">
+            <TextBlock FontSize="12" Margin="5" FontStyle="Italic">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}Pokazano od {0} do {1} gier z {2} wyszukanych.">
                         <Binding Path="ItemsFrom" />
@@ -171,25 +171,25 @@
                   SelectedIndex="-1"
                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  MaxHeight="400" MaxWidth="1600">
+                  MaxHeight="400" MaxWidth="1800">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
                         <Image Source="{Binding Source,
                                 Converter={StaticResource nullImageConverter},
                                 TargetNullValue={x:Null}}"
-                               Height="100" />
-                        <TextBlock HorizontalAlignment="Left"
+                               Height="150" />
+                        <TextBlock HorizontalAlignment="Center"
                                    Margin="5"
                                    Text="{Binding Name}"
-                                   FontSize="30"
+                                   FontSize="26"
                                    FontWeight="Bold"
                                    TextWrapping="Wrap"
                                    DockPanel.Dock="Left" />
                         <TextBlock Margin="5"
                                    HorizontalAlignment="Right"
                                    Text="{Binding Price, StringFormat={}{0} PLN}"
-                                   FontSize="30"
+                                   FontSize="18"
                                    Foreground="Red"
                                    FontWeight="Bold"
                                    DockPanel.Dock="Right" />

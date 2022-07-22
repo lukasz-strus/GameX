@@ -201,12 +201,4 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
 
         base.Dispose();
     }
-
-    private void DisposeImages(ObservableCollection<Game> games)
-    {
-        foreach (var game in games)
-        {
-            game.Source = null;
-        }
-    }
 }

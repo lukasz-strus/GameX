@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.IO;
+﻿using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.Helpers;
@@ -16,6 +15,7 @@ public static class FileHelper
         {
             return null;
         }
+
         var bitmapImage = new BitmapImage();
         var stream = File.OpenRead(fullpath);
 
@@ -46,6 +46,20 @@ public static class FileHelper
     public static string GetProjectDirectory() =>
         Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
 
-    private static bool IsImageSourceExists(string source) =>
-        File.Exists(source);
+    public static void DeleteGamesImages()
+    {
+        var currentPath = FileHelper.GetProjectDirectory();
+        var fullpath = string.Concat(currentPath, $"/Images/Games/");
+
+        DirectoryInfo di = new DirectoryInfo(fullpath);
+
+        foreach (FileInfo file in di.GetFiles())
+        {
+            file.Delete();
+        }
+        foreach (DirectoryInfo dir in di.GetDirectories())
+        {
+            dir.Delete(true);
+        }
+    }
 }

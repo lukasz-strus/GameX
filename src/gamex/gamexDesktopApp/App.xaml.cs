@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
-using gamexDesktopApp.Views;
-using Microsoft.Extensions.Hosting;
+﻿using gamexDesktopApp.Helpers;
 using gamexDesktopApp.HostBuilders;
+using gamexDesktopApp.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Windows;
 
 namespace gamexDesktopApp;
 
@@ -37,6 +38,8 @@ public partial class App : Application
 
     protected override async void OnExit(ExitEventArgs e)
     {
+        FileHelper.DeleteGamesImages();
+
         await _host.StopAsync();
         _host.Dispose();
 
