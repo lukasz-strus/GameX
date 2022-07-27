@@ -5,7 +5,7 @@ namespace gamexServices;
 
 public interface IFileService
 {
-    Task GetGameImage(string token, int gameId, string localFolderPath);
+    Task<byte[]> GetGameImage(string token, int gameId);
 }
 
 public class FileService : IFileService
@@ -14,7 +14,7 @@ public class FileService : IFileService
 
     private readonly string _localUrl = "https://localhost:5001/file";
 
-    public async Task GetGameImage(string token, int gameId, string localFolderPath)
+    public async Task<byte[]> GetGameImage(string token, int gameId)
     {
         AcceptUntrustedCerts();
 
@@ -26,31 +26,7 @@ public class FileService : IFileService
             })
             .GetBytesAsync();
 
-        var fullPath = $"{localFolderPath}/{gameId}.jpg";
-
-        SaveImage(fullPath, response);
-    }
-
-    private void SaveImage(string fullPath, byte[] image)
-    {
-        DeleteExistingImage(fullPath);
-
-        using (var ms = new MemoryStream(image))
-        {
-            using (var fs = new FileStream(fullPath, FileMode.Create))
-            {
-                ms.WriteTo(fs);
-                fs.Close();
-            }
-        }
-    }
-
-    private void DeleteExistingImage(string fullPath)
-    {
-        if (File.Exists(fullPath))
-        {
-            File.Delete(fullPath);
-        }
+        return response;
     }
 
     private void AcceptUntrustedCerts()

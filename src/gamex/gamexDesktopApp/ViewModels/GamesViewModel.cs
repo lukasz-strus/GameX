@@ -192,7 +192,6 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
 
         ViewListCommand.Execute(null);
-        ViewListCommand.Execute(null);
     }
 
     public override void Dispose()

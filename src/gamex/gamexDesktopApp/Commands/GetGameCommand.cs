@@ -44,9 +44,9 @@ public class GetGameCommand<T> : AsyncCommandBase
                 var token = _accountStore.CurrentAccount.Token;
                 var gameId = (int)_singleGame.Id;
                 var game = await _gameService.Get(token, gameId);
-                var fullPath = string.Concat(FileHelper.GetProjectDirectory(), $"/Images/Games/");
+                var imageSource = await _fileService.GetGameImage(token, gameId);
 
-                AssignValues(game);
+                AssignValues(game, imageSource);
             }
         }
         catch (Exception)
@@ -54,13 +54,13 @@ public class GetGameCommand<T> : AsyncCommandBase
         }
     }
 
-    private void AssignValues(GameDto gameDto)
+    private void AssignValues(GameDto gameDto, byte[] imageSource)
     {
         _gameViewModel.Id = gameDto.Id;
         _gameViewModel.Name = gameDto.Name;
         _gameViewModel.Description = gameDto.Description;
         _gameViewModel.Price = gameDto.Price;
         _gameViewModel.Total = _accountStore.CurrentAccount.Total;
-        _gameViewModel.Source = FileHelper.SetSource(_gameViewModel.Id);
+        _gameViewModel.Source = FileHelper.LoadImage(imageSource);
     }
 }

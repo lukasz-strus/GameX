@@ -39,8 +39,6 @@ public class GetGamesListCommand<T> : AsyncCommandBase
             var token = _accountStore.CurrentAccount.Token;
             _getAllResult = await GetAllResult(token);
             AssignValues(token, _getAllResult);
-
-            AssignImages();
         }
         catch (Exception)
         {
@@ -71,37 +69,30 @@ public class GetGamesListCommand<T> : AsyncCommandBase
         _gamesViewModel.Total = _accountStore.CurrentAccount.Total;
     }
 
-    private void AddToGamesCollection(string token, List<GameDto> dto)
+    private async void AddToGamesCollection(string token, List<GameDto> dto)
     {
         foreach (var item in dto)
         {
-            GetGamesImages(token, item.Id);
+            var imageStream = await GetGamesImages(token, item.Id);
 
-            _gamesViewModel.Games.GamesCollection.Add(MapFromGameDto(item));
+            _gamesViewModel.Games.GamesCollection.Add(MapFromGameDto(item, imageStream));
         }
     }
 
-    private Game MapFromGameDto(GameDto dto) =>
+    private Game MapFromGameDto(GameDto dto, byte[] imageStream) =>
         new()
         {
             Id = dto.Id,
             Name = dto.Name,
             Description = dto.Description,
             Price = dto.Price,
+            Source = FileHelper.LoadImage(imageStream)
         };
 
-    private void GetGamesImages(string token, int gameId)
+    private async Task<byte[]> GetGamesImages(string token, int gameId)
     {
-        var fullPath = string.Concat(FileHelper.GetProjectDirectory(), $"/Images/Games/");
+        var imageStream = await _fileService.GetGameImage(token, gameId);
 
-        _fileService.GetGameImage(token, gameId, fullPath);
-    }
-
-    private void AssignImages()
-    {
-        foreach (var game in _gamesViewModel.Games.GamesCollection)
-        {
-            game.Source = FileHelper.SetSource(game.Id);
-        }
+        return imageStream;
     }
 }

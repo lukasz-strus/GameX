@@ -25,7 +25,6 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = FileHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
