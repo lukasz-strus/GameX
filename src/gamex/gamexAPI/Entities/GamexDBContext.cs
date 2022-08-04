@@ -7,8 +7,8 @@ public class GamexDbContext : DbContext
     public DbSet<Game> Games { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
-
     public DbSet<GameSerial> GameSerials { get; set; }
+    public DbSet<Image> Images { get; set; }
 
     public GamexDbContext(DbContextOptions<GamexDbContext> options) : base(options)
     {
@@ -39,6 +39,7 @@ public class GamexDbContext : DbContext
 
         modelBuilder.Entity<Game>()
             .Property(g => g.Price)
+            .HasPrecision(9, 2)
             .IsRequired();
 
         #endregion Games
@@ -71,6 +72,7 @@ public class GamexDbContext : DbContext
 
         modelBuilder.Entity<User>()
             .Property(u => u.Total)
+            .HasPrecision(9, 2)
             .HasDefaultValue(0);
 
         #endregion User
@@ -95,5 +97,31 @@ public class GamexDbContext : DbContext
             .ToTable("GameSerials");
 
         #endregion GameSerial
+
+        #region Image
+
+        modelBuilder.Entity<Image>()
+            .ToTable("Images");
+
+        modelBuilder.Entity<Image>()
+            .HasKey(r => r.Id);
+
+        modelBuilder.Entity<Image>()
+            .Property(i => i.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Image>()
+            .Property(i => i.ImageStream)
+            .IsRequired();
+
+        modelBuilder.Entity<Image>()
+            .Property(i => i.GameId)
+            .IsRequired();
+
+        modelBuilder.Entity<Image>()
+            .Property(i => i.Extension)
+            .IsRequired();
+
+        #endregion Image
     }
 }
