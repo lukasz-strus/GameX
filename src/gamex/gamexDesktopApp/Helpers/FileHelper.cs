@@ -1,4 +1,6 @@
 ﻿using gamexModels;
+using Microsoft.Win32;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
 
@@ -6,31 +8,7 @@ namespace gamexDesktopApp.Helpers;
 
 public static class FileHelper
 {
-    public static BitmapImage SetSource(int id)
-    {
-        var currentPath = GetProjectDirectory();
-
-        var fullpath = string.Concat(currentPath, $"/Images/Games/{id}.jpg");
-
-        if (!File.Exists(fullpath))
-        {
-            return null;
-        }
-
-        var bitmapImage = new BitmapImage();
-        var stream = File.OpenRead(fullpath);
-
-        bitmapImage.BeginInit();
-        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-        bitmapImage.StreamSource = stream;
-        bitmapImage.EndInit();
-        stream.Close();
-        stream.Dispose();
-
-        return bitmapImage;
-    }
-
-    public static BitmapImage LoadImage(ImageDto imageDto)
+    public static BitmapImage SetImage(ImageDto imageDto)
     {
         if (imageDto == null)
         {
@@ -60,6 +38,50 @@ public static class FileHelper
         return image;
     }
 
-    public static string GetProjectDirectory() =>
-        Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+    public static CreateImageDto LoadImage(int gameId)
+    {
+        CreateImageDto imageDto = new();
+
+        var openFileDialog = new OpenFileDialog()
+        {
+            Title = "Wybierz obrazek",
+            Filter = ""
+        };
+
+        ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+        var separator = string.Empty;
+
+        foreach (var c in codecs)
+        {
+            string codecName = c.CodecName[8..].Replace("Codec", "Files").Trim();
+            openFileDialog.Filter = String.Format("{0}{1}{2} ({3})|{3}",
+                                                    openFileDialog.Filter,
+                                                    separator, codecName,
+                                                    c.FilenameExtension);
+            separator = "|";
+        }
+        openFileDialog.Filter = String.Format("{0}{1}{2} ({3})|{3}", openFileDialog.Filter, separator, "All Files", "*.*");
+        openFileDialog.DefaultExt = ".png";
+
+        string fileSourceName = null;
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            fileSourceName = openFileDialog.FileName;
+        }
+
+        if (fileSourceName == null)
+        {
+            return null;
+        }
+
+        var source = File.ReadAllBytes(fileSourceName);
+        var extension = Path.GetExtension(fileSourceName);
+
+        imageDto.ImageStream = source;
+        imageDto.GameId = gameId;
+        imageDto.Extension = extension;
+
+        return imageDto;
+    }
 }

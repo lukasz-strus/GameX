@@ -61,6 +61,6 @@ public class GetGameCommand<T> : AsyncCommandBase
         _gameViewModel.Description = gameDto.Description;
         _gameViewModel.Price = gameDto.Price;
         _gameViewModel.Total = _accountStore.CurrentAccount.Total;
-        _gameViewModel.Source = FileHelper.LoadImage(image);
+        _gameViewModel.Source = FileHelper.SetImage(image);
     }
 }

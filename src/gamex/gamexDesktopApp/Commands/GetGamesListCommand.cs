@@ -85,7 +85,7 @@ public class GetGamesListCommand<T> : AsyncCommandBase
             Name = dto.Name,
             Description = dto.Description,
             Price = dto.Price,
-            Source = FileHelper.LoadImage(image)
+            Source = FileHelper.SetImage(image)
         };
 
     private async Task<ImageDto> GetGamesImages(string token, int gameId)

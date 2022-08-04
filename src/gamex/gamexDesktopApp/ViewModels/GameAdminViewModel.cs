@@ -133,7 +133,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
-        LoadImageCommand = new LoadImageCommand(this);
+        LoadImageCommand = new LoadImageCommand(this, fileService, accountStore);
     }
 
     public override void Dispose()

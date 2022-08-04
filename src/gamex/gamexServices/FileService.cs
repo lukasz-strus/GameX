@@ -8,6 +8,8 @@ namespace gamexServices;
 public interface IFileService
 {
     Task<ImageDto> GetGameImage(string token, int gameId);
+
+    Task<int> Create(string token, CreateImageDto createImageDto);
 }
 
 public class FileService : IFileService
@@ -33,6 +35,15 @@ public class FileService : IFileService
         var result = await response.GetJsonAsync<ImageDto>();
 
         return result;
+    }
+
+    public async Task<int> Create(string token, CreateImageDto createImageDto)
+    {
+        var response = await _baseUrl
+            .WithOAuthBearerToken(token)
+            .PostJsonAsync(createImageDto);
+
+        return response.StatusCode;
     }
 
     private void AcceptUntrustedCerts()
