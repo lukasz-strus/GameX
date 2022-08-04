@@ -18,7 +18,7 @@ public class FileService : IFileService
     {
         AcceptUntrustedCerts();
 
-        var response = await (_localUrl)
+        var response = await (_baseUrl)
             .WithOAuthBearerToken(token)
             .SetQueryParams(new
             {

@@ -58,6 +58,7 @@ builder.Services.AddScoped<GamexSeeder>();
 
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -91,7 +92,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<GamexSeeder>();
 
-app.UseStaticFiles();
+//app.UseStaticFiles();
 
 //app.UseCors("FrontEndClient");
 

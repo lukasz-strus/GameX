@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using gamexAPI.Entities;
+using gamexAPI.Services;
+using gamexModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gamexAPI.Controllers;
 
@@ -13,37 +10,44 @@ namespace gamexAPI.Controllers;
 [Authorize]
 public class FileController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult GetGameImage([FromQuery] int gameId)
+    private readonly IFileService _fileService;
+
+    public FileController(IFileService fileService)
     {
-        var rootPath = Directory.GetCurrentDirectory();
-        var pathToSearch = $"{rootPath}/PrivateFiles/Games/";
+        _fileService = fileService;
+    }
 
-        string partialName = gameId.ToString();
+    [HttpGet("/all/{gameId}")]
+    public ActionResult<IEnumerable<Image>> GetGameImages([FromRoute] int gameId)
+    {
+        var images = _fileService.GetImages(gameId);
 
-        var hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
-        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
+        return Ok(images);
+    }
 
-        string fileName;
-        string filePath;
+    [HttpGet("{gameId}")]
+    public ActionResult<Image> Get([FromRoute] int gameId)
+    {
+        var image = _fileService.GetMainImage(gameId);
 
-        if (filesInDir.Length == 0)
-        {
-            fileName = "0.jpg";
-            filePath = Path.Combine(pathToSearch, fileName);
-        }
-        else
-        {
-            filePath = filesInDir.FirstOrDefault().FullName;
+        return Ok(image);
+    }
 
-            fileName = filesInDir.FirstOrDefault().Name;
-        }
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin,Seller")]
+    public ActionResult Delete([FromRoute] int id)
+    {
+        _fileService.Delete(id);
 
-        var contentProvider = new FileExtensionContentTypeProvider();
-        contentProvider.TryGetContentType(fileName, out var contentType);
+        return NoContent();
+    }
 
-        var fileContents = System.IO.File.ReadAllBytes(filePath);
+    [HttpPost]
+    [Authorize(Roles = "Admin,Seller")]
+    public ActionResult Create([FromBody] CreateImageDto dto)
+    {
+        var id = _fileService.Create(dto);
 
-        return File(fileContents, contentType, fileName);
+        return Created($"/file/{id}", null);
     }
 }
