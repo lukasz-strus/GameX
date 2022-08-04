@@ -27,7 +27,7 @@ public class FileService : IFileService
 
         if (response.StatusCode == (int)HttpStatusCode.NotFound) //TODO Zrobić to innych serwisach + API
         {
-            return null;
+            return null; //TODO zmienic na obrazek NotFound
         }
 
         var result = await response.GetJsonAsync<ImageDto>();

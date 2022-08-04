@@ -33,7 +33,6 @@ public class UpdatePageCommand<T> : ICommand
                 _viewModel.PageNumber = int.Parse(parameter.ToString());
             }
             _viewModel.ViewListCommand.Execute(_viewModel);
-            _viewModel.ViewListCommand.Execute(_viewModel);
         }
         catch (Exception)
         {

@@ -26,7 +26,6 @@ public class UpdatePageSizeCommand<T> : ICommand
         {
             _viewModel.PageSize = int.Parse(parameter.ToString());
             _viewModel.ViewListCommand.Execute(_viewModel);
-            _viewModel.ViewListCommand.Execute(_viewModel);
         }
         catch (Exception)
         {

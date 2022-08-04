@@ -35,7 +35,6 @@ public class GetGamesListCommand<T> : AsyncCommandBase
         try
         {
             _gamesViewModel.Games.GamesCollection.Clear();
-
             var token = _accountStore.CurrentAccount.Token;
             _getAllResult = await GetAllResult(token);
             AssignValues(token, _getAllResult);
