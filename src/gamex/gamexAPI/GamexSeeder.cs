@@ -46,12 +46,12 @@ public class GamexSeeder
                 _dbContext.SaveChanges();
             }
 
-            if (!_dbContext.Images.Any())
-            {
-                var images = GetImages();
-                _dbContext.Images.AddRange(images);
-                _dbContext.SaveChanges();
-            }
+            //if (!_dbContext.Images.Any())
+            //{
+            //    var images = GetImages();
+            //    _dbContext.Images.AddRange(images);
+            //    _dbContext.SaveChanges();
+            //}
         }
     }
 

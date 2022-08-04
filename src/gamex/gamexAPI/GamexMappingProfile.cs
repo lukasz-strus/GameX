@@ -22,6 +22,6 @@ public class GamexMappingProfile : Profile
 
         CreateMap<GameSerialDto, GameSerial>();
 
-        CreateMap<ImageDto, Image>();
+        CreateMap<Image, ImageDto>();
     }
 }

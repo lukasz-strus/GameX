@@ -17,8 +17,8 @@ public class FileController : ControllerBase
         _fileService = fileService;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Image>> GetGameImages([FromQuery] int gameId)
+    [HttpGet("/all/{gameId}")]
+    public ActionResult<IEnumerable<Image>> GetGameImages([FromRoute] int gameId)
     {
         var images = _fileService.GetImages(gameId);
 
