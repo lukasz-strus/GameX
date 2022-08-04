@@ -58,6 +58,7 @@ builder.Services.AddScoped<GamexSeeder>();
 
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -76,11 +77,25 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("FrontEndClient", policyBuilder =>
+//    policyBuilder.AllowAnyMethod()
+//        .AllowAnyHeader()
+//        .WithOrigins(builder.Configuration["AllowedOrigins"])
+//        );
+//});
+
 // configure
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<GamexSeeder>();
+
+//app.UseStaticFiles();
+
+//app.UseCors("FrontEndClient");
+
 seeder.Seed();
 
 if (app.Environment.IsDevelopment())

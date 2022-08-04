@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:gamexDesktopApp.Views" xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GameViewModel}"
+             xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
+             xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GameViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converter:NullImageConverter x:Key="nullImageConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -81,10 +85,18 @@
                Grid.Row="1"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center" />
+        <Image Source="{Binding Source,
+                    Converter={StaticResource nullImageConverter},
+                    TargetNullValue={x:Null}}"
+               Grid.Column="0"
+               Grid.Row="3"
+               Grid.ColumnSpan="3"
+               Grid.RowSpan="3" />
         <TextBlock x:Name="txbGameName"
-                   Grid.Column="0"
+                   Grid.Column="3"
                    Grid.Row="3"
-                   Grid.ColumnSpan="10"
+                   Grid.ColumnSpan="5"
+                   Grid.RowSpan="2"
                    Margin="10"
                    TextWrapping="Wrap"
                    Text="{Binding Name}"
@@ -92,9 +104,9 @@
                    FontWeight="Bold" />
         <TextBlock x:Name="txbGameDescription"
                    Grid.Column="0"
-                   Grid.Row="4"
+                   Grid.Row="6"
                    Grid.ColumnSpan="7"
-                   Grid.RowSpan="4"
+                   Grid.RowSpan="2"
                    Margin="10"
                    TextWrapping="Wrap"
                    FontSize="16"

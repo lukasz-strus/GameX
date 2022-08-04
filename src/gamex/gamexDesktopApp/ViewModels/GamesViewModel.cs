@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
@@ -7,7 +8,9 @@ using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
 using gamexModels;
 using gamexServices;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -166,7 +169,8 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
                           IRenavigator loginRenavigator,
                           IRenavigator accountRenavigator,
                           IRenavigator walletRenavigator,
-                          IRenavigator libraryRenavigator)
+                          IRenavigator libraryRenavigator,
+                          IFileService fileService)
     {
         ErrorMessageViewModel = new();
         _singleGame = singleGame;
@@ -177,7 +181,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         };
         GamesListView = collectionViewSource.View;
 
-        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore);
+        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
         UpdatePageCommand = new UpdatePageCommand<GamesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesViewModel>(this);
         GoToWalletCommand = new RenavigateCommand(walletRenavigator);

@@ -1,4 +1,5 @@
 ﻿using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
@@ -87,6 +89,18 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         }
     }
 
+    private BitmapImage _source;
+
+    public BitmapImage Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
+            OnPropertyChanged();
+        }
+    }
+
     public MessageViewModel ErrorMessageViewModel { get; }
 
     public string ErrorMessage
@@ -99,6 +113,7 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
     public ICommand BackToGamesCommand { get; }
     public ICommand GoToAccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
+    public ICommand LoadImageCommand { get; }
 
     public GameAdminViewModel(IGameService gameService,
                              IAccountStore accountStore,
@@ -107,16 +122,18 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
                              IRenavigator gamesAdminRenavigator,
                              IRenavigator gamesSalesRenavigator,
                              IRenavigator loginRenavigator,
-                             IRenavigator accountRenavigator)
+                             IRenavigator accountRenavigator,
+                             IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame);
+        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame, fileService);
         GetGameCommand.Execute(null);
         UpdateGameCommand = new UpdateGameCommand(this, gameService, accountStore, singleGame);
         BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
+        LoadImageCommand = new LoadImageCommand(this, fileService, accountStore);
     }
 
     public override void Dispose()

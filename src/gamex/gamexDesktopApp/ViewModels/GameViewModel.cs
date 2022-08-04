@@ -1,10 +1,15 @@
 ﻿using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.SelectedGame;
 using gamexServices;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
@@ -85,6 +90,18 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         }
     }
 
+    private BitmapImage _source;
+
+    public BitmapImage Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
+            OnPropertyChanged();
+        }
+    }
+
     public MessageViewModel ErrorMessageViewModel { get; }
 
     public string ErrorMessage
@@ -107,11 +124,12 @@ public class GameViewModel : BaseViewModel, IGameViewModel
                          IRenavigator gamesRenavigator,
                          IRenavigator loginRenavigator,
                          IRenavigator accountRenavigator,
-                         IRenavigator walletRenavigator)
+                         IRenavigator walletRenavigator,
+                         IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameViewModel>(this, gameService, accountStore, singleGame);
+        GetGameCommand = new GetGameCommand<GameViewModel>(this, gameService, accountStore, singleGame, fileService);
         GetGameCommand.Execute(null);
         BuyGameCommand = new BuyGameCommand(this, gameService, accountStore, userService);
         BackToGamesCommand = new RenavigateCommand(gamesRenavigator);

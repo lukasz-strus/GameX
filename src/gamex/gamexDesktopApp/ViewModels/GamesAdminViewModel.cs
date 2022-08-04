@@ -168,7 +168,8 @@ public class GamesAdminViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
                               IRenavigator loginRenavigator,
                               IRenavigator accountRenavigator,
                               IRenavigator gamesRenavigator,
-                              IRenavigator usersRenavigator)
+                              IRenavigator usersRenavigator,
+                              IFileService fileService)
     {
         ErrorMessageViewModel = new();
         _singleGame = singleGame;
@@ -179,7 +180,7 @@ public class GamesAdminViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
         };
         GamesListView = collectionViewSource.View;
 
-        ViewListCommand = new GetGamesListCommand<GamesAdminViewModel>(this, gameService, accountStore);
+        ViewListCommand = new GetGamesListCommand<GamesAdminViewModel>(this, gameService, accountStore, fileService);
         UpdatePageCommand = new UpdatePageCommand<GamesAdminViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesAdminViewModel>(this);
 
