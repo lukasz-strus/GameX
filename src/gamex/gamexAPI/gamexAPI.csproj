@@ -11,13 +11,6 @@
 		</VisualStudio>
 	</ProjectExtensions>
 
-	<ItemGroup>
-	  <Compile Remove="PrivateFiles\Users\**" />
-	  <Content Remove="PrivateFiles\Users\**" />
-	  <EmbeddedResource Remove="PrivateFiles\Users\**" />
-	  <None Remove="PrivateFiles\Users\**" />
-	</ItemGroup>
-
   <ItemGroup>
 	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />

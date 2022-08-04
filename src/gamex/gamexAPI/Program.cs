@@ -92,7 +92,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<GamexSeeder>();
 
-app.UseStaticFiles();
+//app.UseStaticFiles();
 
 //app.UseCors("FrontEndClient");
 
