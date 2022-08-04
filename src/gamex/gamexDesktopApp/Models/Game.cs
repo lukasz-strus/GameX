@@ -1,6 +1,7 @@
 ﻿using gamexDesktopApp.Helpers;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.Models;
 
@@ -19,7 +20,6 @@ public class Game : INotifyPropertyChanged
         set
         {
             _id = value;
-            Source = SourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -60,9 +60,9 @@ public class Game : INotifyPropertyChanged
         }
     }
 
-    private string _source;
+    private BitmapImage _source;
 
-    public string Source
+    public BitmapImage Source
     {
         get => _source;
         set

@@ -28,10 +28,9 @@ public class GameService : IGameService
     private readonly IMapper _mapper;
     private readonly ILogger<GameService> _logger;
 
-    public GameService(
-        GamexDbContext dbContext,
-        IMapper mapper,
-        ILogger<GameService> logger)
+    public GameService(GamexDbContext dbContext,
+                        IMapper mapper,
+                        ILogger<GameService> logger)
     {
         _dbContext = dbContext;
         _mapper = mapper;

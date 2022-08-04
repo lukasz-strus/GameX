@@ -72,4 +72,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\Games\" />
+  </ItemGroup>
+
 </Project>

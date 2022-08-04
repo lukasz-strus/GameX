@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PrivateFiles\Users\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

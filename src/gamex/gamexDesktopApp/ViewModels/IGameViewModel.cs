@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels
 {
@@ -16,6 +17,7 @@ namespace gamexDesktopApp.ViewModels
         decimal Price { get; set; }
         string SerialKey { get; set; }
         decimal Total { get; set; }
+        BitmapImage Source { get; set; }
 
         void Dispose();
     }

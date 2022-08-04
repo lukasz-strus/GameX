@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
@@ -24,7 +25,6 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set
         {
             _id = value;
-            Source = SourceHelper.SetSource(_id);
             OnPropertyChanged();
         }
     }
@@ -89,9 +89,9 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         }
     }
 
-    private string _source;
+    private BitmapImage _source;
 
-    public string Source
+    public BitmapImage Source
     {
         get => _source;
         set
@@ -122,17 +122,18 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
                              IRenavigator gamesAdminRenavigator,
                              IRenavigator gamesSalesRenavigator,
                              IRenavigator loginRenavigator,
-                             IRenavigator accountRenavigator)
+                             IRenavigator accountRenavigator,
+                             IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame);
+        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame, fileService);
         GetGameCommand.Execute(null);
         UpdateGameCommand = new UpdateGameCommand(this, gameService, accountStore, singleGame);
         BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
-        LoadImageCommand = new LoadImageCommand(this);
+        LoadImageCommand = new LoadImageCommand(this, fileService, accountStore);
     }
 
     public override void Dispose()

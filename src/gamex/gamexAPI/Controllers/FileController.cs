@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using gamexAPI.Entities;
+using gamexAPI.Services;
+using gamexModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gamexAPI.Controllers;
 
@@ -13,27 +10,44 @@ namespace gamexAPI.Controllers;
 [Authorize]
 public class FileController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult GetGameImage([FromQuery] int gameId)
+    private readonly IFileService _fileService;
+
+    public FileController(IFileService fileService)
     {
-        var rootPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-        var pathToSearch = $"{rootPath}/PrivateFiles/Games/";
+        _fileService = fileService;
+    }
 
-        string partialName = gameId.ToString();
-        string fullName;
+    [HttpGet("/all/{gameId}")]
+    public ActionResult<IEnumerable<Image>> GetGameImages([FromRoute] int gameId)
+    {
+        var images = _fileService.GetImages(gameId);
 
-        DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
-        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles(partialName + "*.*");
+        return Ok(images);
+    }
 
-        fullName = filesInDir.FirstOrDefault().FullName;
+    [HttpGet("{gameId}")]
+    public ActionResult<Image> Get([FromRoute] int gameId)
+    {
+        var image = _fileService.GetMainImage(gameId);
 
-        if (fullName is null)
-        {
-            return NotFound();
-        }
+        return Ok(image);
+    }
 
-        var extension = Path.GetExtension(fullName);
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin,Seller")]
+    public ActionResult Delete([FromRoute] int id)
+    {
+        _fileService.Delete(id);
 
-        return File(fullName, extension);
+        return NoContent();
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "Admin,Seller")]
+    public ActionResult Create([FromBody] CreateImageDto dto)
+    {
+        var id = _fileService.Create(dto);
+
+        return Created($"/file/{id}", null);
     }
 }
