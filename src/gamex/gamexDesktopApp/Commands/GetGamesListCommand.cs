@@ -73,26 +73,26 @@ public class GetGamesListCommand<T> : AsyncCommandBase
     {
         foreach (var item in dto)
         {
-            var imageStream = await GetGamesImages(token, item.Id);
+            var image = await GetGamesImages(token, item.Id);
 
-            _gamesViewModel.Games.GamesCollection.Add(MapFromGameDto(item, imageStream));
+            _gamesViewModel.Games.GamesCollection.Add(MapFromGameDto(item, image));
         }
     }
 
-    private Game MapFromGameDto(GameDto dto, byte[] imageStream) =>
+    private Game MapFromGameDto(GameDto dto, ImageDto image) =>
         new()
         {
             Id = dto.Id,
             Name = dto.Name,
             Description = dto.Description,
             Price = dto.Price,
-            Source = FileHelper.LoadImage(imageStream)
+            Source = FileHelper.LoadImage(image)
         };
 
-    private async Task<byte[]> GetGamesImages(string token, int gameId)
+    private async Task<ImageDto> GetGamesImages(string token, int gameId)
     {
-        var imageStream = await _fileService.GetGameImage(token, gameId);
+        var image = await _fileService.GetGameImage(token, gameId);
 
-        return imageStream;
+        return image;
     }
 }

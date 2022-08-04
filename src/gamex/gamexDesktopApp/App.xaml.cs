@@ -38,8 +38,6 @@ public partial class App : Application
 
     protected override async void OnExit(ExitEventArgs e)
     {
-        FileHelper.DeleteGamesImages();
-
         await _host.StopAsync();
         _host.Dispose();
 

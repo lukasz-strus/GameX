@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using gamexModels;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.Helpers;
@@ -29,8 +30,15 @@ public static class FileHelper
         return bitmapImage;
     }
 
-    public static BitmapImage LoadImage(byte[] imageData)
+    public static BitmapImage LoadImage(ImageDto imageDto)
     {
+        if (imageDto == null)
+        {
+            return null;
+        }
+
+        var imageData = imageDto.ImageStream;
+
         if (imageData == null || imageData.Length == 0)
         {
             return null;
@@ -52,37 +60,6 @@ public static class FileHelper
         return image;
     }
 
-    public static string SearchFilePath(string pathToSearch, string partialName)
-    {
-        var hdDirectoryInWhichToSearch = new DirectoryInfo(pathToSearch);
-        FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
-
-        if (filesInDir.Length == 0)
-        {
-            var fileName = "0.jpg";
-            return Path.Combine(pathToSearch, fileName);
-        }
-
-        return filesInDir.FirstOrDefault().FullName;
-    }
-
     public static string GetProjectDirectory() =>
         Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-    public static void DeleteGamesImages()
-    {
-        var currentPath = FileHelper.GetProjectDirectory();
-        var fullpath = string.Concat(currentPath, $"/Images/Games/");
-
-        DirectoryInfo di = new DirectoryInfo(fullpath);
-
-        foreach (FileInfo file in di.GetFiles())
-        {
-            file.Delete();
-        }
-        foreach (DirectoryInfo dir in di.GetDirectories())
-        {
-            dir.Delete(true);
-        }
-    }
 }
