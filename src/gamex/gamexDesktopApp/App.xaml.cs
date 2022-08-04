@@ -43,4 +43,11 @@ public partial class App : Application
 
         base.OnExit(e);
     }
+
+    //TODO CLEAN CODE
+    //TODO CC1. HttpStatusCode
+    //TODO CC2. Rozdzielić Metody
+    //TODO CC3. Wydzielić metody pomocnicze dla komend
+    //TODO CC4. Generyczność komend
+    //TODO CC5. Wyczyścic dokładnie pod kolejną gałąź - DESING!!!
 }
