@@ -35,7 +35,7 @@ public class GamexDbContext : DbContext
 
         modelBuilder.Entity<Game>()
             .Property(g => g.Description)
-            .HasMaxLength(300);
+            .HasMaxLength(1000);
 
         modelBuilder.Entity<Game>()
             .Property(g => g.Price)

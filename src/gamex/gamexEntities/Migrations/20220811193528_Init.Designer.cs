@@ -9,22 +9,22 @@ using gamexEntities;
 
 #nullable disable
 
-namespace gamexAPI.Migrations
+namespace gamexEntities.Migrations
 {
     [DbContext(typeof(GamexDbContext))]
-    [Migration("20220727220514_AddExtensionToImages")]
-    partial class AddExtensionToImages
+    [Migration("20220811193528_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("gamexAPI.Entities.Game", b =>
+            modelBuilder.Entity("gamexEntities.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace gamexAPI.Migrations
                     b.ToTable("Games", (string)null);
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.GameSerial", b =>
+            modelBuilder.Entity("gamexEntities.GameSerial", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace gamexAPI.Migrations
                     b.ToTable("GameSerials", (string)null);
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.Image", b =>
+            modelBuilder.Entity("gamexEntities.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace gamexAPI.Migrations
                     b.ToTable("Images", (string)null);
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.Role", b =>
+            modelBuilder.Entity("gamexEntities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,7 +114,7 @@ namespace gamexAPI.Migrations
                     b.ToTable("Roles", (string)null);
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.User", b =>
+            modelBuilder.Entity("gamexEntities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,9 +152,9 @@ namespace gamexAPI.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.GameSerial", b =>
+            modelBuilder.Entity("gamexEntities.GameSerial", b =>
                 {
-                    b.HasOne("gamexAPI.Entities.Game", "Game")
+                    b.HasOne("gamexEntities.Game", "Game")
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -163,9 +163,9 @@ namespace gamexAPI.Migrations
                     b.Navigation("Game");
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.Image", b =>
+            modelBuilder.Entity("gamexEntities.Image", b =>
                 {
-                    b.HasOne("gamexAPI.Entities.Game", "Game")
+                    b.HasOne("gamexEntities.Game", "Game")
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -174,9 +174,9 @@ namespace gamexAPI.Migrations
                     b.Navigation("Game");
                 });
 
-            modelBuilder.Entity("gamexAPI.Entities.User", b =>
+            modelBuilder.Entity("gamexEntities.User", b =>
                 {
-                    b.HasOne("gamexAPI.Entities.Role", "Role")
+                    b.HasOne("gamexEntities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

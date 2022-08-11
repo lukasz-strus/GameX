@@ -1,4 +1,5 @@
-﻿using gamexServices;
+﻿using gamexModels;
+using gamexServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
