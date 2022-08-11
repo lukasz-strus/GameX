@@ -45,7 +45,6 @@ public partial class App : Application
     }
 
     //TODO CLEAN CODE
-    //TODO CC1 Entity Framework
     //TODO CC2. Rozdzielić Metody
     //TODO CC3. Wydzielić metody pomocnicze dla komend
     //TODO CC4. Generyczność komend

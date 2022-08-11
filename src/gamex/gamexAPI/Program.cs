@@ -125,9 +125,3 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
-
-/*Next stages:
- *TODO Validators in gamexAPI
- *
- *
- */
