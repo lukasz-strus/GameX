@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using gamexAPI.Entities;
+using gamexEntities;
 using gamexAPI.Excepitons;
 using gamexModels;
 

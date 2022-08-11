@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using gamexAPI.Entities;
+using gamexEntities;
 using gamexAPI.Excepitons;
-using gamexAPI.Models;
 using gamexModels;
 using System.Linq.Expressions;
 

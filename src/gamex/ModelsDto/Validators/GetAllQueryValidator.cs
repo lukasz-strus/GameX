@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using gamexAPI.Entities;
+using gamexEntities;
 
-namespace gamexAPI.Models.Validators;
+namespace gamexModels.Validators;
 
 public class GetAllQueryValidator : AbstractValidator<GetAllQuery>
 {

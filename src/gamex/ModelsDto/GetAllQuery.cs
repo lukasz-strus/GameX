@@ -1,4 +1,4 @@
-﻿namespace gamexAPI.Models;
+﻿namespace gamexModels;
 
 public class GetAllQuery
 {

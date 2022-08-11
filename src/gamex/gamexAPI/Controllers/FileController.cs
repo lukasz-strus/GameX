@@ -1,4 +1,4 @@
-﻿using gamexAPI.Entities;
+﻿using gamexEntities;
 using gamexAPI.Services;
 using gamexModels;
 using Microsoft.AspNetCore.Authorization;

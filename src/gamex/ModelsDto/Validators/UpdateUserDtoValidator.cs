@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-using gamexAPI.Entities;
-using gamexModels;
+using gamexEntities;
 
-namespace gamexAPI.Models.Validators;
+namespace gamexModels.Validators;
 
 public class UpdateUserDtoValidator : AbstractValidator<UpdateUserDto>
 {

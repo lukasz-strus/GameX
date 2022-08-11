@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\gamexEntities\gamexEntities.csproj" />
     <ProjectReference Include="..\ModelsDto\gamexModels.csproj" />
   </ItemGroup>
 
