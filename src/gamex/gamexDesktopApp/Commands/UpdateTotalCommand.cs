@@ -50,7 +50,7 @@ public class UpdateTotalCommand : AsyncCommandBase
                     _walletViewModel.ErrorMessage = "Account has been successfully topped up";
                 }
 
-                _walletViewModel.GetWalletCommand.Execute(null);
+                _walletViewModel.RefreshWalletCommand.Execute(null);
             }
         }
         catch (Exception)

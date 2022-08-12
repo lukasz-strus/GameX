@@ -32,7 +32,7 @@ public class UpdatePageCommand<T> : ICommand
             {
                 _viewModel.PageNumber = int.Parse(parameter.ToString());
             }
-            _viewModel.ViewListCommand.Execute(_viewModel);
+            _viewModel.RefreshGamesCommand.Execute(_viewModel);
         }
         catch (Exception)
         {

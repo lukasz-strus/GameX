@@ -53,7 +53,7 @@ public class UpdateUserCommand : AsyncCommandBase
             if (response == (int)HttpStatusCode.OK)
                 _userViewModel.ErrorMessage = "The user has been updated";
 
-            _userViewModel.BackToUsersCommand.Execute(null);
+            _userViewModel.UsersViewCommand.Execute(null);
         }
         catch (Exception)
         {

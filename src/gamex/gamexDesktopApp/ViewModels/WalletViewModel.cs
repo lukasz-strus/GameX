@@ -65,10 +65,10 @@ public class WalletViewModel : BaseViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-    public ICommand GetWalletCommand { get; }
+    public ICommand RefreshWalletCommand { get; }
     public ICommand UpdateTotalCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
-    public ICommand BackToGamesCommand { get; }
+    public ICommand AccountViewCommand { get; }
+    public ICommand GamesViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public WalletViewModel(IUserService userService,
@@ -80,13 +80,13 @@ public class WalletViewModel : BaseViewModel
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetWalletCommand = new GetWalletCommand(this, userService, accountStore);
+        RefreshWalletCommand = new GetWalletCommand(this, userService, accountStore);
         UpdateTotalCommand = new UpdateTotalCommand(this, userService, accountStore);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
-        BackToGamesCommand = new RenavigateCommand(gamesRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
+        GamesViewCommand = new RenavigateCommand(gamesRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
 
-        GetWalletCommand.Execute(null);
+        RefreshWalletCommand.Execute(null);
     }
 
     public override void Dispose()

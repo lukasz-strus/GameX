@@ -57,7 +57,7 @@ public class UpdateGameCommand : AsyncCommandBase
                 }
             }
 
-            _gameAdminViewModel.BackToGamesCommand.Execute(null);
+            _gameAdminViewModel.GamesViewCommand.Execute(null);
         }
         catch (Exception)
         {

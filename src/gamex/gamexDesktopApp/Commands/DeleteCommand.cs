@@ -44,7 +44,7 @@ public class DeleteCommand : AsyncCommandBase
                 _viewModel.ErrorMessage = $"The {record} was successfully deleted";
             }
 
-            _viewModel.ViewListCommand.Execute(null);
+            _viewModel.RefreshGamesCommand.Execute(null);
         }
         catch (Exception)
         {

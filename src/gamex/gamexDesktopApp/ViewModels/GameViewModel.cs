@@ -110,11 +110,11 @@ public class GameViewModel : BaseViewModel, IGameViewModel, ISelectedViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-    public ICommand GetGameCommand { get; }
+    public ICommand RefreshGameCommand { get; }
     public ICommand BuyGameCommand { get; }
-    public ICommand BackToGamesCommand { get; }
-    public ICommand GoToWalletCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
+    public ICommand GamesViewCommand { get; }
+    public ICommand WalletViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public GameViewModel(IGameService gameService,
@@ -130,12 +130,12 @@ public class GameViewModel : BaseViewModel, IGameViewModel, ISelectedViewModel
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetCommand<GameDto>(this, gameService, accountStore, singleGame, fileService);
-        GetGameCommand.Execute(null);
+        RefreshGameCommand = new GetCommand<GameDto>(this, gameService, accountStore, singleGame, fileService);
+        RefreshGameCommand.Execute(null);
         BuyGameCommand = new BuyGameCommand(this, gameService, accountStore, userService);
-        BackToGamesCommand = new RenavigateCommand(gamesRenavigator);
-        GoToWalletCommand = new RenavigateCommand(walletRenavigator);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
+        GamesViewCommand = new RenavigateCommand(gamesRenavigator);
+        WalletViewCommand = new RenavigateCommand(walletRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
     }
 

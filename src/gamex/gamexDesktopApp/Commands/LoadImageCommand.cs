@@ -53,7 +53,7 @@ public class LoadImageCommand : ICommand
             if (response == (int)HttpStatusCode.OK)
                 _gameAdminViewModel.ErrorMessage = "The image has been added";
 
-            _gameAdminViewModel.GetGameCommand.Execute(null);
+            _gameAdminViewModel.RefreshGameCommand.Execute(null);
         }
         catch (InvalidOperationException)
         {

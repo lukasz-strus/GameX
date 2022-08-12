@@ -5,10 +5,10 @@ namespace gamexDesktopApp.ViewModels
 {
     public interface IGameViewModel
     {
-        ICommand BackToGamesCommand { get; }
+        ICommand GamesViewCommand { get; }
         string Description { get; set; }
-        ICommand GetGameCommand { get; }
-        ICommand GoToAccountViewCommand { get; }
+        ICommand RefreshGameCommand { get; }
+        ICommand AccountViewCommand { get; }
         int Id { get; set; }
         ICommand LogoutCommand { get; }
         string Name { get; set; }

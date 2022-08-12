@@ -144,16 +144,16 @@ public class UsersViewModel : BaseViewModel, IPagesViewModel
     }
 
     public ICollectionView UsersListView { get; }
-    public ICommand ViewListCommand { get; }
+    public ICommand RefreshGamesCommand { get; }
     public ICommand UpdatePageCommand { get; }
     public ICommand UpdatePageSizeCommand { get; }
-    public ICommand GoToUserViewCommand { get; }
+    public ICommand UserViewCommand { get; }
     public ICommand AddNewUserCommand { get; }
     public ICommand DeleteUserCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
-    public ICommand BackToGamesCommand { get; }
-    public ICommand GoToGamesAdminCommand { get; }
+    public ICommand GamesViewCommand { get; }
+    public ICommand GamesAdminViewCommand { get; }
 
     public UsersViewModel(IUserService userService,
                           IAccountStore accountStore,
@@ -174,23 +174,23 @@ public class UsersViewModel : BaseViewModel, IPagesViewModel
         };
         UsersListView = collectionViewSource.View;
 
-        ViewListCommand = new GetUsersListCommand(this, userService, accountStore);
+        RefreshGamesCommand = new GetUsersListCommand(this, userService, accountStore);
         UpdatePageCommand = new UpdatePageCommand<UsersViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<UsersViewModel>(this);
 
-        GoToUserViewCommand = new RenavigateCommand(userRenavigator);
+        UserViewCommand = new RenavigateCommand(userRenavigator);
         AddNewUserCommand = new AddNewCommand(userRenavigator, singleUser);
         DeleteUserCommand = new DeleteCommand(this, singleUser, userService, accountStore);
 
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
 
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
 
-        BackToGamesCommand = new RenavigateCommand(gamesRenavigator);
+        GamesViewCommand = new RenavigateCommand(gamesRenavigator);
 
-        GoToGamesAdminCommand = new RenavigateCommand(gamesAdminRenavigator);
+        GamesAdminViewCommand = new RenavigateCommand(gamesAdminRenavigator);
 
-        ViewListCommand.Execute(null);
+        RefreshGamesCommand.Execute(null);
     }
 
     public override void Dispose()
