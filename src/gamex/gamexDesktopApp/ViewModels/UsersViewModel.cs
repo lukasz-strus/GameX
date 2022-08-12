@@ -3,7 +3,7 @@ using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using gamexModels;
 using gamexServices;
 using System.ComponentModel;
@@ -179,8 +179,8 @@ public class UsersViewModel : BaseViewModel, IPagesViewModel
         UpdatePageSizeCommand = new UpdatePageSizeCommand<UsersViewModel>(this);
 
         GoToUserViewCommand = new RenavigateCommand(userRenavigator);
-        AddNewUserCommand = new AddNewUserCommand(userRenavigator, singleUser);
-        DeleteUserCommand = new DeleteUserCommand(this, singleUser, userService, accountStore);
+        AddNewUserCommand = new AddNewCommand(userRenavigator, singleUser);
+        DeleteUserCommand = new DeleteCommand(this, singleUser, userService, accountStore);
 
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
 

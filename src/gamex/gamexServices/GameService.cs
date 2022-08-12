@@ -5,11 +5,9 @@ using System.Security.Claims;
 
 namespace gamexServices;
 
-public interface IGameService
+public interface IGameService : IDeleteService
 {
     Task<int> Create(string token, CreateGameDto createGameDto);
-
-    Task<int> Delete(string token, int id);
 
     Task<GameDto> Get(string token, int id);
 

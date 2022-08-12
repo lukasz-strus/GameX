@@ -1,5 +1,5 @@
 ﻿using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +9,15 @@ using System.Windows.Input;
 
 namespace gamexDesktopApp.Commands;
 
-public class AddNewUserCommand : ICommand
+public class AddNewCommand : ICommand
 {
     private readonly IRenavigator _renavigator;
-    private readonly ISingleUser _singleUser;
+    private readonly ISelected _selected;
 
-    public AddNewUserCommand(IRenavigator renavigator, ISingleUser singleUser)
+    public AddNewCommand(IRenavigator renavigator, ISelected selected)
     {
         _renavigator = renavigator;
-        _singleUser = singleUser;
+        _selected = selected;
     }
 
     public event EventHandler CanExecuteChanged;
@@ -29,7 +29,7 @@ public class AddNewUserCommand : ICommand
 
     public void Execute(object parameter)
     {
-        _singleUser.Id = null;
+        _selected.Id = null;
         _renavigator.Renavigate();
     }
 }

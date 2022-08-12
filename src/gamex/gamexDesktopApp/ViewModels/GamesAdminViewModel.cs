@@ -3,7 +3,7 @@ using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
+using gamexDesktopApp.State.Selected;
 using gamexModels;
 using gamexServices;
 using System;
@@ -186,8 +186,8 @@ public class GamesAdminViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesAdminViewModel>(this);
 
         GoToGameViewCommand = new RenavigateCommand(gameAdminRenavigator);
-        AddNewGameCommand = new AddNewGameCommand(gameAdminRenavigator, singleGame);
-        DeleteGameCommand = new DeleteGameCommand<GamesAdminViewModel>(this, singleGame, gameService, accountStore);
+        AddNewGameCommand = new AddNewCommand(gameAdminRenavigator, singleGame);
+        DeleteGameCommand = new DeleteCommand(this, singleGame, gameService, accountStore);
 
         GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
 

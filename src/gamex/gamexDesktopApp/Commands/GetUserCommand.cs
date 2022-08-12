@@ -1,6 +1,6 @@
 ﻿using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;

@@ -1,5 +1,4 @@
 ﻿using gamexDesktopApp.State.Accounts;
-using gamexDesktopApp.State.SelectedGame;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using gamexDesktopApp.State.Selected;
 
 namespace gamexDesktopApp.Commands;
 

@@ -1,5 +1,5 @@
 ﻿using gamexDesktopApp.State.Accounts;
-using gamexDesktopApp.State.SelectedGame;
+using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;

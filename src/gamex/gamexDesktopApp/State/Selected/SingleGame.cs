@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gamexDesktopApp.State.SelectedGame;
+namespace gamexDesktopApp.State.Selected;
 
-public interface ISingleGame
+public interface ISingleGame : ISelected
 {
-    int? Id { get; set; }
 }
 
 public class SingleGame : ISingleGame

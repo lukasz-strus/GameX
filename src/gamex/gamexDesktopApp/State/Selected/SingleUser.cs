@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gamexDesktopApp.State.SelectedUser;
+namespace gamexDesktopApp.State.Selected;
 
-public interface ISingleUser
+public interface ISingleUser : ISelected
 {
-    int? Id { get; set; }
 }
 
 public class SingleUser : ISingleUser

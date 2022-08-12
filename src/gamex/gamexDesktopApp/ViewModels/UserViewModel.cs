@@ -3,7 +3,7 @@ using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using gamexServices;
 using System.Windows.Input;
 
