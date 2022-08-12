@@ -27,7 +27,7 @@ public class FileService : IFileService
             .AllowAnyHttpStatus()
             .GetAsync();
 
-        if (response.StatusCode == (int)HttpStatusCode.NotFound) //TODO Zrobić to innych serwisach + API
+        if (response.StatusCode == (int)HttpStatusCode.NotFound)
         {
             return null; //TODO zmienic na obrazek NotFound
         }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using gamexAPI.Authorization;
-using gamexAPI.Entities;
+using gamexEntities;
 using gamexAPI.Excepitons;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +10,6 @@ using gamexModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using gamexAPI.Models;
 using System.Linq.Expressions;
 
 namespace gamexAPI.Services;

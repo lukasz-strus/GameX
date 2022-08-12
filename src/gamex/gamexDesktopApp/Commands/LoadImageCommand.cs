@@ -46,18 +46,18 @@ public class LoadImageCommand : ICommand
             var image = FileHelper.LoadImage(gameId);
 
             if (image == null)
-                _gameAdminViewModel.ErrorMessage = "Błąd odczytu";
+                _gameAdminViewModel.ErrorMessage = "Reading error";
 
             var response = await _fileService.Create(token, image);
 
             if (response == (int)HttpStatusCode.OK)
-                _gameAdminViewModel.ErrorMessage = "Obrazek został dodany";
+                _gameAdminViewModel.ErrorMessage = "The image has been added";
 
-            _gameAdminViewModel.GetGameCommand.Execute(null);
+            _gameAdminViewModel.RefreshGameCommand.Execute(null);
         }
         catch (InvalidOperationException)
         {
-            _gameAdminViewModel.ErrorMessage = "Błąd odczytu";
+            _gameAdminViewModel.ErrorMessage = "Reading error";
         }
     }
 }

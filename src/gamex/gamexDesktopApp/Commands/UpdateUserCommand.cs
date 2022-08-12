@@ -1,11 +1,12 @@
 ﻿using gamexDesktopApp.State.Accounts;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,14 +50,14 @@ public class UpdateUserCommand : AsyncCommandBase
 
             var response = await _userService.Update(token, userId, updateUserDto);
 
-            if (response == 200)
-                _userViewModel.ErrorMessage = "Użytkownik został zaktualizowany";
+            if (response == (int)HttpStatusCode.OK)
+                _userViewModel.ErrorMessage = "The user has been updated";
 
-            _userViewModel.BackToUsersCommand.Execute(null);
+            _userViewModel.UsersViewCommand.Execute(null);
         }
         catch (Exception)
         {
-            _userViewModel.ErrorMessage = "Błędne dane. Sprawdź czy login użytkownika istnieje już w bazie.";
+            _userViewModel.ErrorMessage = "Incorrect data";
         }
     }
 

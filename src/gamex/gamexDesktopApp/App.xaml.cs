@@ -43,4 +43,6 @@ public partial class App : Application
 
         base.OnExit(e);
     }
+
+    //TODO: Portfel się nie aktualizuje po kupieniu gry i powrocie do listy gier
 }

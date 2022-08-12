@@ -1,4 +1,5 @@
-﻿using gamexServices;
+﻿using gamexModels;
+using gamexServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ public interface IPagesViewModel
     int TotalPages { get; set; }
     SortGameBy SortBy { get; set; }
     SortDirection SortDirection { get; set; }
-    ICommand ViewListCommand { get; }
+    ICommand RefreshGamesCommand { get; }
     string ErrorMessage { set; }
     MessageViewModel ErrorMessageViewModel { get; }
 }

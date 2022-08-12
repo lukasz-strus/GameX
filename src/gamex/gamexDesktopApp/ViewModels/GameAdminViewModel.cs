@@ -3,7 +3,8 @@ using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
+using gamexDesktopApp.State.Selected;
+using gamexModels;
 using gamexServices;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
-public class GameAdminViewModel : BaseViewModel, IGameViewModel
+public class GameAdminViewModel : BaseViewModel, IGameViewModel, ISelectedViewModel
 {
     private int _id;
 
@@ -108,10 +109,10 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-    public ICommand GetGameCommand { get; }
+    public ICommand RefreshGameCommand { get; }
     public ICommand UpdateGameCommand { get; }
-    public ICommand BackToGamesCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
+    public ICommand GamesViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
     public ICommand LoadImageCommand { get; }
 
@@ -127,11 +128,11 @@ public class GameAdminViewModel : BaseViewModel, IGameViewModel
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameAdminViewModel>(this, gameService, accountStore, singleGame, fileService);
-        GetGameCommand.Execute(null);
+        RefreshGameCommand = new GetCommand<GameDto>(this, gameService, accountStore, singleGame, fileService);
+        RefreshGameCommand.Execute(null);
         UpdateGameCommand = new UpdateGameCommand(this, gameService, accountStore, singleGame);
-        BackToGamesCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
+        GamesViewCommand = new BackToGamesAdminCommand(gamesAdminRenavigator, gamesSalesRenavigator, accountStore);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
         LoadImageCommand = new LoadImageCommand(this, fileService, accountStore);
     }

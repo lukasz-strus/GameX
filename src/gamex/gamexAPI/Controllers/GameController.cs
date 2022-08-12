@@ -1,9 +1,8 @@
-﻿using gamexAPI.Entities;
+﻿using gamexEntities;
 using gamexAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using gamexModels;
-using gamexAPI.Models;
 
 namespace gamexAPI.Controllers;
 

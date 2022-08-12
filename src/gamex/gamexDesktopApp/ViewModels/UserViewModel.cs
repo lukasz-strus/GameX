@@ -3,13 +3,14 @@ using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
+using gamexModels;
 using gamexServices;
 using System.Windows.Input;
 
 namespace gamexDesktopApp.ViewModels;
 
-public class UserViewModel : BaseViewModel, IPasswordViewModel
+public class UserViewModel : BaseViewModel, IPasswordViewModel, ISelectedViewModel
 {
     private int _id;
 
@@ -102,11 +103,11 @@ public class UserViewModel : BaseViewModel, IPasswordViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-    public ICommand GetUserCommand { get; }
+    public ICommand RefreshUserCommand { get; }
     public ICommand UpdateUserCommand { get; }
     public ICommand ChangePasswordCommand { get; }
-    public ICommand BackToUsersCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
+    public ICommand UsersViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public UserViewModel(IUserService userService,
@@ -120,14 +121,14 @@ public class UserViewModel : BaseViewModel, IPasswordViewModel
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetUserCommand = new GetUserCommand(this, userService, accountStore, singleUser);
-        GetUserCommand.Execute(null);
+        RefreshUserCommand = new GetCommand<UserDto>(this, userService, accountStore, singleUser);
+        RefreshUserCommand.Execute(null);
 
         UpdateUserCommand = new UpdateUserCommand(this, userService, accountStore, singleUser);
         ChangePasswordCommand = new ChangePasswordCommand(this, authenticationService, accountStore);
 
-        BackToUsersCommand = new RenavigateCommand(usersRenavigator);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
+        UsersViewCommand = new RenavigateCommand(usersRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
     }
 

@@ -10,7 +10,7 @@ namespace gamexDesktopApp.Commands;
 
 public class GetAccountCommand : AsyncCommandBase
 {
-    private AccountViewModel _accountViewModel;
+    private readonly AccountViewModel _accountViewModel;
     private readonly IUserService _userService;
     private readonly IAccountStore _accountStore;
 
@@ -36,7 +36,7 @@ public class GetAccountCommand : AsyncCommandBase
         }
     }
 
-    private int GetUserIdFromJwt(string token)
+    private static int GetUserIdFromJwt(string token)
     {
         var handler = new JwtSecurityTokenHandler();
         var jwtSecurityToken = handler.ReadJwtToken(token);

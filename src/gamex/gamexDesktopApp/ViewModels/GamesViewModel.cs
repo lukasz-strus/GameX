@@ -5,7 +5,7 @@ using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
+using gamexDesktopApp.State.Selected;
 using gamexModels;
 using gamexServices;
 using System.Collections.ObjectModel;
@@ -149,16 +149,13 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
     }
 
     public ICollectionView GamesListView { get; }
-
-    public ICommand ViewListCommand { get; }
-
+    public ICommand RefreshGamesCommand { get; }
     public ICommand UpdatePageCommand { get; }
     public ICommand UpdatePageSizeCommand { get; }
-    public ICommand GoToWalletCommand { get; }
-    public ICommand GoToGameViewCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
-    public ICommand GoToLibraryViewCommand { get; }
-
+    public ICommand WalletViewCommand { get; }
+    public ICommand GameViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
+    public ICommand LibraryViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public GamesViewModel(IGameService gameService,
@@ -181,17 +178,17 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         };
         GamesListView = collectionViewSource.View;
 
-        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
+        RefreshGamesCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
         UpdatePageCommand = new UpdatePageCommand<GamesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesViewModel>(this);
-        GoToWalletCommand = new RenavigateCommand(walletRenavigator);
-        GoToGameViewCommand = new RenavigateCommand(gameRenavigator);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
-        GoToLibraryViewCommand = new RenavigateCommand(libraryRenavigator);
+        WalletViewCommand = new RenavigateCommand(walletRenavigator);
+        GameViewCommand = new RenavigateCommand(gameRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
+        LibraryViewCommand = new RenavigateCommand(libraryRenavigator);
 
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
 
-        ViewListCommand.Execute(null);
+        RefreshGamesCommand.Execute(null);
     }
 
     public override void Dispose()

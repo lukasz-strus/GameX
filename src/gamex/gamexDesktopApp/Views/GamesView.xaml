@@ -50,7 +50,7 @@
                      FontSize="12"
                      VerticalContentAlignment="Center" />
             <Button x:Name="btnSearch"
-                    Command="{Binding ViewListCommand}"
+                    Command="{Binding RefreshGamesCommand}"
                     Grid.Column="6"
                     Grid.Row="0"
                     BorderBrush="Red"
@@ -65,7 +65,7 @@
                 Grid.Row="0"
                 BorderBrush="{x:Null}"
                 Background="White"
-                Command="{Binding GoToAccountViewCommand}">
+                Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
@@ -80,7 +80,7 @@
                 Grid.Row="0"
                 BorderBrush="{x:Null}"
                     Background="White"
-                    Command="{Binding GoToWalletCommand}">
+                    Command="{Binding WalletViewCommand}">
                 <Image Source="/Images/wallet.png" Stretch="Uniform" />
             </Button>
             <TextBlock x:Name="lblWallet"
@@ -123,7 +123,7 @@
                     Foreground="#FF232323"
                     FontSize="26"
                     Background="{x:Null}"
-                    Command="{Binding GoToLibraryViewCommand}" />
+                    Command="{Binding LibraryViewCommand}" />
         </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -206,7 +206,7 @@
                     Foreground="White"
                     Background="Black"
                     BorderBrush="{x:Null}"
-                    Command="{Binding GoToGameViewCommand}" />
+                    Command="{Binding GameViewCommand}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <Button Height="35"

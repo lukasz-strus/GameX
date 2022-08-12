@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using gamexDesktopApp.Helpers;
+﻿using gamexDesktopApp.Helpers;
 using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.ViewModels;
 using gamexModels;
 using gamexServices;
-using System.ComponentModel;
-using System.IO;
 
 namespace gamexDesktopApp.Commands;
 
@@ -41,7 +38,7 @@ public class GetGamesListCommand<T> : AsyncCommandBase
         }
         catch (Exception)
         {
-            _gamesViewModel.ErrorMessage = "Failed";
+            _gamesViewModel.ErrorMessage = "Something went wrong";
         }
     }
 
@@ -78,7 +75,7 @@ public class GetGamesListCommand<T> : AsyncCommandBase
         }
     }
 
-    private Game MapFromGameDto(GameDto dto, ImageDto image) =>
+    private static Game MapFromGameDto(GameDto dto, ImageDto image) =>
         new()
         {
             Id = dto.Id,

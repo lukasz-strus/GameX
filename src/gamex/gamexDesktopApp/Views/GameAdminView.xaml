@@ -39,7 +39,7 @@
                     Grid.Row="0"
                     BorderBrush="{x:Null}"
                     Background="White"
-                    Command="{Binding GoToAccountViewCommand}">
+                    Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
@@ -181,7 +181,7 @@
                         Margin="5"
                         Width="200"
                         Height="50"
-                        Command="{Binding BackToGamesCommand}" />
+                        Command="{Binding GamesViewCommand}" />
                 <Button x:Name="btnSave"
                         Grid.Column="1"
                         Grid.Row="1"

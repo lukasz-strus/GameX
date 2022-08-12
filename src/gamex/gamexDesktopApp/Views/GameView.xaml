@@ -48,7 +48,7 @@
                 Grid.Row="0"
                 BorderBrush="{x:Null}"
                 Background="White"
-                Command="{Binding GoToAccountViewCommand}">
+                Command="{Binding AccountViewCommand}">
             <Image Source="/Images/user.png" Stretch="Uniform" />
         </Button>
         <Label x:Name="lblUser"
@@ -62,7 +62,7 @@
                 Grid.Row="0"
                 BorderBrush="{x:Null}"
                 Background="White"
-                Command="{Binding GoToWalletCommand}">
+                Command="{Binding WalletViewCommand}">
             <Image Source="/Images/wallet.png" Stretch="Uniform" />
         </Button>
         <TextBlock x:Name="lblWallet"
@@ -178,6 +178,6 @@
                 Background="Black"
                 Content="Wróć do sklepu"
                 FontSize="20"
-                Command="{Binding BackToGamesCommand}" />
+                Command="{Binding GamesViewCommand}" />
     </Grid>
 </UserControl>

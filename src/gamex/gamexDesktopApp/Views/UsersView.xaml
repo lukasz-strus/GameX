@@ -45,7 +45,7 @@
                      FontSize="20"
                      VerticalContentAlignment="Center" />
             <Button x:Name="btnSearch"
-                    Command="{Binding ViewListCommand}"
+                    Command="{Binding RefreshGamesCommand}"
                 Grid.Column="7"
                 Grid.Row="0"
                 BorderBrush="Red"
@@ -59,7 +59,7 @@
                 Grid.Row="0"
                 BorderBrush="{x:Null}"
                 Background="White"
-                Command="{Binding GoToAccountViewCommand}">
+                Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
@@ -92,7 +92,7 @@
                     FontSize="40"
                     FontWeight="Bold"
                     Background="{x:Null}"
-                    Command="{Binding GoToGamesAdminCommand}">
+                    Command="{Binding GamesAdminViewCommand}">
             </Button>
             <Button x:Name="btnUsers"
                     Grid.Column="5"
@@ -203,7 +203,7 @@
                     BorderBrush="{x:Null}"
                     FontSize="20"
                     Width="180"
-                    Command="{Binding GoToUserViewCommand}" />
+                    Command="{Binding UserViewCommand}" />
             <TextBlock Width="250"
                        Grid.Column="0"
                        Grid.Row="1"
@@ -290,7 +290,7 @@
                     Background="Black"
                     Content="Wróć do sklepu"
                     FontSize="25"
-                    Command="{Binding BackToGamesCommand}" />
+                    Command="{Binding GamesViewCommand}" />
         </StackPanel>
     </StackPanel>
 </UserControl>
