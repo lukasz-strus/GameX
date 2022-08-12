@@ -1,14 +1,8 @@
 ﻿using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.ViewModels;
-using gamexModels;
 using gamexServices;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gamexDesktopApp.Commands;
 
@@ -19,7 +13,10 @@ public class BuyGameCommand : AsyncCommandBase
     private readonly IAccountStore _accountStore;
     private readonly IUserService _userService;
 
-    public BuyGameCommand(GameViewModel gameViewModel, IGameService gameService, IAccountStore accountStore, IUserService userService)
+    public BuyGameCommand(GameViewModel gameViewModel,
+                          IGameService gameService,
+                          IAccountStore accountStore,
+                          IUserService userService)
     {
         _gameViewModel = gameViewModel;
         _gameService = gameService;
@@ -43,7 +40,7 @@ public class BuyGameCommand : AsyncCommandBase
         }
         catch (Exception)
         {
-            _gameViewModel.ErrorMessage = "Nie masz środków na koncie";
+            _gameViewModel.ErrorMessage = "You have no funds in your account";
         }
     }
 

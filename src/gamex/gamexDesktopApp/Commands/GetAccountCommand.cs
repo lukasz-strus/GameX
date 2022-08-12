@@ -36,7 +36,7 @@ public class GetAccountCommand : AsyncCommandBase
         }
     }
 
-    private int GetUserIdFromJwt(string token)
+    private static int GetUserIdFromJwt(string token)
     {
         var handler = new JwtSecurityTokenHandler();
         var jwtSecurityToken = handler.ReadJwtToken(token);

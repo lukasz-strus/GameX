@@ -2,11 +2,7 @@
 using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace gamexDesktopApp.Commands;
 
@@ -38,13 +34,28 @@ public class DeleteCommand : AsyncCommandBase
         try
         {
             var token = _accountStore.CurrentAccount.Token;
-            int id = (int)_selected.Id;
-            await _deleteService.Delete(token, id);
+            var id = (int)_selected.Id;
+            var response = await _deleteService.Delete(token, id);
+
+            var record = GetRecordType();
+
+            if (response == (int)HttpStatusCode.OK)
+            {
+                _viewModel.ErrorMessage = $"The {record} was successfully deleted";
+            }
+
             _viewModel.ViewListCommand.Execute(null);
         }
         catch (Exception)
         {
-            _viewModel.ErrorMessage = "Coś poszło nie tak";
+            _viewModel.ErrorMessage = "Something went wrong";
         }
     }
+
+    private string GetRecordType() => _selected switch
+    {
+        ISingleGame => "game",
+        ISingleUser => "user",
+        _ => "item",
+    };
 }

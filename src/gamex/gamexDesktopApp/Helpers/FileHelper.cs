@@ -44,7 +44,7 @@ public static class FileHelper
 
         var openFileDialog = new OpenFileDialog()
         {
-            Title = "Wybierz obrazek",
+            Title = "Choose a picture",
             Filter = ""
         };
 
@@ -61,7 +61,7 @@ public static class FileHelper
             separator = "|";
         }
         openFileDialog.Filter = String.Format("{0}{1}{2} ({3})|{3}", openFileDialog.Filter, separator, "All Files", "*.*");
-        openFileDialog.DefaultExt = ".png";
+        openFileDialog.DefaultExt = ".jpg";
 
         string fileSourceName = null;
 

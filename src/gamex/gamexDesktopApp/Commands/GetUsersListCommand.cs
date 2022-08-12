@@ -37,7 +37,7 @@ namespace gamexDesktopApp.Commands
             }
             catch (Exception)
             {
-                _usersViewModel.ErrorMessage = "Failed";
+                _usersViewModel.ErrorMessage = "Something went wrong";
             }
         }
 
@@ -70,7 +70,7 @@ namespace gamexDesktopApp.Commands
                 _usersViewModel.Users.UsersCollection.Add(MapFromUserDto(item));
         }
 
-        private User MapFromUserDto(UserDto dto) =>
+        private static User MapFromUserDto(UserDto dto) =>
             new()
             {
                 Id = dto.Id,
