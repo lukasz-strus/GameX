@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <converter:NullImageConverter x:Key="nullImageConverter" />
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -125,18 +125,93 @@
                     Background="{x:Null}"
                     Command="{Binding LibraryViewCommand}" />
         </Grid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock FontSize="12" Margin="5" FontStyle="Italic">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Pokazano od {0} do {1} gier z {2} wyszukanych.">
-                        <Binding Path="ItemsFrom" />
-                        <Binding Path="ItemsTo" />
-                        <Binding Path="TotalItemsCount" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <Button
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Height="35"
+                    Width="35"
+                    Content="1"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="1" />
+                <Button Height="35"
+                    Width="35"
+                    Content="2"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="2" />
+                <Button Height="35"
+                    Width="35"
+                    Content="3"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="3" />
+                <Button Height="35"
+                    Width="35"
+                    Content="4"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="4" />
+                <Button Height="35"
+                    Width="35"
+                    Content="5"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="5" />
+                <Label Content="..."
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Bottom"
+                   Height="35"
+                   Width="35"
+                   Background="Black"
+                   Foreground="White"
+                   Margin="5" />
+                <Button Height="35"
+                    Width="70"
+                    Content="Dalej"
+                    Margin="5"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding UpdatePageCommand}"
+                    CommandParameter="Next" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Height="40"
+                    Width="300"
+                    Margin="5"
+                    Content="Pokaż szczegóły"
+                    FontSize="26"
+                    Foreground="White"
+                    Background="Black"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding GameViewCommand}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock FontSize="12" Margin="5" FontStyle="Italic">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}Pokazano od {0} do {1} gier z {2} wyszukanych.">
+                            <Binding Path="ItemsFrom" />
+                            <Binding Path="ItemsTo" />
+                            <Binding Path="TotalItemsCount" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <Button
                     Height="35"
                     Width="35"
                     Content="5"
@@ -145,7 +220,7 @@
                     Background="Black"
                     BorderBrush="{x:Null}"
                     Command="{Binding UpdatePageSizeCommand}" CommandParameter="5" />
-            <Button
+                <Button
                     Height="35"
                     Width="35"
                     Content="10"
@@ -154,7 +229,7 @@
                     Background="Black"
                     BorderBrush="{x:Null}"
                     Command="{Binding UpdatePageSizeCommand}" CommandParameter="10" />
-            <Button
+                <Button
                     Height="35"
                     Width="35"
                     Content="15"
@@ -163,15 +238,16 @@
                     Background="Black"
                     BorderBrush="{x:Null}"
                     Command="{Binding UpdatePageSizeCommand}" CommandParameter="15" />
-        </StackPanel>
-        <ListBox  Width="auto"
+            </StackPanel>
+        </Grid>
+        <ListBox  Width="Auto"
                   x:Name="lvGameListView"
                   ItemsSource="{Binding GamesListView}"
                   SelectedItem="{Binding Selected, Mode=TwoWay}"
                   SelectedIndex="-1"
                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  MaxHeight="400" MaxWidth="1800">
+                  Height="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
@@ -197,80 +273,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Height="40"
-                    Width="300"
-                    Margin="5"
-                    Content="Pokaż szczegóły"
-                    FontSize="26"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding GameViewCommand}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Height="35"
-                    Width="35"
-                    Content="1"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="1" />
-            <Button Height="35"
-                    Width="35"
-                    Content="2"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="2" />
-            <Button Height="35"
-                    Width="35"
-                    Content="3"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="3" />
-            <Button Height="35"
-                    Width="35"
-                    Content="4"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="4" />
-            <Button Height="35"
-                    Width="35"
-                    Content="5"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="5" />
-            <Label Content="..."
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Bottom"
-                   Height="35"
-                   Width="35"
-                   Background="Black"
-                   Foreground="White"
-                   Margin="5" />
-            <Button Height="35"
-                    Width="70"
-                    Content="Dalej"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="Next" />
-        </StackPanel>
     </StackPanel>
 </UserControl>
