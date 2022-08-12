@@ -5,13 +5,9 @@ using System.Security.Claims;
 
 namespace gamexServices;
 
-public interface IUserService : IDeleteService
+public interface IUserService : IGetService<UserDto>, IDeleteService
 {
     Task<int> Update(string token, int id, UpdateUserDto updateUserDto);
-
-    Task<GetAllResult<UserDto>> GetAll(string token, GetAllQuery query);
-
-    Task<UserDto> Get(string token, int id);
 }
 
 public class UserService : IUserService

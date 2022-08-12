@@ -10,7 +10,7 @@ namespace gamexDesktopApp.Commands;
 
 public class GetAccountCommand : AsyncCommandBase
 {
-    private AccountViewModel _accountViewModel;
+    private readonly AccountViewModel _accountViewModel;
     private readonly IUserService _userService;
     private readonly IAccountStore _accountStore;
 

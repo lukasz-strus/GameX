@@ -5,13 +5,9 @@ using System.Security.Claims;
 
 namespace gamexServices;
 
-public interface IGameService : IDeleteService
+public interface IGameService : IGetService<GameDto>, IDeleteService
 {
     Task<int> Create(string token, CreateGameDto createGameDto);
-
-    Task<GameDto> Get(string token, int id);
-
-    Task<GetAllResult<GameDto>> GetAll(string token, GetAllQuery query);
 
     Task<string> GetSerialKey(string token, int gameId);
 

@@ -7,8 +7,6 @@ namespace gamexDesktopApp.ViewModels
     {
         ICommand BackToGamesCommand { get; }
         string Description { get; set; }
-        string ErrorMessage { set; }
-        MessageViewModel ErrorMessageViewModel { get; }
         ICommand GetGameCommand { get; }
         ICommand GoToAccountViewCommand { get; }
         int Id { get; set; }

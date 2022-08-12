@@ -4,12 +4,13 @@ using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.State.Selected;
+using gamexModels;
 using gamexServices;
 using System.Windows.Input;
 
 namespace gamexDesktopApp.ViewModels;
 
-public class UserViewModel : BaseViewModel, IPasswordViewModel
+public class UserViewModel : BaseViewModel, IPasswordViewModel, ISelectedViewModel
 {
     private int _id;
 
@@ -120,7 +121,7 @@ public class UserViewModel : BaseViewModel, IPasswordViewModel
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetUserCommand = new GetUserCommand(this, userService, accountStore, singleUser);
+        GetUserCommand = new GetCommand<UserDto>(this, userService, accountStore, singleUser);
         GetUserCommand.Execute(null);
 
         UpdateUserCommand = new UpdateUserCommand(this, userService, accountStore, singleUser);

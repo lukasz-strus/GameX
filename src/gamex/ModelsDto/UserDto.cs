@@ -1,6 +1,6 @@
 ﻿namespace gamexModels;
 
-public class UserDto
+public class UserDto : IDto
 {
     public int Id { get; set; }
 
