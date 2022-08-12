@@ -44,9 +44,5 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    //TODO CLEAN CODE
-    //TODO CC2. Rozdzielić Metody
-    //TODO CC3. Wydzielić metody pomocnicze dla komend
-    //TODO CC4. Generyczność komend
-    //TODO CC5. Wyczyścic dokładnie pod kolejną gałąź - DESING!!!
+    //TODO: Portfel się nie aktualizuje po kupieniu gry i powrocie do listy gier
 }
