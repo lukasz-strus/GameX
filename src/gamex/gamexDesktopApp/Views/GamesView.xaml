@@ -6,9 +6,10 @@
              xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
              xmlns:extension="clr-namespace:gamexDesktopApp.Extensions"
              xmlns:service="clr-namespace:gamexServices;assembly=gamexServices"
-             d:DataContext="{d:DesignInstance Type=viewmodels:GamesViewModel}"
              xmlns:local="clr-namespace:gamexDesktopApp.Views"
              xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GamesViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.Resources>
@@ -272,6 +273,12 @@
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding GameViewCommand}"
+                                           CommandParameter="{Binding ElementName=lvGameListView, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListBox>
     </StackPanel>
 </UserControl>
