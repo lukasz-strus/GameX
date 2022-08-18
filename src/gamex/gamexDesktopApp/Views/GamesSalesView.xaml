@@ -13,7 +13,7 @@
         <converter:NullImageConverter x:Key="nullImageConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -22,156 +22,315 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="30" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
-               Grid.Column="0"
-               Grid.Row="0"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               Width="200" />
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Grid.RowSpan="2"
+                   Width="200" />
             <TextBox x:Name="txbSearch"
                      Text="{Binding SearchPhrase}"
-                     Grid.Column="2"
+                     Grid.Column="3"
                      Grid.Row="0"
-                     Grid.ColumnSpan="5"
-                     Height="50"
+                     Grid.ColumnSpan="3"
+                     Height="30"
                      BorderBrush="Black"
                      BorderThickness="2"
-                     FontSize="20"
-                     VerticalContentAlignment="Center" />
+                     FontSize="12"
+                     VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Button x:Name="btnSearch"
                     Command="{Binding RefreshGamesCommand}"
-                Grid.Column="7"
-                Grid.Row="0"
-                BorderBrush="Red"
-                BorderThickness="2"
-                Background="White">
-                <Image Source="/Images/search.png" Stretch="Uniform" />
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
+                    BorderThickness="2"
+                    Background="White"
+                    Width="30"
+                    HorizontalAlignment="Left">
+                <Image Source="/Images/search.png"
+                       Stretch="Uniform" />
             </Button>
 
             <Button x:Name="btnUser"
-                Grid.Column="8"
-                Grid.Row="0"
-                BorderBrush="{x:Null}"
-                Background="White"
-                Command="{Binding AccountViewCommand}">
+                    Grid.Column="8"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
+                    Background="White"
+                    Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-               Content="Profil"
-               Grid.Column="8"
-               Grid.Row="1"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center" />
-
+                   Content="Profile"
+                   Grid.Column="8"
+                   Grid.Row="1"
+                   FontSize="12"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
             <Button x:Name="btnLogout"
                     Command="{Binding LogoutCommand}"
-                Grid.Column="9"
-                Grid.Row="0"
-                BorderBrush="{x:Null}"
+                    Grid.Column="9"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
                     Background="White">
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-               Content="Wyloguj"
-               Grid.Column="9"
-               Grid.Row="1"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center" />
-            <Button x:Name="btnGames"
-                    Grid.Column="2"
+                   Content="Logout"
+                   Grid.Column="9"
+                   Grid.Row="1"
+                   FontSize="12"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
+            <Button x:Name="btnShop"
+                    Grid.Column="3"
                     Grid.Row="2"
-                    Grid.ColumnSpan="6"
-                    BorderBrush="Black"
-                    BorderThickness="2"
-                    Content="GRY"
-                    FontSize="40"
-                    FontWeight="Bold">
-                <Button.Effect>
-                    <DropShadowEffect />
-                </Button.Effect>
+                    Grid.ColumnSpan="2"
+                    BorderBrush="{x:Null}"
+                    Content="GAMES"
+                    FontSize="26"
+                    FontWeight="SemiBold"
+                    Background="{x:Null}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock TextDecorations="Underline" Text="{TemplateBinding Content}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="btnGoBack"
+                    Grid.Column="7"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Margin="5"
+                    HorizontalAlignment="Right"
+                    Width="120"
+                    Height="35"
+                    BorderBrush="{x:Null}"
+                    Foreground="White"
+                    Background="Black"
+                    Content="Back to store"
+                    Command="{Binding GamesViewCommand}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
             </Button>
         </Grid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock FontSize="20" Margin="5">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Pokazano od {0} do {1} gier z {2} wyszukanych.">
-                        <Binding Path="ItemsFrom" />
-                        <Binding Path="ItemsTo" />
-                        <Binding Path="TotalItemsCount" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="5"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="5" />
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="10"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="10" />
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="15"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="15" />
-        </StackPanel>
-        <ListBox  Width="auto"
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Height="35"
+                        Width="100"
+                        Content="Previous page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="Previous">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Height="35"
+                        Width="100"
+                        Content="Starting page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="DarkRed"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="1">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Height="35"
+                        Width="100"
+                        Content="Next page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="Next">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Separator Width="50" Background="{x:Null}" />
+                <Button x:Name="btnDelete"
+                        Grid.Column="0"
+                        Content="Delete game"
+                        Foreground="White"
+                        Background="Red"
+                        BorderBrush="{x:Null}"
+                        Margin="5"
+                        Height="35"
+                        Width="100"
+                        FontWeight="SemiBold"
+                        Command="{Binding DeleteGameCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnEdit"
+                        Grid.Column="1"
+                        Content="Edit game"
+                        Foreground="White"
+                        Background="DarkOrange"
+                        BorderBrush="{x:Null}"
+                        Margin="5"
+                        Height="35"
+                        Width="100"
+                        FontWeight="SemiBold"
+                        Command="{Binding GameViewCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnAdd"
+                        Grid.Column="2"
+                        Content="Add new game"
+                        Foreground="White"
+                        Background="DarkGreen"
+                        BorderBrush="{x:Null}"
+                        Margin="5"
+                        Height="35"
+                        Width="100"
+                        FontWeight="SemiBold"
+                        Command="{Binding AddNewGameCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label FontSize="14"
+                       Margin="5"
+                       FontStyle="Italic"
+                       Content="Results per page:"
+                       VerticalAlignment="Center" />
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="5"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="5">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="10"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="10">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="15"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="15">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <ListBox  Width="Auto"
                   x:Name="lvGameListView"
                   ItemsSource="{Binding GamesListView}"
                   SelectedItem="{Binding Selected, Mode=TwoWay}"
                   SelectedIndex="-1"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  MaxHeight="400" MaxWidth="1600">
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.CanContentScroll="False"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  MinHeight="800"
+                  MaxHeight="800">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
-                        <Image Source="{Binding Source,
-                                Converter={StaticResource nullImageConverter},
-                                TargetNullValue={x:Null}}"
-                               Height="100" />
-                        <TextBlock HorizontalAlignment="Left"
-                                   Margin="5"
-                                   Text="{Binding Name}"
-                                   FontSize="30"
-                                   FontWeight="Bold"
-                                   TextWrapping="Wrap"
-                                   DockPanel.Dock="Left" />
-                        <TextBlock Margin="5"
-                                   HorizontalAlignment="Right"
-                                   Text="{Binding Price, StringFormat={}{0} PLN}"
-                                   FontSize="30"
-                                   Foreground="Red"
-                                   FontWeight="Bold"
-                                   DockPanel.Dock="Right" />
-                    </DockPanel>
+                    <Border BorderBrush="DarkRed"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                        <StackPanel Margin="2" Orientation="Vertical" Width="298" Height="430">
+                            <Image Source="{Binding Source,
+                                            Converter={StaticResource nullImageConverter},
+                                            TargetNullValue={x:Null}}"
+                                   Height="350" />
+                            <TextBlock Margin="3"
+                                       Text="{Binding Name}"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="3"
+                                       Text="{Binding Price, StringFormat={}{0} PLN}"
+                                       FontSize="18"
+                                       Foreground="Red"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
         <Grid Margin="20">
             <Grid.ColumnDefinitions>
@@ -183,33 +342,7 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Button x:Name="btnDelete"
-                    Grid.Column="0"
-                    Content="Usuń grę"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    FontSize="20"
-                    Width="180"
-                    Command="{Binding DeleteGameCommand}" />
-            <Button x:Name="btnEdit"
-                    Grid.Column="1"
-                    Content="Edytuj grę"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    FontSize="20"
-                    Width="180"
-                    Command="{Binding GameViewCommand}" />
-            <Button x:Name="btnAdd"
-                    Grid.Column="2"
-                    Content="Dodaj grę"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    FontSize="20"
-                    Width="180"
-                    Command="{Binding AddNewGameCommand}" />
+
             <TextBlock Width="250"
                        Grid.Column="0"
                        Grid.Row="1"
@@ -222,81 +355,5 @@
                        Visibility="{Binding HasMessage,
                        Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Height="35"
-                    Width="35"
-                    Content="1"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="1" />
-            <Button Height="35"
-                    Width="35"
-                    Content="2"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="2" />
-            <Button Height="35"
-                    Width="35"
-                    Content="3"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="3" />
-            <Button Height="35"
-                    Width="35"
-                    Content="4"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="4" />
-            <Button Height="35"
-                    Width="35"
-                    Content="5"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="5" />
-            <Label Content="..."
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Bottom"
-                   Height="35"
-                   Width="35"
-                   Background="Black"
-                   Foreground="White"
-                   Margin="5" />
-            <Button Height="35"
-                    Width="70"
-                    Content="Dalej"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="Next" />
-        </StackPanel>
-        <StackPanel>
-            <Button x:Name="btnGoBack"
-                    Margin="5"
-                    HorizontalAlignment="Right"
-                    Width="200"
-                    BorderBrush="{x:Null}"
-                    Foreground="White"
-                    Background="Black"
-                    Content="Wróć do sklepu"
-                    FontSize="25"
-                    Command="{Binding GamesViewCommand}" />
-        </StackPanel>
     </StackPanel>
 </UserControl>
