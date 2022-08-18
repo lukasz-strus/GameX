@@ -45,4 +45,8 @@ public partial class App : Application
     }
 
     //TODO: Portfel się nie aktualizuje po kupieniu gry i powrocie do listy gier
+    //TODO: Dodać okno dialogowe przy usuwaniu gier/użytkowników "Czy napewno"
+    //TODO: Zablokować możliwość usuwania Adminów, chyba że ktoś jest "Admin", ale on siebie też nie może usunąć
+    //TODO: Design -> Develope
+    //TODO: Testy
 }
