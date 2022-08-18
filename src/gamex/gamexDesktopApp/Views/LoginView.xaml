@@ -18,14 +18,14 @@
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Margin="5" />
-        <Label Content="Logowanie"
+        <Label Content="Login"
                FontSize="32"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Margin="5" />
-        <Grid HorizontalAlignment="Center" Width="320" Margin="5">
+        <Grid HorizontalAlignment="Center" Width="330" Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -46,8 +46,7 @@
                    Width="50"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
 
             <TextBox x:Name="txbLogin"
                      Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
@@ -60,32 +59,31 @@
                      VerticalAlignment="Center"
                      Margin="5"
                      Padding="5" />
-            <Label Content="Hasło"
+            <Label Content="Password"
                    Grid.Column="0"
                    Grid.Row="1"
                    FontSize="14"
                    FontStyle="Italic"
-                   Width="50"
+                   Width="Auto"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"/>
-            <components:BindablePasswordBox
-                     x:Name="txbPassword"
-                     Password="{Binding Password}"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"
-                     Grid.Row="1"
-                     Height="30"
-                     MinWidth="250"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Center"
-                     Margin="5"/>
+                   VerticalAlignment="Center" />
+            <components:BindablePasswordBox Margin="5"
+                                            x:Name="txbPassword"
+                                            Password="{Binding Password}"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            Grid.Row="1"
+                                            Height="30"
+                                            MinWidth="250"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center" />
             <Button x:Name="btnPasswordReminder"
                     Command="{Binding ViewPasswordReminderCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Grid.Row="2"
-                    Content="Zapomniałeś/aś hasła?"
+                    Content="Have you forgotten your password?"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Background="White"
@@ -94,53 +92,72 @@
                     HorizontalContentAlignment="Left"
                     FontSize="12"
                     FontStyle="Italic"
-                    FontWeight="Bold" />
+                    FontWeight="Bold">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Button x:Name="btnLogIn"
-                Content="Zaloguj"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Grid.Row="3"
-                FontSize="16"
-                FontWeight="Bold"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Width="100"
-                Height="30"
-                Margin="5"
-                Background="Black"
-                Foreground="White"
-                Command="{Binding LoginCommand}" />
-            <Label Content="Nie masz konta?"
+                    Content="Login"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Width="100"
+                    Height="30"
+                    Margin="5"
+                    Background="Black"
+                    Foreground="White"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding LoginCommand}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Content="You don't have an account?"
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
                    Grid.Row="4"
                    FontSize="12"
-                   FontStyle="Italic" />
+                   FontStyle="Italic"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center" />
             <Button x:Name="btnRegister"
-                Content="Zarejestruj się"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Grid.Row="4"
-                FontSize="12"
-                FontStyle="Italic"
-                FontWeight="Bold"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right"
-                Margin="5"
-                Background="White"
-                BorderBrush="White"
-                Command="{Binding ViewRegisterCommand}" />
-            <TextBlock Grid.Row="5"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="2"
-                       Margin="0 10 0 0"
-                       HorizontalAlignment="Center"
-                       DataContext="{Binding ErrorMessageViewModel}"
-                       Foreground="DarkRed"
-                       Text="{Binding Message}"
-                       Visibility="{Binding HasMessage,
-                       Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Content="Register"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="4"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="5"
+                    Background="DarkRed"
+                    Foreground="White"
+                    BorderBrush="{x:Null}"
+                    Width="100"
+                    Height="30"
+                    Command="{Binding ViewRegisterCommand}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
+        <TextBlock Margin="10"
+                   HorizontalAlignment="Center"
+                   DataContext="{Binding ErrorMessageViewModel}"
+                   Foreground="DarkRed"
+                   Text="{Binding Message}"
+                   Visibility="{Binding HasMessage,
+                   Converter={StaticResource BooleanToVisibilityConverter}}" />
     </StackPanel>
 </UserControl>

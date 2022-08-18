@@ -22,25 +22,25 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="30" />
             <RowDefinition Height="70" />
             <RowDefinition Height="100" />
             <RowDefinition Height="60" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="80" />
             <RowDefinition />
+            <RowDefinition Height="50" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Image Source="/Images/gamexTitle.png"
                Grid.Column="0"
                Grid.Row="0"
-               Grid.ColumnSpan="7"
+               Grid.ColumnSpan="5"
                Grid.RowSpan="2"
                Width="350" />
         <Button x:Name="btnUser"
@@ -52,7 +52,7 @@
             <Image Source="/Images/user.png" Stretch="Uniform" />
         </Button>
         <Label x:Name="lblUser"
-               Content="Profil"
+               Content="Profile"
                Grid.Column="7"
                Grid.Row="1"
                HorizontalContentAlignment="Center"
@@ -80,7 +80,7 @@
             <Image Source="/Images/logout.png" Stretch="Uniform" />
         </Button>
         <Label x:Name="lblLogout"
-               Content="Wyloguj"
+               Content="Logout"
                Grid.Column="9"
                Grid.Row="1"
                HorizontalContentAlignment="Center"
@@ -91,22 +91,30 @@
                Grid.Column="0"
                Grid.Row="3"
                Grid.ColumnSpan="3"
-               Grid.RowSpan="3" />
+               Grid.RowSpan="5"
+               Height="400">
+            <Image.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Image.Resources>
+        </Image>
         <TextBlock x:Name="txbGameName"
                    Grid.Column="3"
                    Grid.Row="3"
-                   Grid.ColumnSpan="5"
-                   Grid.RowSpan="2"
+                   Grid.ColumnSpan="7"
+                   Grid.RowSpan="1"
                    Margin="10"
                    TextWrapping="Wrap"
                    Text="{Binding Name}"
                    FontSize="50"
                    FontWeight="Bold" />
         <TextBlock x:Name="txbGameDescription"
-                   Grid.Column="0"
-                   Grid.Row="6"
-                   Grid.ColumnSpan="7"
-                   Grid.RowSpan="2"
+                   Grid.Column="3"
+                   Grid.Row="4"
+                   Grid.ColumnSpan="4"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"
+                   Grid.RowSpan="3"
                    Margin="10"
                    TextWrapping="Wrap"
                    FontSize="16"
@@ -115,7 +123,7 @@
                Grid.Column="7"
                Grid.Row="4"
                Grid.ColumnSpan="3"
-               Content="Cena:"
+               Content="Price:"
                HorizontalContentAlignment="Center"
                FontSize="30"
                Margin="5" />
@@ -136,13 +144,21 @@
                 BorderBrush="{x:Null}"
                 Foreground="White"
                 Background="Black"
-                Content="Kup Teraz"
+                Content="Buy now"
                 FontSize="30"
-                Command="{Binding BuyGameCommand}" />
+                Height="60"
+                VerticalAlignment="Top"
+                Command="{Binding BuyGameCommand}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7" />
+                </Style>
+            </Button.Resources>
+        </Button>
         <TextBox x:Name="txbSerialKey"
-                   Grid.Column="7"
+                   Grid.Column="6"
                    Grid.Row="7"
-                   Grid.ColumnSpan="3"
+                   Grid.ColumnSpan="4"
                    Margin="10"
                    Height="50"
                    VerticalAlignment="Top"
@@ -156,7 +172,7 @@
         <TextBlock Width="250"
                    Height="30"
                    Grid.Column="7"
-                   Grid.Row="7"
+                   Grid.Row="9"
                    Grid.ColumnSpan="3"
                    VerticalAlignment="Top"
                    TextAlignment="Center"
@@ -175,9 +191,15 @@
                 Margin="3"
                 BorderBrush="{x:Null}"
                 Foreground="White"
-                Background="Black"
-                Content="Wróć do sklepu"
+                Background="DarkRed"
+                Content="Back to store"
                 FontSize="20"
-                Command="{Binding GamesViewCommand}" />
+                Command="{Binding GamesViewCommand}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7" />
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </UserControl>

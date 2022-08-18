@@ -18,7 +18,7 @@
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Margin="5" />
-        <Label Content="Rejestracja"
+        <Label Content="Registration"
                FontSize="32"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
@@ -46,8 +46,7 @@
                    Width="50"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
             <TextBox x:Name="txbLoginRegistration"
                      Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="0"
@@ -67,8 +66,7 @@
                    Width="50"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
             <TextBox x:Name="txbMailRegistration"
                      Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="0"
@@ -80,7 +78,7 @@
                      VerticalAlignment="Center"
                      Margin="5"
                      Padding="5" />
-            <Label Content="Powtórz e-mail"
+            <Label Content="Repeat e-mail"
                    Grid.Column="0"
                    Grid.Row="2"
                    FontSize="14"
@@ -88,8 +86,7 @@
                    Width="105"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
             <TextBox x:Name="txbMailRepeatRegistration"
                      Text="{Binding ConfirmEmail, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="0"
@@ -101,16 +98,15 @@
                      VerticalAlignment="Center"
                      Margin="5"
                      Padding="5" />
-            <Label Content="Hasło"
+            <Label Content="Password"
                    Grid.Column="0"
                    Grid.Row="3"
                    FontSize="14"
                    FontStyle="Italic"
-                   Width="50"
+                   Width="80"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
             <components:BindablePasswordBox x:Name="txbPasswordRegistration"
                      Password="{Binding Password}"
                      Grid.Column="0"
@@ -121,16 +117,15 @@
                      HorizontalAlignment="Right"
                      VerticalAlignment="Center"
                      Margin="5" />
-            <Label Content="Powtórz hasło"
+            <Label Content="Repeat password"
                    Grid.Column="0"
                    Grid.Row="4"
                    FontSize="14"
                    FontStyle="Italic"
-                   Width="110"
+                   Width="120"
                    Height="30"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   />
+                   VerticalAlignment="Center" />
             <components:BindablePasswordBox x:Name="txbPasswordRepeatRegistration"
                      Password="{Binding ConfirmPassword}"
                      Grid.Column="0"
@@ -142,7 +137,7 @@
                      VerticalAlignment="Center"
                      Margin="5" />
             <Button x:Name="btnRegister"
-                    Content="Załóż konto"
+                    Content="Create an account"
                     Command="{Binding RegisterCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -151,12 +146,19 @@
                     FontWeight="Bold"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Width="100"
+                    Width="150"
                     Height="30"
                     Margin="5"
                     Background="Black"
-                    Foreground="White" />
-            <Label  Content="Masz już konto?"
+                    Foreground="White"
+                    BorderBrush="{x:Null}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label  Content="Do you already have an account?"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Grid.Row="6"
@@ -164,19 +166,26 @@
                     FontStyle="Italic" />
             <Button x:Name="btnLogInRegistration"
                     Command="{Binding ViewLoginCommand}"
-                    Content="Zaloguj się"
+                    Content="Login"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Grid.Row="6"
-                    FontSize="12"
+                    FontSize="16"
                     FontStyle="Italic"
                     FontWeight="Bold"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    HorizontalContentAlignment="Right"
                     Margin="5"
-                    Background="White"
-                    BorderBrush="White" />
+                    Background="DarkRed"
+                    BorderBrush="{x:Null}"
+                    Width="70"
+                    Height="30">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
             <TextBlock Grid.Row="7" Margin="0,10,0,0"
                     HorizontalAlignment="Center"
                     DataContext="{Binding ErrorMessageViewModel}"
