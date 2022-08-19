@@ -2,7 +2,11 @@
 using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexServices;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Security.Claims;
+using System.Windows;
 
 namespace gamexDesktopApp.Commands;
 
@@ -35,16 +39,21 @@ public class DeleteCommand : AsyncCommandBase
         {
             var token = _accountStore.CurrentAccount.Token;
             var id = (int)_selected.Id;
-            var response = await _deleteService.Delete(token, id);
+            var record = GetRecordType(_selected);
 
-            var record = GetRecordType();
+            ValidateUser(token, _selected);
 
-            if (response == (int)HttpStatusCode.OK)
+            if (MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                _viewModel.ErrorMessage = $"The {record} was successfully deleted";
-            }
+                var response = await _deleteService.Delete(token, id);
 
-            _viewModel.RefreshGamesCommand.Execute(null);
+                if (response == (int)HttpStatusCode.OK)
+                {
+                    _viewModel.ErrorMessage = $"The {record} was successfully deleted";
+                }
+
+                _viewModel.RefreshGamesCommand.Execute(null);
+            }
         }
         catch (Exception)
         {
@@ -52,10 +61,30 @@ public class DeleteCommand : AsyncCommandBase
         }
     }
 
-    private string GetRecordType() => _selected switch
+    private static string GetRecordType(ISelected selected) => selected switch
     {
         ISingleGame => "game",
         ISingleUser => "user",
         _ => "item",
     };
+
+    private static void ValidateUser(string token, ISelected selected)
+    {
+        if (selected is ISingleUser user
+            && user.Id == GetUserIdFromJwt(token))
+        {
+            MessageBox.Show("You cannot remove yourself!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw new Exception();
+        }
+    }
+
+    private static int GetUserIdFromJwt(string token)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtSecurityToken = handler.ReadJwtToken(token);
+
+        var id = jwtSecurityToken.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
+        return int.Parse(id);
+    }
 }

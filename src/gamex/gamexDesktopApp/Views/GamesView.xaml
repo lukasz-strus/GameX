@@ -262,7 +262,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkRed"
-                            BorderThickness="2.5"
+                            BorderThickness="1"
                             CornerRadius="7">
                         <StackPanel Margin="2" Orientation="Vertical" Width="298" Height="430">
                             <Image Source="{Binding Source,
@@ -271,12 +271,12 @@
                                    Height="350" />
                             <TextBlock Margin="3"
                                        Text="{Binding Name}"
-                                       FontSize="20"
+                                       FontSize="18"
                                        FontWeight="Bold"
                                        TextWrapping="Wrap" />
                             <TextBlock Margin="3"
                                        Text="{Binding Price, StringFormat={}{0} PLN}"
-                                       FontSize="18"
+                                       FontSize="14"
                                        Foreground="Red"
                                        FontWeight="Bold" />
                         </StackPanel>

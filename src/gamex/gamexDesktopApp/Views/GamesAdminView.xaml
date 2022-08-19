@@ -325,12 +325,12 @@
                                    Height="350" />
                             <TextBlock Margin="3"
                                        Text="{Binding Name}"
-                                       FontSize="20"
+                                       FontSize="18"
                                        FontWeight="Bold"
                                        TextWrapping="Wrap" />
                             <TextBlock Margin="3"
                                        Text="{Binding Price, StringFormat={}{0} PLN}"
-                                       FontSize="18"
+                                       FontSize="14"
                                        Foreground="Red"
                                        FontWeight="Bold" />
                         </StackPanel>

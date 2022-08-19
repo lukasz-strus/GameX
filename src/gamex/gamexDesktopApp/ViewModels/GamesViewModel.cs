@@ -35,7 +35,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
     }
 
     public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 5;
+    public int PageSize { get; set; } = 15;
 
     private SortGameBy _sortBy;
 
