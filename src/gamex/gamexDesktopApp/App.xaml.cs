@@ -44,8 +44,6 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    //TODO: Dodać okno dialogowe przy usuwaniu gier/użytkowników "Czy napewno"
-    //TODO: Zablokować możliwość usuwania Adminów, chyba że ktoś jest "Admin", ale on siebie też nie może usunąć
     //TODO: Design -> Develope
     //TODO: Testy
 }
