@@ -179,6 +179,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         GamesListView = collectionViewSource.View;
 
         RefreshGamesCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
+
         UpdatePageCommand = new UpdatePageCommand<GamesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesViewModel>(this);
         WalletViewCommand = new RenavigateCommand(walletRenavigator);
@@ -187,7 +188,6 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         LibraryViewCommand = new RenavigateCommand(libraryRenavigator);
 
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
-
         RefreshGamesCommand.Execute(null);
     }
 

@@ -182,6 +182,8 @@ public class GamesAdminViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
         GamesListView = collectionViewSource.View;
 
         RefreshGamesCommand = new GetGamesListCommand<GamesAdminViewModel>(this, gameService, accountStore, fileService);
+        RefreshGamesCommand.Execute(null);
+
         UpdatePageCommand = new UpdatePageCommand<GamesAdminViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesAdminViewModel>(this);
 
@@ -196,8 +198,6 @@ public class GamesAdminViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
         GamesViewCommand = new RenavigateCommand(gamesRenavigator);
 
         UsersViewCommand = new RenavigateCommand(usersRenavigator);
-
-        RefreshGamesCommand.Execute(null);
     }
 
     public override void Dispose()

@@ -178,6 +178,8 @@ public class GamesSalesViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
         GamesListView = collectionViewSource.View;
 
         RefreshGamesCommand = new GetGamesListCommand<GamesSalesViewModel>(this, gameService, accountStore, fileService);
+        RefreshGamesCommand.Execute(null);
+
         UpdatePageCommand = new UpdatePageCommand<GamesSalesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesSalesViewModel>(this);
 
@@ -188,8 +190,6 @@ public class GamesSalesViewModel : BaseViewModel, IGamesViewModel, IPagesViewMod
 
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
         GamesViewCommand = new RenavigateCommand(gamesRenavigator);
-
-        RefreshGamesCommand.Execute(null);
     }
 
     public override void Dispose()
