@@ -1,7 +1,8 @@
 ﻿using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.ViewModels;
-using gamexModelsDto;
+using gamexModels;
 using gamexServices;
+using System.Net;
 
 namespace gamexDesktopApp.Commands;
 
@@ -33,9 +34,12 @@ public class ChangePasswordCommand : AsyncCommandBase
 
             var token = _accountStore.CurrentAccount.Token;
 
-            await _authenticationService.ChangePassword(token, passwordDto);
+            var response = await _authenticationService.ChangePassword(token, passwordDto);
 
-            _accountViewModel.ErrorMessage = "Pomyślna zmiana hasła";
+            if (response == (int)HttpStatusCode.OK)
+            {
+                _accountViewModel.ErrorMessage = "Successful password change";
+            }
         }
         catch (Exception)
         {

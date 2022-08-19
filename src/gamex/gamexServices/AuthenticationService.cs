@@ -1,5 +1,5 @@
 ﻿using Flurl.Http;
-using gamexModelsDto;
+using gamexModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -7,33 +7,16 @@ namespace gamexServices;
 
 public interface IAuthenticationService
 {
-    /// <summary>
-    /// Change password by user Id
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="userPasswordDto">User password data transfer object</param>
-    /// <returns>Status Code</returns>
     Task<int> ChangePassword(string token, UserPasswordDto userPasswordDto);
 
-    /// <summary>
-    /// Register new user
-    /// </summary>
-    /// <param name="registerUserDto">Register user data transfer object</param>
-    /// <returns>Status code</returns>
     Task<int> Register(RegisterUserDto registerUserDto);
 
-    /// <summary>
-    /// Log In
-    /// </summary>
-    /// <param name="loginDto">Login data transfer object</param>
-    /// <returns>Token JWT</returns>
     Task<string> Login(LoginDto loginDto);
 }
 
 public class AuthenticationService : IAuthenticationService
 {
-    private readonly string _baseUrl =
-"https://gamex-api-app.azurewebsites.net/api/user";
+    private readonly string _baseUrl = "https://gamex-api-app.azurewebsites.net/api/user";
 
     public async Task<int> Register(RegisterUserDto registerUserDto)
     {

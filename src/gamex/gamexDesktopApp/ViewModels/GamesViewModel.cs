@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.Models;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
-using gamexModelsDto;
+using gamexDesktopApp.State.Selected;
+using gamexModels;
 using gamexServices;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -32,7 +35,7 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
     }
 
     public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 5;
+    public int PageSize { get; set; } = 15;
 
     private SortGameBy _sortBy;
 
@@ -146,16 +149,13 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
     }
 
     public ICollectionView GamesListView { get; }
-
-    public ICommand ViewListCommand { get; }
-
+    public ICommand RefreshGamesCommand { get; }
     public ICommand UpdatePageCommand { get; }
     public ICommand UpdatePageSizeCommand { get; }
-    public ICommand GoToWalletCommand { get; }
-    public ICommand GoToGameViewCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
-    public ICommand GoToLibraryViewCommand { get; }
-
+    public ICommand WalletViewCommand { get; }
+    public ICommand GameViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
+    public ICommand LibraryViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public GamesViewModel(IGameService gameService,
@@ -166,7 +166,8 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
                           IRenavigator loginRenavigator,
                           IRenavigator accountRenavigator,
                           IRenavigator walletRenavigator,
-                          IRenavigator libraryRenavigator)
+                          IRenavigator libraryRenavigator,
+                          IFileService fileService)
     {
         ErrorMessageViewModel = new();
         _singleGame = singleGame;
@@ -177,17 +178,17 @@ public class GamesViewModel : BaseViewModel, IGamesViewModel, IPagesViewModel
         };
         GamesListView = collectionViewSource.View;
 
-        ViewListCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore);
+        RefreshGamesCommand = new GetGamesListCommand<GamesViewModel>(this, gameService, accountStore, fileService);
+
         UpdatePageCommand = new UpdatePageCommand<GamesViewModel>(this);
         UpdatePageSizeCommand = new UpdatePageSizeCommand<GamesViewModel>(this);
-        GoToWalletCommand = new RenavigateCommand(walletRenavigator);
-        GoToGameViewCommand = new RenavigateCommand(gameRenavigator);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
-        GoToLibraryViewCommand = new RenavigateCommand(libraryRenavigator);
+        WalletViewCommand = new RenavigateCommand(walletRenavigator);
+        GameViewCommand = new RenavigateCommand(gameRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
+        LibraryViewCommand = new RenavigateCommand(libraryRenavigator);
 
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
-
-        ViewListCommand.Execute(null);
+        RefreshGamesCommand.Execute(null);
     }
 
     public override void Dispose()

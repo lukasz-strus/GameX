@@ -1,11 +1,8 @@
-﻿using gamexAPI.Entities;
+﻿using gamexEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace gamexAPI;
 
-/// <summary>
-/// Gamex Seeder class
-/// </summary>
 public class GamexSeeder
 {
     private readonly GamexDbContext _dbContext;
@@ -48,6 +45,13 @@ public class GamexSeeder
                 _dbContext.Games.AddRange(games);
                 _dbContext.SaveChanges();
             }
+
+            //if (!_dbContext.Images.Any())
+            //{
+            //    var images = GetImages();
+            //    _dbContext.Images.AddRange(images);
+            //    _dbContext.SaveChanges();
+            //}
         }
     }
 
@@ -106,5 +110,38 @@ public class GamexSeeder
         };
 
         return users;
+    }
+
+    private IEnumerable<Image> GetImages()
+    {
+        var images = new List<Image>()
+        {
+            new Image()
+            {
+                ImageStream = GetImageFile("1"),
+                GameId = 1,
+                Extension = GetImageExtension("1")
+            },
+            new Image()
+            {
+                ImageStream = GetImageFile("2"),
+                GameId = 2,
+                Extension = GetImageExtension("2")
+            }
+        };
+
+        return images;
+    }
+
+    private static byte[] GetImageFile(string id)
+    {
+        string filePath = $@"D:\Microsoft Visual Studio\source\gamex\src\gamex\gamexAPI\PrivateFiles\Games\{id}.jpg";
+        return File.ReadAllBytes(filePath);
+    }
+
+    private static string GetImageExtension(string id)
+    {
+        string filePath = $@"D:\Microsoft Visual Studio\source\gamex\src\gamex\gamexAPI\PrivateFiles\Games\{id}.jpg";
+        return Path.GetExtension(filePath);
     }
 }

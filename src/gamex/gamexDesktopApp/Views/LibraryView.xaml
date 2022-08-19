@@ -7,106 +7,141 @@
              xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:LibraryViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="800" d:DesignWidth="900">
-    <StackPanel>
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <StackPanel MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="500" />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
                    Grid.Column="0"
                    Grid.Row="0"
-                   Grid.RowSpan="2"
                    Grid.ColumnSpan="2"
-                   Width='350' />
-
-            <Button x:Name="btnUser"
-                    Grid.Column="2"
+                   Grid.RowSpan="2"
+                   Width="200" />
+            <TextBox x:Name="txbSearch"
+                     Text=""
+                     Grid.Column="2"
+                     Grid.Row="0"
+                     Grid.ColumnSpan="3"
+                     Height="30"
+                     BorderBrush="Black"
+                     BorderThickness="2"
+                     FontSize="12"
+                     VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button x:Name="btnSearch"
+                    Grid.Column="5"
                     Grid.Row="0"
                     BorderBrush="{x:Null}"
+                    BorderThickness="2"
                     Background="White"
-                    Command="{Binding GoToAccountViewCommand}">
+                    Width="30"
+                    HorizontalAlignment="Left">
+                <Image Source="/Images/search.png"
+                       Stretch="Uniform" />
+            </Button>
+
+            <Button x:Name="btnUser"
+                    Grid.Column="7"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
+                    Background="White">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-                   Content="Profil"
-                   Grid.Column="2"
+                   Content="Profile"
+                   Grid.Column="7"
                    Grid.Row="1"
+                   FontSize="12"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center" />
             <Button x:Name="btnWallet"
-                    Grid.Column="3"
+                    Grid.Column="8"
                     Grid.Row="0"
                     BorderBrush="{x:Null}"
-                    Background="White"
-                    Command="{Binding GoToWalletCommand}">
+                    Background="White">
                 <Image Source="/Images/wallet.png" Stretch="Uniform" />
             </Button>
             <TextBlock x:Name="lblWallet"
-               Text="{Binding Total, StringFormat={}{0} PLN}"
-               Grid.Column="3"
-               Grid.Row="1"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center" />
+                       Text="{Binding Total, StringFormat={}{0} PLN}"
+                       Grid.Column="8"
+                       Grid.Row="1"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
             <Button x:Name="btnLogout"
-                    Grid.Column="4"
+                    Command="{Binding LogoutCommand}"
+                    Grid.Column="9"
                     Grid.Row="0"
                     BorderBrush="{x:Null}"
-                    Background="White"
-                    Command="{Binding LogoutCommand}">
+                    Background="White">
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-                   Content="Wyloguj"
-                   Grid.Column="4"
+                   Content="Logout"
+                   Grid.Column="9"
                    Grid.Row="1"
+                   FontSize="12"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center" />
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
             <Button x:Name="btnShop"
-                    Grid.Column="0"
-                    BorderBrush="Black"
-                    BorderThickness="2"
-                    Content="SKLEP"
-                    FontSize="40"
-                    FontWeight="Bold"
-                    Background="{x:Null}"
-                    Command="{Binding GoToGamesViewCommand}" />
-
-            <Button x:Name="btnLibrary"
-                    Grid.Column="5"
+                    Grid.Column="1"
                     Grid.Row="2"
-                    Grid.ColumnSpan="5"
-                    BorderBrush="Black"
-                    BorderThickness="2"
-                    Content="BIBLIOTEKA"
-                    FontSize="40"
-                    FontWeight="Bold">
-                <Button.Effect>
-                    <DropShadowEffect />
-                </Button.Effect>
+                    Grid.ColumnSpan="2"
+                    BorderBrush="{x:Null}"
+                    Content="GAMEX STORE"
+                    Foreground="#FF232323"
+                    FontSize="26"
+                    FontWeight="SemiBold"
+                    Background="{x:Null}"
+                    Command="{Binding GoToGamesViewCommand}">
+            </Button>
+            <Button x:Name="btnLibrary"
+                    Grid.Column="4"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="{x:Null}"
+                    Content="YOUR LIBRARY"
+                    FontSize="26"
+                    FontWeight="SemiBold"
+                    Background="{x:Null}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock TextDecorations="Underline" Text="{TemplateBinding Content}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
             </Button>
         </Grid>
-        <Grid>
-            <Label HorizontalAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Wkrótce..."
-                   Margin="20"
-                   FontSize="45"
-                   Foreground="DarkRed" />
-        </Grid>
+        <Label Content="Soon... :)"
+               FontSize="60"
+               Foreground="DarkRed"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center" />
     </StackPanel>
 </UserControl>

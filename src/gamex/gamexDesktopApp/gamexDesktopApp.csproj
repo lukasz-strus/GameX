@@ -34,17 +34,19 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Expression.Interaction" Version="3.0.40218" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
     <PackageReference Include="LoadingSpinner.WPF" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PasswordBoxMVVM" Version="1.0.5" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\gamexServices\gamexServices.csproj" />
-    <ProjectReference Include="..\ModelsDto\gamexModelsDto.csproj" />
+    <ProjectReference Include="..\ModelsDto\gamexModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,6 +71,10 @@
     <Resource Include="Images\wallet.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\Games\" />
   </ItemGroup>
 
 </Project>

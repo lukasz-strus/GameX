@@ -2,6 +2,7 @@
 using gamexDesktopApp.State.Navigators;
 using gamexDesktopApp.ViewModels;
 using System.ComponentModel;
+using System.Net;
 
 namespace gamexDesktopApp.Commands;
 
@@ -31,16 +32,15 @@ public class RegisterCommand : AsyncCommandBase
 
         try
         {
-            var registrationResult = await _authenticator.Register(
-                _registrationViewModel.Login,
-                _registrationViewModel.Password,
-                _registrationViewModel.ConfirmPassword,
-                _registrationViewModel.Email,
-                _registrationViewModel.ConfirmEmail);
+            var registrationResult = await _authenticator.Register(_registrationViewModel.Login,
+                                                                   _registrationViewModel.Password,
+                                                                   _registrationViewModel.ConfirmPassword,
+                                                                   _registrationViewModel.Email,
+                                                                   _registrationViewModel.ConfirmEmail);
 
             switch (registrationResult)
             {
-                case 200:
+                case (int)HttpStatusCode.OK:
                     _registerRenavigator.Renavigate();
                     break;
 

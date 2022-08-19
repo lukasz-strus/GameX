@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using gamexDesktopApp.Helpers;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.Models;
 
@@ -54,6 +56,18 @@ public class Game : INotifyPropertyChanged
         set
         {
             _price = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private BitmapImage _source;
+
+    public BitmapImage Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
             OnPropertyChanged();
         }
     }

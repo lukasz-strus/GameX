@@ -14,6 +14,7 @@ public static class AddServicesHostBuilderExtensions
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IGameService, GameService>();
+            services.AddSingleton<IFileService, FileService>();
         });
 
         return host;

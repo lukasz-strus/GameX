@@ -4,14 +4,8 @@ namespace gamexAPI.Services;
 
 public interface IUserContextService
 {
-    /// <summary>
-    /// User claims principal
-    /// </summary>
     public ClaimsPrincipal User { get; }
 
-    /// <summary>
-    /// User ID
-    /// </summary>
     public int? GetUserId { get; }
 }
 

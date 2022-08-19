@@ -1,8 +1,7 @@
 ﻿using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
-using gamexDesktopApp.State.SelectedUser;
+using gamexDesktopApp.State.Selected;
 using gamexDesktopApp.ViewModels;
 using gamexDesktopApp.ViewModels.Factories;
 using gamexServices;
@@ -90,7 +89,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesAdminViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesSalesViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesAdminViewModel CreateGamesAdminViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),
@@ -101,7 +101,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<UsersViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<UsersViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesSalesViewModel CreateGamesSalesViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),
@@ -111,7 +112,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GameAdminViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static WalletViewModel CreateWalletViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IUserService>(),
@@ -141,7 +143,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<GamesViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static GamesViewModel CreateGamesViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IGameService>(),
@@ -152,7 +155,8 @@ public static class AddViewModelsHostBuildersExtension
             services.GetRequiredService<ViewModelDelegateRenavigator<LoginViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<AccountViewModel>>(),
             services.GetRequiredService<ViewModelDelegateRenavigator<WalletViewModel>>(),
-            services.GetRequiredService<ViewModelDelegateRenavigator<LibraryViewModel>>());
+            services.GetRequiredService<ViewModelDelegateRenavigator<LibraryViewModel>>(),
+            services.GetRequiredService<IFileService>());
 
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services) =>
         new(services.GetRequiredService<IAuthenticator>(),

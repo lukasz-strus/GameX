@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
-using gamexServices;
-using gamexDesktopApp.Views;
-using Microsoft.Extensions.Hosting;
+﻿using gamexDesktopApp.Helpers;
 using gamexDesktopApp.HostBuilders;
+using gamexDesktopApp.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Windows;
 
 namespace gamexDesktopApp;
 
@@ -43,4 +43,7 @@ public partial class App : Application
 
         base.OnExit(e);
     }
+
+    //TODO: Design -> Develope
+    //TODO: Testy
 }

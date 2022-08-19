@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:gamexDesktopApp.Views" xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GameAdminViewModel}"
+             xmlns:local="clr-namespace:gamexDesktopApp.Views"
+             xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
+             xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GameAdminViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1000">
     <UserControl.Resources>
+        <converter:NullImageConverter x:Key="nullImageConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
@@ -16,11 +20,11 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="500" />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
@@ -35,11 +39,11 @@
                     Grid.Row="0"
                     BorderBrush="{x:Null}"
                     Background="White"
-                    Command="{Binding GoToAccountViewCommand}">
+                    Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-                   Content="Profil"
+                   Content="Profile"
                    Grid.Column="3"
                    Grid.Row="1"
                    HorizontalContentAlignment="Center"
@@ -54,7 +58,7 @@
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-                   Content="Wyloguj"
+                   Content="Logout"
                    Grid.Column="4"
                    Grid.Row="1"
                    HorizontalContentAlignment="Center"
@@ -63,13 +67,14 @@
 
         <StackPanel>
             <Label x:Name="lblAddEditGame"
-                   Content="Dodaj/edytuj grę"
+                   Content="Add / edit game"
                    FontSize="40" />
             <Border Height="2" Background="Black" />
         </StackPanel>
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -81,84 +86,155 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label x:Name="lblName"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="0"
-                       Content="Nazwa:"
+                       Content="Name:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbName"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="0"
                          Grid.ColumnSpan="2"
                          Margin="5"
                          VerticalContentAlignment="Center"
                          FontSize="25"
                          TextWrapping="Wrap"
-                         Text="{Binding Name}" />
+                         Text="{Binding Name}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
                 <Label x:Name="lblDescription"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="1"
-                       Content="Opis:"
+                       Content="Description:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbDescription"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="1"
                          Grid.ColumnSpan="2"
                          Margin="5"
                          FontSize="18"
+                         Height="300"
+                         MaxHeight="350"
                          TextWrapping="Wrap"
-                         Text="{Binding Description}" />
+                         Text="{Binding Description}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
                 <Label x:Name="lblPrice"
-                       Grid.Column="0"
+                       Grid.Column="1"
                        Grid.Row="2"
-                       Content="Cena:"
+                       Content="Price:"
                        FontSize="25"
                        HorizontalAlignment="Right"
                        Margin="5" />
                 <TextBox x:Name="txbPrice"
-                         Grid.Column="1"
+                         Grid.Column="2"
                          Grid.Row="2"
                          Grid.ColumnSpan="2"
                          Margin="5"
                          Foreground="Red"
                          FontSize="25"
                          TextWrapping="Wrap"
-                         Text="{Binding Price}" />
+                         Width="150"
+                         MaxWidth="150"
+                         HorizontalAlignment="Left"
+                         Text="{Binding Price}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Image Source="{Binding Source,
+                            Converter={StaticResource nullImageConverter},
+                            TargetNullValue={x:Null}}"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.RowSpan="3"
+                       Width="350"
+                       Height="350" />
             </Grid>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnCancel"
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button x:Name="btnLoadImage"
                         Grid.Column="0"
-                        Content="Anuluj"
-                        FontSize="30"
+                        Grid.Row="1"
+                        Content="Upload an image"
+                        FontSize="20"
                         Foreground="White"
                         BorderBrush="{x:Null}"
                         Background="Black"
                         Margin="5"
                         Width="200"
-                        Command="{Binding BackToGamesCommand}" />
+                        Height="40"
+                        Command="{Binding LoadImageCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="btnCancel"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Content="Cancel"
+                        FontSize="20"
+                        Foreground="White"
+                        BorderBrush="{x:Null}"
+                        Background="Black"
+                        Margin="5"
+                        Width="200"
+                        Height="40"
+                        Command="{Binding GamesViewCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button x:Name="btnSave"
                         Grid.Column="1"
-                        Content="Zapisz"
-                        FontSize="30"
+                        Grid.Row="1"
+                        Content="Save"
+                        FontSize="20"
                         Foreground="White"
                         BorderBrush="{x:Null}"
                         Background="Black"
                         Margin="5"
                         Width="200"
-                        Command="{Binding UpdateGameCommand}" />
+                        Height="40"
+                        Command="{Binding UpdateGameCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <TextBlock Width="250"
                            Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Margin="5"
+                           Grid.ColumnSpan="3"
+                           Grid.Row="0"
+                           Margin="10"
                            HorizontalAlignment="Center"
                            DataContext="{Binding ErrorMessageViewModel}"
                            Foreground="DarkRed"

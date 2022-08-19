@@ -1,73 +1,35 @@
 ﻿using AutoMapper;
-using gamexAPI.Entities;
+using gamexEntities;
 using gamexAPI.Excepitons;
-using gamexAPI.Models;
-using gamexModelsDto;
+using gamexModels;
 using System.Linq.Expressions;
 
 namespace gamexAPI.Services;
 
-/// <summary>
-/// Interface Game Service
-/// </summary>
 public interface IGameService
 {
-    /// <summary>
-    /// Create a new game
-    /// </summary>
-    /// <param name="dto">Create Game Data Transfer Object</param>
-    /// <returns>GameId</returns>
     int Create(CreateGameDto dto);
 
-    /// <summary>
-    /// Get list of games
-    /// </summary>
-    /// <param name="query">Get All Query</param>
-    /// <returns>Collection of Data Transfer Objects</returns>
     GetAllResult<GameDto> GetAll(GetAllQuery query);
 
-    /// <summary>
-    /// Get one game by id number
-    /// </summary>
-    /// <param name="id">Game ID</param>
-    /// <returns>Data Transfer Object</returns>
     GameDto Get(int id);
 
-    /// <summary>
-    /// Delete one game by id number
-    /// </summary>
-    /// <param name="id">Game ID</param>
     void Delete(int id);
 
-    /// <summary>
-    /// Update one game by id number
-    /// </summary>
-    /// <param name="id">Game ID</param>
-    /// <param name="dto">Data Transfer Object with changed parameters</param>
     void Update(int id, UpdateGameDto dto);
 
-    /// <summary>
-    /// Get game serial key
-    /// </summary>
-    /// <param name="userId">The ID of the user who purchased the game</param>
-    /// <param name="gameId">The ID of the game that was purchased</param>
-    /// <returns>Data Transfer Object</returns>
     GameSerialDto GetSerialKey(int userId, int gameId);
 }
 
-/// <summary>
-/// Game Service
-/// </summary>
 public class GameService : IGameService
 {
     private readonly GamexDbContext _dbContext;
     private readonly IMapper _mapper;
     private readonly ILogger<GameService> _logger;
 
-    public GameService(
-        GamexDbContext dbContext,
-        IMapper mapper,
-        ILogger<GameService> logger)
+    public GameService(GamexDbContext dbContext,
+                        IMapper mapper,
+                        ILogger<GameService> logger)
     {
         _dbContext = dbContext;
         _mapper = mapper;

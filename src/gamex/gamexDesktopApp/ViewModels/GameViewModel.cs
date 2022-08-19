@@ -1,17 +1,23 @@
 ﻿using gamexDesktopApp.Commands;
+using gamexDesktopApp.Helpers;
 using gamexDesktopApp.State.Accounts;
 using gamexDesktopApp.State.Authenticators;
 using gamexDesktopApp.State.Navigators;
-using gamexDesktopApp.State.SelectedGame;
+using gamexDesktopApp.State.Selected;
+using gamexModels;
 using gamexServices;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace gamexDesktopApp.ViewModels;
 
 /// <summary>
 /// GameViewModel Class
 /// </summary>
-public class GameViewModel : BaseViewModel, IGameViewModel
+public class GameViewModel : BaseViewModel, IGameViewModel, ISelectedViewModel
 {
     private int _id;
 
@@ -85,6 +91,18 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         }
     }
 
+    private BitmapImage _source;
+
+    public BitmapImage Source
+    {
+        get => _source;
+        set
+        {
+            _source = value;
+            OnPropertyChanged();
+        }
+    }
+
     public MessageViewModel ErrorMessageViewModel { get; }
 
     public string ErrorMessage
@@ -92,11 +110,11 @@ public class GameViewModel : BaseViewModel, IGameViewModel
         set => ErrorMessageViewModel.Message = value;
     }
 
-    public ICommand GetGameCommand { get; }
+    public ICommand RefreshGameCommand { get; }
     public ICommand BuyGameCommand { get; }
-    public ICommand BackToGamesCommand { get; }
-    public ICommand GoToWalletCommand { get; }
-    public ICommand GoToAccountViewCommand { get; }
+    public ICommand GamesViewCommand { get; }
+    public ICommand WalletViewCommand { get; }
+    public ICommand AccountViewCommand { get; }
     public ICommand LogoutCommand { get; }
 
     public GameViewModel(IGameService gameService,
@@ -107,16 +125,17 @@ public class GameViewModel : BaseViewModel, IGameViewModel
                          IRenavigator gamesRenavigator,
                          IRenavigator loginRenavigator,
                          IRenavigator accountRenavigator,
-                         IRenavigator walletRenavigator)
+                         IRenavigator walletRenavigator,
+                         IFileService fileService)
     {
         ErrorMessageViewModel = new MessageViewModel();
 
-        GetGameCommand = new GetGameCommand<GameViewModel>(this, gameService, accountStore, singleGame);
-        GetGameCommand.Execute(null);
+        RefreshGameCommand = new GetCommand<GameDto>(this, gameService, accountStore, singleGame, fileService);
+        RefreshGameCommand.Execute(null);
         BuyGameCommand = new BuyGameCommand(this, gameService, accountStore, userService);
-        BackToGamesCommand = new RenavigateCommand(gamesRenavigator);
-        GoToWalletCommand = new RenavigateCommand(walletRenavigator);
-        GoToAccountViewCommand = new RenavigateCommand(accountRenavigator);
+        GamesViewCommand = new RenavigateCommand(gamesRenavigator);
+        WalletViewCommand = new RenavigateCommand(walletRenavigator);
+        AccountViewCommand = new RenavigateCommand(accountRenavigator);
         LogoutCommand = new LogoutCommand(authenticator, loginRenavigator);
     }
 

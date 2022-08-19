@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using gamexAPI.Entities;
-using gamexModelsDto;
+using gamexEntities;
+using gamexModels;
 
 namespace gamexAPI;
 
-/// <summary>
-/// Gamex Mapping Profile
-/// </summary>
 public class GamexMappingProfile : Profile
 {
     public GamexMappingProfile()
@@ -24,5 +21,9 @@ public class GamexMappingProfile : Profile
         CreateMap<UpdateGameDto, GameDto>();
 
         CreateMap<GameSerialDto, GameSerial>();
+
+        CreateMap<Image, ImageDto>();
+
+        CreateMap<CreateImageDto, Image>();
     }
 }

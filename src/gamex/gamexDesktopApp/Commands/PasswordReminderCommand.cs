@@ -18,7 +18,7 @@ public class PasswordReminderCommand : AsyncCommandBase
 
     public override Task ExecuteAsync(object parameter)
     {
-        //TODO zaimplementować Password Reminder
+        //TODO implement Password Reminder
         throw new NotImplementedException();
     }
 }

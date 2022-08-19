@@ -1,58 +1,16 @@
 ﻿using Flurl.Http;
-using gamexModelsDto;
+using gamexModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace gamexServices;
 
-public interface IGameService
-{    /// <summary>
-     /// Create new game
-     /// </summary>
-     /// <param name="token">JWT</param>
-     /// <param name="createGameDto">Create game data transfer object</param>
-     /// <returns>Status code</returns>
+public interface IGameService : IGetService<GameDto>, IDeleteService
+{
     Task<int> Create(string token, CreateGameDto createGameDto);
 
-    /// <summary>
-    /// Get list of games
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="id">Game Id</param>
-    /// <returns>GetAllResult<Game></returns>
-    Task<int> Delete(string token, int id);
-
-    /// <summary>
-    /// Get game by id
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="id">Game Id</param>
-    /// <returns>Game</returns>
-    Task<GameDto> Get(string token, int id);
-
-    /// <summary>
-    /// Delete game by id
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="query">Get All Query</param>
-    /// <returns>Status Code</returns>
-    Task<GetAllResult<GameDto>> GetAll(string token, GetAllQuery query);
-
-    /// <summary>
-    /// Update game by Id
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="gameId">GameId</param>
-    /// <returns>Status Code</returns>
     Task<string> GetSerialKey(string token, int gameId);
 
-    /// <summary>
-    /// Get serial key
-    /// </summary>
-    /// <param name="token">JWT</param>
-    /// <param name="userId">UserId</param>
-    /// <param name="updateGameDto">Update game data transfer object</param>
-    /// <returns>Serial key in string</returns>
     Task<int> Update(string token, int gameId, UpdateGameDto updateGameDto);
 }
 
