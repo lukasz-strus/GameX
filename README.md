@@ -6,8 +6,8 @@
 *Best prices on top games!*
 
 ## **Technologies**
-- serwer REST (ASP.NET)
-- aplikacja desktopowa (WPF)
+- REST Server API (ASP.NET)
+- Desktop application (WPF)
 
 ## Azure 
 https://gamex-api-app.azurewebsites.net
