@@ -262,7 +262,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="DarkRed"
-                            BorderThickness="1"
+                            BorderThickness="2.5"
                             CornerRadius="7">
                         <StackPanel Margin="2" Orientation="Vertical" Width="298" Height="430">
                             <Image Source="{Binding Source,

@@ -186,7 +186,6 @@
                     Foreground="White"
                     Background="DarkRed"
                     Content="Change password"
-                    FontSize="18"
                     Command="{Binding ChangePasswordCommand}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -203,7 +202,6 @@
                     Foreground="White"
                     Background="Black"
                     Content="Back to store"
-                    FontSize="18"
                     HorizontalAlignment="Right"
                     Command="{Binding BackToGamesCommand}">
                 <Button.Resources>
@@ -223,7 +221,6 @@
                     BorderBrush="{x:Null}"
                     Foreground="White"
                     Background="Black"
-                    FontSize="18"
                     Command="{Binding GoToGamesAdminCommand}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
