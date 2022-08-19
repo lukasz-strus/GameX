@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="gamexDesktopApp.Views.GamesView"
+             x:Name="GmaesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,15 +7,16 @@
              xmlns:viewmodels="clr-namespace:gamexDesktopApp.ViewModels"
              xmlns:extension="clr-namespace:gamexDesktopApp.Extensions"
              xmlns:service="clr-namespace:gamexServices;assembly=gamexServices"
-             d:DataContext="{d:DesignInstance Type=viewmodels:GamesViewModel}"
              xmlns:local="clr-namespace:gamexDesktopApp.Views"
              xmlns:converter="clr-namespace:gamexDesktopApp.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GamesViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.Resources>
         <converter:NullImageConverter x:Key="nullImageConverter" />
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -34,51 +36,59 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
-               Grid.Column="0"
-               Grid.Row="0"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               Width="200" />
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Grid.RowSpan="2"
+                   Width="200" />
             <TextBox x:Name="txbSearch"
                      Text="{Binding SearchPhrase}"
                      Grid.Column="2"
                      Grid.Row="0"
-                     Grid.ColumnSpan="4"
+                     Grid.ColumnSpan="3"
                      Height="30"
                      BorderBrush="Black"
                      BorderThickness="2"
                      FontSize="12"
-                     VerticalContentAlignment="Center" />
+                     VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Button x:Name="btnSearch"
                     Command="{Binding RefreshGamesCommand}"
-                    Grid.Column="6"
+                    Grid.Column="5"
                     Grid.Row="0"
-                    BorderBrush="Red"
+                    BorderBrush="{x:Null}"
                     BorderThickness="2"
-                    Background="White">
+                    Background="White"
+                    Width="30"
+                    HorizontalAlignment="Left">
                 <Image Source="/Images/search.png"
                        Stretch="Uniform" />
             </Button>
 
             <Button x:Name="btnUser"
-                Grid.Column="7"
-                Grid.Row="0"
-                BorderBrush="{x:Null}"
-                Background="White"
-                Command="{Binding AccountViewCommand}">
+                    Grid.Column="7"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
+                    Background="White"
+                    Command="{Binding AccountViewCommand}">
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-                   Content="Profil"
+                   Content="Profile"
                    Grid.Column="7"
                    Grid.Row="1"
                    FontSize="12"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center" />
             <Button x:Name="btnWallet"
-                Grid.Column="8"
-                Grid.Row="0"
-                BorderBrush="{x:Null}"
+                    Grid.Column="8"
+                    Grid.Row="0"
+                    BorderBrush="{x:Null}"
                     Background="White"
                     Command="{Binding WalletViewCommand}">
                 <Image Source="/Images/wallet.png" Stretch="Uniform" />
@@ -99,178 +109,191 @@
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-                   Content="Wyloguj"
+                   Content="Logout"
                    Grid.Column="9"
                    Grid.Row="1"
                    FontSize="12"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center" />
             <Button x:Name="btnShop"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     BorderBrush="{x:Null}"
-                    Content="SKLEP"
+                    Content="GAMEX STORE"
                     FontSize="26"
-                    FontWeight="Bold"
-                    Background="{x:Null}" />
+                    FontWeight="SemiBold"
+                    Background="{x:Null}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock TextDecorations="Underline" Text="{TemplateBinding Content}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="btnLibrary"
-                    Grid.Column="2"
+                    Grid.Column="4"
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     BorderBrush="{x:Null}"
-                    Content="BIBLIOTEKA"
+                    Content="YOUR LIBRARY"
                     Foreground="#FF232323"
                     FontSize="26"
                     Background="{x:Null}"
                     Command="{Binding LibraryViewCommand}" />
         </Grid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock FontSize="12" Margin="5" FontStyle="Italic">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Pokazano od {0} do {1} gier z {2} wyszukanych.">
-                        <Binding Path="ItemsFrom" />
-                        <Binding Path="ItemsTo" />
-                        <Binding Path="TotalItemsCount" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="5"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="5" />
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="10"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="10" />
-            <Button
-                    Height="35"
-                    Width="35"
-                    Content="15"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageSizeCommand}" CommandParameter="15" />
-        </StackPanel>
-        <ListBox  Width="auto"
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Height="35"
+                        Width="100"
+                        Content="Previous page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="Previous">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Height="35"
+                        Width="100"
+                        Content="Starting page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="DarkRed"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="Start">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Height="35"
+                        Width="100"
+                        Content="Next page"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageCommand}"
+                        CommandParameter="Next">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label FontSize="14"
+                       Margin="5"
+                       FontStyle="Italic"
+                       Content="Results per page:"
+                       VerticalAlignment="Center" />
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="5"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="5">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="10"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="10">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button
+                        Height="30"
+                        Width="30"
+                        Content="15"
+                        Margin="5"
+                        Foreground="White"
+                        Background="Black"
+                        BorderBrush="{x:Null}"
+                        Command="{Binding UpdatePageSizeCommand}" CommandParameter="15">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <ListBox  Width="Auto"
                   x:Name="lvGameListView"
                   ItemsSource="{Binding GamesListView}"
                   SelectedItem="{Binding Selected, Mode=TwoWay}"
                   SelectedIndex="-1"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                  MaxHeight="400" MaxWidth="1800">
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.CanContentScroll="False"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  MinHeight="800"
+                  MaxHeight="800">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Margin="2" Width="1090" HorizontalAlignment="Stretch">
-                        <Image Source="{Binding Source,
-                                Converter={StaticResource nullImageConverter},
-                                TargetNullValue={x:Null}}"
-                               Height="150" />
-                        <TextBlock HorizontalAlignment="Center"
-                                   Margin="5"
-                                   Text="{Binding Name}"
-                                   FontSize="26"
-                                   FontWeight="Bold"
-                                   TextWrapping="Wrap"
-                                   DockPanel.Dock="Left" />
-                        <TextBlock Margin="5"
-                                   HorizontalAlignment="Right"
-                                   Text="{Binding Price, StringFormat={}{0} PLN}"
-                                   FontSize="18"
-                                   Foreground="Red"
-                                   FontWeight="Bold"
-                                   DockPanel.Dock="Right" />
-                    </DockPanel>
+                    <Border BorderBrush="DarkRed"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                        <StackPanel Margin="2" Orientation="Vertical" Width="298" Height="430">
+                            <Image Source="{Binding Source,
+                                            Converter={StaticResource nullImageConverter},
+                                            TargetNullValue={x:Null}}"
+                                   Height="350" />
+                            <TextBlock Margin="3"
+                                       Text="{Binding Name}"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="3"
+                                       Text="{Binding Price, StringFormat={}{0} PLN}"
+                                       FontSize="14"
+                                       Foreground="Red"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding GameViewCommand}"
+                                           CommandParameter="{Binding ElementName=lvGameListView, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListBox>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Height="40"
-                    Width="300"
-                    Margin="5"
-                    Content="Pokaż szczegóły"
-                    FontSize="26"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding GameViewCommand}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Height="35"
-                    Width="35"
-                    Content="1"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="1" />
-            <Button Height="35"
-                    Width="35"
-                    Content="2"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="2" />
-            <Button Height="35"
-                    Width="35"
-                    Content="3"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="3" />
-            <Button Height="35"
-                    Width="35"
-                    Content="4"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="4" />
-            <Button Height="35"
-                    Width="35"
-                    Content="5"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="5" />
-            <Label Content="..."
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Bottom"
-                   Height="35"
-                   Width="35"
-                   Background="Black"
-                   Foreground="White"
-                   Margin="5" />
-            <Button Height="35"
-                    Width="70"
-                    Content="Dalej"
-                    Margin="5"
-                    Foreground="White"
-                    Background="Black"
-                    BorderBrush="{x:Null}"
-                    Command="{Binding UpdatePageCommand}"
-                    CommandParameter="Next" />
-        </StackPanel>
     </StackPanel>
 </UserControl>

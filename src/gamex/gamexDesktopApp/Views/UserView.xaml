@@ -19,11 +19,11 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="500" />
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Image Source="/Images/gamexTitle.png"
@@ -42,7 +42,7 @@
                 <Image Source="/Images/user.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblUser"
-                   Content="Profil"
+                   Content="Profile"
                    Grid.Column="3"
                    Grid.Row="1"
                    HorizontalContentAlignment="Center"
@@ -57,7 +57,7 @@
                 <Image Source="/Images/logout.png" Stretch="Uniform" />
             </Button>
             <Label x:Name="lblLogout"
-                   Content="Wyloguj"
+                   Content="Logout"
                    Grid.Column="4"
                    Grid.Row="1"
                    HorizontalContentAlignment="Center"
@@ -66,7 +66,7 @@
 
         <StackPanel>
             <Label x:Name="lblAddEditGame"
-                   Content="Dodaj/edytuj użytkownika"
+                   Content="Edit user"
                    FontSize="40" />
             <Border Height="2" Background="Black" />
         </StackPanel>
@@ -76,7 +76,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="5">
-                <Grid Background="AntiqueWhite" MinHeight="230">
+                <Grid Background="AntiqueWhite" Height="200">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition />
@@ -93,12 +93,12 @@
                            Margin="5"
                            HorizontalAlignment="Right"
                            Content="Login:"
-                           FontSize="25" />
+                           FontSize="16" />
                     <TextBox x:Name="txbLogin"
                              Grid.Column="1"
                              Grid.Row="0"
                              Margin="5"
-                             FontSize="25"
+                             FontSize="16"
                              VerticalContentAlignment="Center"
                              TextWrapping="Wrap"
                              Text="{Binding Login}" />
@@ -108,12 +108,12 @@
                            Margin="5"
                            HorizontalAlignment="Right"
                            Content="Email:"
-                           FontSize="25" />
+                           FontSize="16" />
                     <TextBox x:Name="txbEmail"
                              Grid.Column="1"
                              Grid.Row="1"
                              Margin="5"
-                             FontSize="25"
+                             FontSize="16"
                              VerticalContentAlignment="Center"
                              TextWrapping="Wrap"
                              Text="{Binding Email}" />
@@ -122,12 +122,13 @@
                            Grid.Row="2"
                            Margin="5"
                            HorizontalAlignment="Right"
-                           Content="Rola:"
-                           FontSize="25" />
+                           Content="Role:"
+                           FontSize="16" />
                     <ComboBox Name="Role"
                               Grid.Column="1"
                               Grid.Row="2"
                               Margin="5"
+                              FontSize="16"
                               ItemsSource="{Binding Source={extension:EnumBindingSource models:Role}}"
                               SelectedValue="{Binding Role}"
                               VerticalContentAlignment="Center" />
@@ -135,19 +136,25 @@
                             Grid.Column="0"
                             Grid.Row="3"
                             Grid.ColumnSpan="2"
-                            Width="200"
-                            Content="Zatwierdź"
+                            Width="150"
+                            Content="Confirm"
                             Margin="5"
-                            FontSize="30"
+                            Height="35"
                             Foreground="White"
                             Background="Black"
                             BorderBrush="{x:Null}"
                             HorizontalAlignment="Center"
-                            Command="{Binding UpdateUserCommand}" />
+                            Command="{Binding UpdateUserCommand}">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5">
-                <Grid Background="Gray" MinHeight="230">
+                <Grid Background="Gray" Height="200">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition />
@@ -163,13 +170,13 @@
                            Grid.Row="0"
                            Margin="5"
                            HorizontalAlignment="Right"
-                           Content="Hasło:"
-                           FontSize="25" />
+                           Content="Password:"
+                           FontSize="16" />
                     <TextBox x:Name="txbPassword"
                              Grid.Column="1"
                              Grid.Row="0"
                              Margin="5"
-                             FontSize="25"
+                             FontSize="16"
                              VerticalContentAlignment="Center"
                              TextWrapping="Wrap"
                              Text="{Binding Password}" />
@@ -178,13 +185,13 @@
                            Grid.Row="1"
                            Margin="5"
                            HorizontalAlignment="Right"
-                           Content="Powtórz hasło:"
-                           FontSize="25" />
+                           Content="Repeat password:"
+                           FontSize="16" />
                     <TextBox x:Name="txbRepeatPassword"
                              Grid.Column="1"
                              Grid.Row="1"
                              Margin="5"
-                             FontSize="25"
+                             FontSize="16"
                              VerticalContentAlignment="Center"
                              TextWrapping="Wrap"
                              Text="{Binding ConfirmPassword}" />
@@ -193,28 +200,40 @@
                             Grid.Row="3"
                             Grid.ColumnSpan="2"
                             HorizontalAlignment="Center"
-                            Width="200"
-                            Content="Zmień hasło"
+                            Width="150"
+                            Height="35"
+                            Content="Change password"
                             Margin="5"
-                            FontSize="30"
                             Foreground="White"
                             Background="Black"
                             BorderBrush="{x:Null}"
-                            Command="{Binding ChangePasswordCommand}" />
+                            Command="{Binding ChangePasswordCommand}">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="7" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Grid>
         <StackPanel>
             <Button x:Name="btnGoBack"
-                        HorizontalAlignment="Center"
-                        Width="200"
-                        Content="Powrót"
+                        HorizontalAlignment="Right"
+                        Width="150"
+                        Content="Back"
                         Margin="20"
-                        FontSize="30"
+                        FontSize="20"
                         Foreground="White"
                         Background="Black"
                         BorderBrush="{x:Null}"
-                        Command="{Binding UsersViewCommand}" />
+                        Command="{Binding UsersViewCommand}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7" />
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
         <StackPanel>
             <TextBlock Width="250"

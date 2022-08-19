@@ -21,6 +21,8 @@ public interface IPagesViewModel
     SortGameBy SortBy { get; set; }
     SortDirection SortDirection { get; set; }
     ICommand RefreshGamesCommand { get; }
+    ICommand UpdatePageCommand { get; }
+    ICommand UpdatePageSizeCommand { get; }
     string ErrorMessage { set; }
     MessageViewModel ErrorMessageViewModel { get; }
 }

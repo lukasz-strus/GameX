@@ -37,6 +37,7 @@ public class BuyGameCommand : AsyncCommandBase
             var user = await _userService.Get(token, userId);
 
             _gameViewModel.Total = user.Total;
+            _accountStore.CurrentAccount.Total = user.Total;
         }
         catch (Exception)
         {
