@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("gamexAPI.IntegrationTests")]
 var builder = WebApplication.CreateBuilder();
 
 // NLog: Setup NLog for Dependency injection

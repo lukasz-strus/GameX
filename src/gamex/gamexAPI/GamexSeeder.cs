@@ -13,11 +13,13 @@ public class GamexSeeder
     {
         if (_dbContext.Database.CanConnect())
         {
-            var pendingMigrations = _dbContext.Database.GetPendingMigrations();
-
-            if (pendingMigrations != null && pendingMigrations.Any())
+            if (_dbContext.Database.IsRelational())
             {
-                _dbContext.Database.Migrate();
+                var pendingMigrations = _dbContext.Database.GetPendingMigrations();
+                if (pendingMigrations != null && pendingMigrations.Any())
+                {
+                    _dbContext.Database.Migrate();
+                }
             }
 
             if (!_dbContext.Roles.Any())
