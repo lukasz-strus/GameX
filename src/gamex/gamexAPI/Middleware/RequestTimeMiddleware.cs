@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace gamexAPI.Middleware;
+﻿namespace gamexAPI.Middleware;
 
 public class RequestTimeMiddleware : IMiddleware
 {

@@ -1,7 +1,4 @@
-﻿using gamexEntities;
-using Microsoft.EntityFrameworkCore;
-
-namespace gamexAPI;
+﻿namespace gamexAPI;
 
 public class GamexSeeder
 {

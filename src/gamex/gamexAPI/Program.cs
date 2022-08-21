@@ -1,20 +1,3 @@
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using gamexAPI;
-using gamexAPI.Authorization;
-using gamexEntities;
-using gamexAPI.Middleware;
-using gamexAPI.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using gamexModels;
-using gamexModels.Validators;
-using NLog.Web;
-using System.Reflection;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder();
 
 // NLog: Setup NLog for Dependency injection

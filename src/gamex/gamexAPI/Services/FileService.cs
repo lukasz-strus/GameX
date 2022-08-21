@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using gamexEntities;
-using gamexAPI.Excepitons;
-using gamexModels;
-
-namespace gamexAPI.Services;
+﻿namespace gamexAPI.Services;
 
 public interface IFileService
 {
