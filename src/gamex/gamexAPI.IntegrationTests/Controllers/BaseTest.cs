@@ -11,6 +11,7 @@ namespace gamexAPI.IntegrationTests.Controllers;
 public class BaseTest
 {
     public ITestOutputHelper Output { get; }
+    public TestWebAppFactory<Program> Factory { get; }
     public HttpClient Client { get; }
     public TestServer Server { get; }
     public List<string> Logs { get; }
@@ -18,12 +19,14 @@ public class BaseTest
     public BaseTest(ITestOutputHelper output)
     {
         Output = output;
-        var factory = new TestWebAppFactory<Program>(output);
+
+        // Factory
+        Factory = new TestWebAppFactory<Program>(output);
 
         // HttpClient
-        Client = factory.CreateClient();
+        Client = Factory.CreateClient();
 
         // Test Server
-        Server = factory.Server;
+        Server = Factory.Server;
     }
 }
