@@ -8,33 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
+using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests.Controllers;
 
-public class GameControllerTests
+[Collection(Constants.TEST_COLLECTION)]
+public class GameControllerTests : BaseTest
 {
-    protected HttpClient _client;
-
-    public GameControllerTests()
+    public GameControllerTests(ITestOutputHelper output) : base(output)
     {
-        _client = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var dbContextOptions = services
-                        .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<GamexDbContext>));
-
-                    services.Remove(dbContextOptions);
-
-                    services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
-
-                    services.AddMvc(option => option.Filters.Add(new FakeUserFilter()));
-
-                    services
-                     .AddDbContext<GamexDbContext>(options => options.UseInMemoryDatabase("GamexDb"));
-                });
-            }).CreateClient();
     }
 
     [Fact]
@@ -54,7 +36,7 @@ public class GameControllerTests
 
         //act
 
-        var response = await _client.PostAsync("api/game", httpContent);
+        var response = await Client.PostAsync("api/game", httpContent);
 
         //assert
 
@@ -70,7 +52,7 @@ public class GameControllerTests
     {
         //act
 
-        var response = await _client.GetAsync("api/game?" + queryParams);
+        var response = await Client.GetAsync("api/game?" + queryParams);
 
         //assert
 
