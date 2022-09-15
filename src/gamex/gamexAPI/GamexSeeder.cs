@@ -104,7 +104,16 @@ public class GamexSeeder
                 Login="Admin",
                 Email="admin@gmail.com",
                 PasswordHash="AQAAAAEAACcQAAAAEFmpjHfAfOpJDWGnKtwGnuSHmNYBrULw1uRaB2gWdnOMCHOfvurFdo8gXMES7Sh0CQ==", //admin123456789
+                Total = 1000m,
                 RoleId = 3
+            },
+            new User()
+            {
+                Login="User",
+                Email="user@gmail.com",
+                PasswordHash="AQAAAAEAACcQAAAAEFmpjHfAfOpJDWGnKtwGnuSHmNYBrULw1uRaB2gWdnOMCHOfvurFdo8gXMES7Sh0CQ==", //admin123456789
+                Total = 0,
+                RoleId = 1
             }
         };
 
