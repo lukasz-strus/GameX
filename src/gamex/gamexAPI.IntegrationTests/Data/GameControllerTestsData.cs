@@ -85,13 +85,13 @@ public static class GameControllerTestsData
             },
             new UpdateGameDto()
             {
-                Name = "Test 1",
-                Price = 120
+                Name = "Test 2",
+                Description = "Test Description"
             },
             new UpdateGameDto()
             {
-                Name = "Test 2",
-                Description = "Test Description"
+                Name = "Test 1",
+                Price = 120
             }
         };
         return list.Select(q => new object[] { q });

@@ -83,7 +83,7 @@ public class GamexSeeder
             {
                 Name = "The Witcher 3: Wild Hunt",
                 Description = "Action role-playing video game developed by Polish developer CD Projekt Red",
-                Price = 120m
+                Price = 12000m
             },
             new Game()
             {

@@ -1,13 +1,10 @@
-﻿using gamexEntities;
+﻿using gamexAPI.Services;
+using gamexEntities;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+using Moq;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests;
@@ -16,6 +13,7 @@ public class TestWebAppFactory<TEntryPoint> : WebApplicationFactory<Program>
         where TEntryPoint : Program
 {
     public ITestOutputHelper Output { get; set; }
+    public Mock<IUserService> UserService = new();
 
     public TestWebAppFactory([NotNull] ITestOutputHelper output)
     {
@@ -32,6 +30,7 @@ public class TestWebAppFactory<TEntryPoint> : WebApplicationFactory<Program>
             services.Remove(dbContextOptions);
 
             services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+            services.AddSingleton(UserService.Object);
 
             services.AddMvc(option => option.Filters.Add(new FakeUserFilter()))
                     .AddApplicationPart(typeof(Program).Assembly);
