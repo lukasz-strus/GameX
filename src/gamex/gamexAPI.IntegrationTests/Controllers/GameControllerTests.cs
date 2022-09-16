@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using gamexAPI.IntegrationTests.Data;
+using gamexAPI.IntegrationTests.Helpers;
 using gamexEntities;
 using gamexModels;
 using Microsoft.EntityFrameworkCore;
@@ -19,18 +21,10 @@ public class GameControllerTests : BaseTest
     #region Create
 
     [Theory]
-    [InlineData("", "Test Description", 100)]
-    [InlineData("Test Name", "", null)]
-    public async Task Create_WithIncorrectQueryParams_ReturnsBadRequest(string name, string description, decimal price)
+    [MemberData(nameof(GameControllerTestsData.GetSampleInvalidData), MemberType = typeof(GameControllerTestsData))]
+    public async Task Create_WithIncorrectQueryParams_ReturnsBadRequest(CreateGameDto model)
     {
-        var model = new CreateGameDto()
-        {
-            Name = name,
-            Description = description,
-            Price = price
-        };
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+        var httpContent = model.ToJsonHttpContent();
 
         var response = await Client.PostAsync("api/game", httpContent);
 
@@ -38,19 +32,10 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [InlineData("Test Name 1", "Test Description", 100)]
-    [InlineData("Test Name 2", "", 100)]
-    [InlineData("Test Name 3", "", 0)]
-    public async Task Create_WithTheSameName_ReturnsBadRequest(string name, string description, decimal price)
+    [MemberData(nameof(GameControllerTestsData.GetSampleValidData), MemberType = typeof(GameControllerTestsData))]
+    public async Task Create_WithTheSameName_ReturnsBadRequest(CreateGameDto model)
     {
-        var model = new CreateGameDto()
-        {
-            Name = name,
-            Description = description,
-            Price = price
-        };
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+        var httpContent = model.ToJsonHttpContent();
 
         await Client.PostAsync("api/game", httpContent);
 
@@ -60,17 +45,10 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [InlineData("Test Name", "Test Description", 100)]
-    public async Task Create_WithCorrectQueryParams_ReturnsCreated(string name, string description, decimal price)
+    [MemberData(nameof(GameControllerTestsData.GetSampleValidData), MemberType = typeof(GameControllerTestsData))]
+    public async Task Create_WithSampleValidData_ReturnsCreated(CreateGameDto model)
     {
-        var model = new CreateGameDto()
-        {
-            Name = name,
-            Description = description,
-            Price = price
-        };
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+        var httpContent = model.ToJsonHttpContent();
 
         var response = await Client.PostAsync("api/game", httpContent);
 
@@ -83,10 +61,8 @@ public class GameControllerTests : BaseTest
     #region GetAll
 
     [Theory]
-    [InlineData("pageSize=5&pageNumber=1")]
-    [InlineData("pageSize=10&pageNumber=2")]
-    [InlineData("pageSize=15&pageNumber=3")]
-    public async Task GetAllGames_WithCorrectQueryParam_ReturnsOk(string queryParams)
+    [MemberData(nameof(GameControllerTestsData.GetSampleValidQueryParams), MemberType = typeof(GameControllerTestsData))]
+    public async Task GetAllGames_WithSampleValidQueryParams_ReturnsOk(string queryParams)
     {
         var response = await Client.GetAsync("api/game?" + queryParams);
 
@@ -94,10 +70,8 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [InlineData("pageSize=1&pageNumber=1")]
-    [InlineData("pageSize=-1&pageNumber=1")]
-    [InlineData("pageSize=5&pageNumber=-1")]
-    public async Task GetAllGames_WithIncorrectQueryParam_ReturnsBadRequest(string queryParams)
+    [MemberData(nameof(GameControllerTestsData.GetSampleInvalidQueryParams), MemberType = typeof(GameControllerTestsData))]
+    public async Task GetAllGames_WithSampleInvalidQueryParams_ReturnsBadRequest(string queryParams)
     {
         var response = await Client.GetAsync("api/game?" + queryParams);
 
@@ -138,7 +112,7 @@ public class GameControllerTests : BaseTest
     {
         var game = new Game()
         {
-            Id = 10,
+            Id = 25,
             Name = "Test Delete",
             Description = "Test Delete",
             Price = 100
@@ -177,21 +151,12 @@ public class GameControllerTests : BaseTest
     #region Update
 
     [Theory]
-    [InlineData(1, "", "Test Description", "100")]
-    [InlineData(1, "Test 1", "", "120")]
-    [InlineData(1, "Test 2", "Test Description", null)]
-    public async Task Update_ForCorrectQueryParams_ReturnsOk(int id, string name, string description, string price)
+    [MemberData(nameof(GameControllerTestsData.GetSampleValidQuery), MemberType = typeof(GameControllerTestsData))]
+    public async Task Update_WithSampleValidQuery_ReturnsOk(UpdateGameDto model)
     {
-        var model = new UpdateGameDto();
+        var httpContent = model.ToJsonHttpContent();
 
-        if (name != null) model.Name = name;
-        if (description != null) model.Description = description;
-        if (price != null) model.Price = Convert.ToDecimal(price);
-
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
-
-        var response = await Client.PutAsync($"api/game/{id}", httpContent);
+        var response = await Client.PutAsync($"api/game/1", httpContent);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
@@ -206,8 +171,7 @@ public class GameControllerTests : BaseTest
             Price = 120m
         };
 
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+        var httpContent = model.ToJsonHttpContent();
 
         await Client.PutAsync($"api/game/2", httpContent);
         var response = await Client.PutAsync($"api/game/2", httpContent);
@@ -215,18 +179,11 @@ public class GameControllerTests : BaseTest
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 
-    [Fact]
-    public async Task Update_ForNonExistentId_ReturnsNotFound()
+    [Theory]
+    [MemberData(nameof(GameControllerTestsData.GetSampleValidQuery), MemberType = typeof(GameControllerTestsData))]
+    public async Task Update_ForNonExistentId_ReturnsNotFound(UpdateGameDto model)
     {
-        var model = new UpdateGameDto()
-        {
-            Name = "Test",
-            Description = "Test",
-            Price = 120m
-        };
-
-        var json = JsonConvert.SerializeObject(model);
-        var httpContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+        var httpContent = model.ToJsonHttpContent();
 
         var response = await Client.PutAsync($"api/game/100", httpContent);
 
