@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexServices", "gamexServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexEntities", "gamexEntities\gamexEntities.csproj", "{09DA6042-53DC-4AB9-B458-D706624CC9D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gamexAPI.IntegrationTests", "gamexAPI.IntegrationTests\gamexAPI.IntegrationTests.csproj", "{5BAC5908-E5F3-42CA-8E5A-56B5B9976704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gamexAPI.IntegrationTests", "gamexAPI.IntegrationTests\gamexAPI.IntegrationTests.csproj", "{5BAC5908-E5F3-42CA-8E5A-56B5B9976704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gamexModels.Tests", "gamexModels.Tests\gamexModels.Tests.csproj", "{4E4B2B62-BD6E-4977-B22E-605CDF2E785C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5BAC5908-E5F3-42CA-8E5A-56B5B9976704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BAC5908-E5F3-42CA-8E5A-56B5B9976704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BAC5908-E5F3-42CA-8E5A-56B5B9976704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4B2B62-BD6E-4977-B22E-605CDF2E785C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4B2B62-BD6E-4977-B22E-605CDF2E785C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4B2B62-BD6E-4977-B22E-605CDF2E785C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4B2B62-BD6E-4977-B22E-605CDF2E785C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,7 +13,7 @@ public class TestWebAppFactory<TEntryPoint> : WebApplicationFactory<Program>
         where TEntryPoint : Program
 {
     public ITestOutputHelper Output { get; set; }
-    public Mock<IUserService> UserService = new();
+    public Mock<IUserService> MockUserService = new();
 
     public TestWebAppFactory([NotNull] ITestOutputHelper output)
     {
@@ -30,7 +30,7 @@ public class TestWebAppFactory<TEntryPoint> : WebApplicationFactory<Program>
             services.Remove(dbContextOptions);
 
             services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
-            services.AddSingleton(UserService.Object);
+            services.AddSingleton(MockUserService.Object);
 
             services.AddMvc(option => option.Filters.Add(new FakeUserFilter()))
                     .AddApplicationPart(typeof(Program).Assembly);

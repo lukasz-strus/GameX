@@ -1,4 +1,4 @@
-﻿namespace gamexAPI.IntegrationTests.Controllers;
+﻿namespace gamexAPI.IntegrationTests;
 
 public class BaseTest
 {

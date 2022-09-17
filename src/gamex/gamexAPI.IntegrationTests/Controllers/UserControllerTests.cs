@@ -14,7 +14,7 @@ public class UserControllerTests : BaseTest
     [Fact]
     public async Task Login_ForRegisteredUser_ReturnsOk()
     {
-        Factory.UserService
+        Factory.MockUserService
             .Setup(e => e.GenerateJwt(It.IsAny<LoginDto>()))
             .Returns("token");
 
