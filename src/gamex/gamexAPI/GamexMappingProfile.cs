@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using gamexEntities;
-using gamexModels;
 
 namespace gamexAPI;
 

@@ -1,7 +1,4 @@
-﻿using gamexAPI.Excepitons;
-using System.Net;
-
-namespace gamexAPI.Middleware;
+﻿namespace gamexAPI.Middleware;
 
 public class ErrorHandlingMiddleware : IMiddleware
 {

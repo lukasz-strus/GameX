@@ -1,10 +1,4 @@
-﻿using AutoMapper;
-using gamexEntities;
-using gamexAPI.Excepitons;
-using gamexModels;
-using System.Linq.Expressions;
-
-namespace gamexAPI.Services;
+﻿namespace gamexAPI.Services;
 
 public interface IGameService
 {

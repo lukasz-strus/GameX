@@ -1,10 +1,4 @@
-﻿using gamexEntities;
-using gamexAPI.Services;
-using gamexModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace gamexAPI.Controllers;
+﻿namespace gamexAPI.Controllers;
 
 [Route("file")]
 [Authorize]

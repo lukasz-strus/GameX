@@ -1,7 +1,4 @@
-﻿using gamexEntities;
-using Microsoft.EntityFrameworkCore;
-
-namespace gamexAPI;
+﻿namespace gamexAPI;
 
 public class GamexSeeder
 {
@@ -16,11 +13,13 @@ public class GamexSeeder
     {
         if (_dbContext.Database.CanConnect())
         {
-            var pendingMigrations = _dbContext.Database.GetPendingMigrations();
-
-            if (pendingMigrations != null && pendingMigrations.Any())
+            if (_dbContext.Database.IsRelational())
             {
-                _dbContext.Database.Migrate();
+                var pendingMigrations = _dbContext.Database.GetPendingMigrations();
+                if (pendingMigrations != null && pendingMigrations.Any())
+                {
+                    _dbContext.Database.Migrate();
+                }
             }
 
             if (!_dbContext.Roles.Any())
@@ -84,7 +83,7 @@ public class GamexSeeder
             {
                 Name = "The Witcher 3: Wild Hunt",
                 Description = "Action role-playing video game developed by Polish developer CD Projekt Red",
-                Price = 120m
+                Price = 12000m
             },
             new Game()
             {
@@ -105,7 +104,16 @@ public class GamexSeeder
                 Login="Admin",
                 Email="admin@gmail.com",
                 PasswordHash="AQAAAAEAACcQAAAAEFmpjHfAfOpJDWGnKtwGnuSHmNYBrULw1uRaB2gWdnOMCHOfvurFdo8gXMES7Sh0CQ==", //admin123456789
+                Total = 1000m,
                 RoleId = 3
+            },
+            new User()
+            {
+                Login="User",
+                Email="user@gmail.com",
+                PasswordHash="AQAAAAEAACcQAAAAEFmpjHfAfOpJDWGnKtwGnuSHmNYBrULw1uRaB2gWdnOMCHOfvurFdo8gXMES7Sh0CQ==", //admin123456789
+                Total = 0,
+                RoleId = 1
             }
         };
 
