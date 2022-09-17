@@ -1,10 +1,4 @@
-﻿using gamexEntities;
-using gamexAPI.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using gamexModels;
-
-namespace gamexAPI.Controllers;
+﻿namespace gamexAPI.Controllers;
 
 [Route("api/user")]
 [ApiController]

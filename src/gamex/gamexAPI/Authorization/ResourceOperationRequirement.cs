@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace gamexAPI.Authorization;
+﻿namespace gamexAPI.Authorization;
 
 public enum ResourceOperation
 {
