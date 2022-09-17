@@ -34,6 +34,7 @@ public class UserControllerTests : BaseTest
     [Fact]
     public async Task Register_ForValidModel_ReturnsOk()
     {
+        //TODO Wyskakuje BadRequest dla wszystkich testów
         var registerUser = new RegisterUserDto()
         {
             Login = "login",
