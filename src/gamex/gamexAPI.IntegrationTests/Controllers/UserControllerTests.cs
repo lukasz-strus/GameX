@@ -70,3 +70,5 @@ public class UserControllerTests : BaseTest
 
     #endregion Login and Register
 }
+
+//TODO GetAll, Get, Delete, ChangePassword, Update

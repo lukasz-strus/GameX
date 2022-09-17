@@ -23,7 +23,7 @@ public class BaseTest
         Server = Factory.Server;
     }
 
-    protected void Seed(Game game = null, User user = null)
+    protected void Seed(Game game = null, User user = null, Image image = null)
     {
         var scopeFactory = Factory.Services.GetService<IServiceScopeFactory>();
         using var scope = scopeFactory.CreateScope();
@@ -33,6 +33,8 @@ public class BaseTest
             _dbContext.Games.Add(game);
         if (user != null)
             _dbContext.Users.Add(user);
+        if (image != null)
+            _dbContext.Images.Add(image);
 
         _dbContext.SaveChanges();
     }
