@@ -1,10 +1,4 @@
-﻿using FluentAssertions;
-using gamexAPI.IntegrationTests.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit.Abstractions;
-
-namespace gamexAPI.IntegrationTests.Startup;
+﻿namespace gamexAPI.IntegrationTests.Startup;
 
 [Collection(Constants.TEST_COLLECTION)]
 public class StartupTests : BaseTest

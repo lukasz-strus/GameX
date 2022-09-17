@@ -1,10 +1,5 @@
-﻿using FluentAssertions;
-using gamexAPI.IntegrationTests.Data;
+﻿using gamexAPI.IntegrationTests.Data;
 using gamexAPI.IntegrationTests.Helpers;
-using gamexEntities;
-using gamexModels;
-using System.Net;
-using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests.Controllers;
 

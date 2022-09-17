@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Text;
-
-namespace gamexAPI.IntegrationTests.Helpers;
+﻿namespace gamexAPI.IntegrationTests.Helpers;
 
 public static class HttpContentHelper
 {

@@ -1,8 +1,4 @@
-﻿using gamexEntities;
-using Microsoft.AspNetCore.TestHost;
-using Xunit.Abstractions;
-
-namespace gamexAPI.IntegrationTests.Controllers;
+﻿namespace gamexAPI.IntegrationTests.Controllers;
 
 public class BaseTest
 {
