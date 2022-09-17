@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
+using gamexAPI.IntegrationTests.Data;
 using gamexAPI.IntegrationTests.Helpers;
+using gamexEntities;
 using gamexModels;
 using Moq;
 using System.Net;
@@ -7,13 +9,14 @@ using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests.Controllers;
 
+[Collection(Constants.TEST_COLLECTION)]
 public class UserControllerTests : BaseTest
 {
     public UserControllerTests(ITestOutputHelper output) : base(output)
     {
     }
 
-    //TODO dopisać resztę testów
+    #region Login and Register
 
     [Fact]
     public async Task Login_ForRegisteredUser_ReturnsOk()
@@ -71,4 +74,6 @@ public class UserControllerTests : BaseTest
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+
+    #endregion Login and Register
 }

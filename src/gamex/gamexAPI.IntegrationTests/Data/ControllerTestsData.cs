@@ -2,9 +2,9 @@
 
 namespace gamexAPI.IntegrationTests.Data;
 
-public static class GameControllerTestsData
+public static class ControllerTestsData
 {
-    public static IEnumerable<object[]> GetSampleValidData()
+    public static IEnumerable<object[]> GetSampleValidGameData()
     {
         var list = new List<CreateGameDto>()
         {
@@ -24,7 +24,7 @@ public static class GameControllerTestsData
         return list.Select(q => new object[] { q });
     }
 
-    public static IEnumerable<object[]> GetSampleInvalidData()
+    public static IEnumerable<object[]> GetSampleInvalidGameData()
     {
         var list = new List<CreateGameDto>()
         {
@@ -74,7 +74,7 @@ public static class GameControllerTestsData
         return list.Select(q => new object[] { q });
     }
 
-    public static IEnumerable<object[]> GetSampleValidQuery()
+    public static IEnumerable<object[]> GetSampleValidUpdateGameData()
     {
         var list = new List<UpdateGameDto>()
         {

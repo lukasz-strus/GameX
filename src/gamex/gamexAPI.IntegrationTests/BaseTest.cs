@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.TestHost;
+﻿using gamexEntities;
+using Microsoft.AspNetCore.TestHost;
 using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests.Controllers;
@@ -24,5 +25,19 @@ public class BaseTest
 
         // Test Server
         Server = Factory.Server;
+    }
+
+    protected void Seed(Game game = null, User user = null)
+    {
+        var scopeFactory = Factory.Services.GetService<IServiceScopeFactory>();
+        using var scope = scopeFactory.CreateScope();
+        var _dbContext = scope.ServiceProvider.GetService<GamexDbContext>();
+
+        if (game != null)
+            _dbContext.Games.Add(game);
+        if (user != null)
+            _dbContext.Users.Add(user);
+
+        _dbContext.SaveChanges();
     }
 }

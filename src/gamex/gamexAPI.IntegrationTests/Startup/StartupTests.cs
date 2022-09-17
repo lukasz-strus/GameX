@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using gamexAPI.Controllers;
 using gamexAPI.IntegrationTests.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -7,6 +6,7 @@ using Xunit.Abstractions;
 
 namespace gamexAPI.IntegrationTests.Startup;
 
+[Collection(Constants.TEST_COLLECTION)]
 public class StartupTests : BaseTest
 {
     private readonly List<Type> _controllerTypes;

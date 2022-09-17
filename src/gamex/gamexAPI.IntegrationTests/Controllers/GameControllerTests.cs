@@ -11,19 +11,26 @@ namespace gamexAPI.IntegrationTests.Controllers;
 [Collection(Constants.TEST_COLLECTION)]
 public class GameControllerTests : BaseTest
 {
-    // TODO Seed danych, bo GetSerialCode zwraca błędne wartości przez UserTests
     public GameControllerTests(ITestOutputHelper output) : base(output)
     {
     }
 
     #region Get
 
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public async Task Get_ForExistId_ReturnOk(int id)
+    [Fact]
+    public async Task Get_ForExistId_ReturnOk()
     {
-        var response = await Client.GetAsync("api/game/" + id);
+        var game = new Game()
+        {
+            Id = 1000,
+            Name = "Test Delete",
+            Description = "Test Delete",
+            Price = 100
+        };
+
+        Seed(game);
+
+        var response = await Client.GetAsync("api/game/" + game.Id);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
@@ -44,7 +51,7 @@ public class GameControllerTests : BaseTest
     #region GetAll
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleValidQueryParams), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleValidQueryParams), MemberType = typeof(ControllerTestsData))]
     public async Task GetAllGames_WithSampleValidQueryParams_ReturnsOk(string queryParams)
     {
         var response = await Client.GetAsync("api/game?" + queryParams);
@@ -53,7 +60,7 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleInvalidQueryParams), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleInvalidQueryParams), MemberType = typeof(ControllerTestsData))]
     public async Task GetAllGames_WithSampleInvalidQueryParams_ReturnsBadRequest(string queryParams)
     {
         var response = await Client.GetAsync("api/game?" + queryParams);
@@ -65,28 +72,64 @@ public class GameControllerTests : BaseTest
 
     #region GetSerialKey
 
-    [Theory]
-    [InlineData(1, 2)]
-    public async Task GetSerialKey_ForCorrectId_ReturnOk(int userId, int gameId)
+    [Fact]
+    public async Task GetSerialKey_ForCorrectId_ReturnOk()
     {
-        var response = await Client.GetAsync($"api/game/{userId}/{gameId}");
+        var game = new Game()
+        {
+            Id = 1100,
+            Name = "Test Delete",
+            Description = "Test Delete",
+            Price = 100
+        };
+
+        var user = new User()
+        {
+            Id = 1100,
+            Login = "Test",
+            Email = "test@test.com",
+            PasswordHash = "test",
+            Total = 1000
+        };
+
+        Seed(game, user);
+
+        var response = await Client.GetAsync($"api/game/{user.Id}/{game.Id}");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         response.RequestMessage.Should().NotBe(null);
     }
 
-    [Theory]
-    [InlineData(2, 1)]
-    public async Task GetSerialKey_ForIncorrectParams_ReturnNotAcceptable(int userId, int gameId)
+    [Fact]
+    public async Task GetSerialKey_ForIncorrectParams_ReturnNotAcceptable()
     {
-        var response = await Client.GetAsync($"api/game/{userId}/{gameId}");
+        var game = new Game()
+        {
+            Id = 1200,
+            Name = "Test Delete",
+            Description = "Test Delete",
+            Price = 1000
+        };
+
+        var user = new User()
+        {
+            Id = 1200,
+            Login = "Test",
+            Email = "test@test.com",
+            PasswordHash = "test",
+            Total = 100
+        };
+
+        Seed(game, user);
+
+        var response = await Client.GetAsync($"api/game/{user.Id}/{game.Id}");
 
         response.StatusCode.Should().Be(HttpStatusCode.NotAcceptable);
     }
 
     [Theory]
-    [InlineData(100, 1)]
-    [InlineData(1, 100)]
+    [InlineData(12345, 1)]
+    [InlineData(1, 12345)]
     public async Task GetSerialKey_ForNonExistentId_ReturnNotFound(int userId, int gameId)
     {
         var response = await Client.GetAsync($"api/game/{userId}/{gameId}");
@@ -99,7 +142,7 @@ public class GameControllerTests : BaseTest
     #region Create
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleInvalidData), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleInvalidGameData), MemberType = typeof(ControllerTestsData))]
     public async Task Create_WithIncorrectQueryParams_ReturnsBadRequest(CreateGameDto model)
     {
         var httpContent = model.ToJsonHttpContent();
@@ -110,7 +153,7 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleValidData), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleValidGameData), MemberType = typeof(ControllerTestsData))]
     public async Task Create_WithTheSameName_ReturnsBadRequest(CreateGameDto model)
     {
         var httpContent = model.ToJsonHttpContent();
@@ -123,7 +166,7 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleValidData), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleValidGameData), MemberType = typeof(ControllerTestsData))]
     public async Task Create_WithSampleValidData_ReturnsCreated(CreateGameDto model)
     {
         var httpContent = model.ToJsonHttpContent();
@@ -139,7 +182,7 @@ public class GameControllerTests : BaseTest
     #region Update
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleValidQuery), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleValidUpdateGameData), MemberType = typeof(ControllerTestsData))]
     public async Task Update_WithSampleValidQuery_ReturnsOk(UpdateGameDto model)
     {
         var httpContent = model.ToJsonHttpContent();
@@ -168,7 +211,7 @@ public class GameControllerTests : BaseTest
     }
 
     [Theory]
-    [MemberData(nameof(GameControllerTestsData.GetSampleValidQuery), MemberType = typeof(GameControllerTestsData))]
+    [MemberData(nameof(ControllerTestsData.GetSampleValidUpdateGameData), MemberType = typeof(ControllerTestsData))]
     public async Task Update_ForNonExistentId_ReturnsNotFound(UpdateGameDto model)
     {
         var httpContent = model.ToJsonHttpContent();
@@ -193,7 +236,7 @@ public class GameControllerTests : BaseTest
             Price = 100
         };
 
-        SeedGame(game);
+        Seed(game);
 
         var response = await Client.DeleteAsync("api/game/" + game.Id);
 
@@ -209,16 +252,6 @@ public class GameControllerTests : BaseTest
         var response = await Client.DeleteAsync("api/game/" + id);
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-    }
-
-    private void SeedGame(Game game)
-    {
-        var scopeFactory = Factory.Services.GetService<IServiceScopeFactory>();
-        using var scope = scopeFactory.CreateScope();
-        var _dbContext = scope.ServiceProvider.GetService<GamexDbContext>();
-
-        _dbContext.Games.Add(game);
-        _dbContext.SaveChanges();
     }
 
     #endregion Delete
