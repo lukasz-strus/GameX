@@ -25,6 +25,7 @@ public class CreateGameDtoValidator : AbstractValidator<CreateGameDto>
             .MaximumLength(300);
 
         RuleFor(x => x.Price)
+            .GreaterThanOrEqualTo(0)
             .NotEmpty();
     }
 }
