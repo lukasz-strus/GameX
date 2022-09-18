@@ -34,14 +34,13 @@ public class UserControllerTests : BaseTest
     [Fact]
     public async Task Register_ForValidModel_ReturnsOk()
     {
-        //TODO Wyskakuje BadRequest dla wszystkich testów
         var registerUser = new RegisterUserDto()
         {
-            Login = "login",
+            Login = "login123",
             Password = "password123",
             ConfirmPassword = "password123",
-            Email = "test@test.com",
-            ConfirmEmail = "test@test.com"
+            Email = "testlogin123@test.com",
+            ConfirmEmail = "testlogin123@test.com"
         };
 
         var httpContent = registerUser.ToJsonHttpContent();
@@ -72,4 +71,4 @@ public class UserControllerTests : BaseTest
     #endregion Login and Register
 }
 
-//TODO GetAll, Get, Delete, ChangePassword, Update
+//TODO GetAll, Get, Delete, ChangePassword, Update - być może to przez Mocka User Service
