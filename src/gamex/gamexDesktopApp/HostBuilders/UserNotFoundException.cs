@@ -1,4 +1,4 @@
-﻿namespace gamexDesktopApp.Exceptions;
+﻿namespace gamexDesktopApp.HostBuilders;
 
 public class UserNotFoundException : Exception
 {
