@@ -9,17 +9,5 @@
 - REST Server API (ASP.NET)
 - Desktop application (WPF)
 
-## Azure 
-https://gamex-api-app.azurewebsites.net
-
 ## Swagger UI
 https://gamex-api-app.azurewebsites.net/swagger/index.html
-
-
-## Release v1.0.0
-- Purchasing games in code form.
-- Wallet top-up.
-- Add, edit and delete games.
-- Adding game images.
-- Removing and editing users.
-- Registration and login.
